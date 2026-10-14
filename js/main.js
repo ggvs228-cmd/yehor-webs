@@ -153,18 +153,19 @@
 
   function prices(t) {
     var p = t.prices;
-    function plan(label, price, note, items, cls) {
+    function plan(label, price, note, items, cls, extra) {
       return h("div", { class: "plan " + (cls || "") },
         h("h3", { class: "plan__label" }, label),
         h("p", { class: "plan__price" }, price),
         h("p", { class: "plan__note" }, note),
-        filled(items) ? h("ul", { role: "list" }, items.map(function (i) { return h("li", {}, i); })) : null);
+        filled(items) ? h("ul", { role: "list" }, items.map(function (i) { return h("li", {}, i); })) : null,
+        filled(extra) ? h("p", { class: "plan__extra" }, extra) : null);
     }
     return h("section", { class: "section section--alt", id: "precios", "aria-labelledby": "prices-title" },
       h("div", { class: "wrap" },
         sectionHead(p.eyebrow, p.title, "prices-title"),
         h("div", { class: "plans" },
-          plan(p.mainLabel, p.mainPrice, p.mainNote, p.mainItems, "plan--main"),
+          plan(p.mainLabel, p.mainPrice, p.mainNote, p.mainItems, "plan--main", p.mainExtra),
           plan(p.careLabel, p.carePrice, p.careNote, p.careItems)),
         h("p", { class: "guarantee" }, p.guarantee)));
   }

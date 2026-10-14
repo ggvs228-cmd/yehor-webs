@@ -206,6 +206,7 @@ h3 { font-size: 1.3rem; }
 .plan ul { margin-top: 16px; display: grid; gap: 8px; list-style: none; }
 .plan li { padding-left: 26px; position: relative; color: var(--muted); }
 .plan li::before { content: ""; position: absolute; left: 2px; top: .5em; width: 12px; height: 7px; border-left: 2px solid var(--accent); border-bottom: 2px solid var(--accent); transform: rotate(-45deg); }
+.plan__extra { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); font-size: .96rem; }
 .guarantee { margin-top: 24px; font-family: var(--serif); font-size: 1.3rem; line-height: 1.4; }
 @media (min-width: 760px) { .plans { grid-template-columns: 1fr 1fr; } }
 
