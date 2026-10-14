@@ -47,11 +47,11 @@ window.SITE = {
       line: { es: "Peluquería orgánica en Gràcia, con servicios y cita online.", en: "Organic hair salon in Gràcia, with services and online booking." },
     },
     {
-      name: "Anukis Lounge",
-      demo: "https://ggvs228-cmd.github.io/anukislounge/",
-      repo: "https://github.com/ggvs228-cmd/anukislounge",
-      image: "img/work/anukislounge.webp",
-      line: { es: "Barbería y masajes: dos espacios, dos formas de reservar.", en: "Barber and massage lounge: two spaces, two ways to book." },
+      name: "Karma Cafè",
+      demo: "https://ggvs228-cmd.github.io/karmacafe/",
+      repo: "https://github.com/ggvs228-cmd/karmacafe",
+      image: "img/work/karmacafe.webp",
+      line: { es: "Cafetería y librería en el Raval, con carta y cómo llegar.", en: "Espresso bar and bookshop in El Raval, with menu and directions." },
     },
     {
       name: "MDQ",
