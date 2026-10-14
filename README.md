@@ -8,9 +8,9 @@ Todo el contenido está en **`js/content.js`**:
 - `caseStudy.review` y `caseStudy.results`: déjalos vacíos hasta tener datos reales; vacío = no se muestra.
 - `projects`: copia un bloque para añadir una demo. Capturas en `img/work/` (800×500, `.webp`).
 
-## Archivos que faltan
-- `img/yehor.jpg` — tu retrato (vertical 4:5, ~960×1200, < 150 KB). Mientras no exista se ve un monograma "Y".
-- Después de poner la foto, regenera `img/og.jpg` con `tools/make-og.mjs`.
+## Foto y vista previa
+- `img/yehor.jpg` — tu retrato (vertical 4:5, 720×900, < 150 KB).
+- Si cambias la foto, regenera `img/og.jpg` con `tools/make-og.mjs`.
 
 ## Publicar en Vercel
 1. Importa el repo en Vercel (Framework: *Other*, sin build command).
