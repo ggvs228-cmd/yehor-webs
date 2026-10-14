@@ -54,11 +54,11 @@ window.SITE = {
       line: { es: "Barbería y masajes: dos espacios, dos formas de reservar.", en: "Barber and massage lounge: two spaces, two ways to book." },
     },
     {
-      name: "Fade Barber Shop",
-      demo: "https://ggvs228-cmd.github.io/fadebarber/",
-      repo: "https://github.com/ggvs228-cmd/fadebarber",
-      image: "img/work/fadebarber.webp",
-      line: { es: "Barbería en el Eixample, con precios claros y reserva.", en: "Barbershop in the Eixample, with clear prices and booking." },
+      name: "MDQ",
+      demo: "https://ggvs228-cmd.github.io/mdq/",
+      repo: "https://github.com/ggvs228-cmd/mdq",
+      image: "img/work/mdq.webp",
+      line: { es: "Parrilla argentina en Sant Andreu, con carta y menú del día.", en: "Argentinian grill in Sant Andreu, with menu and lunch deal." },
     },
     {
       name: "Rodríguez Barbershop",
