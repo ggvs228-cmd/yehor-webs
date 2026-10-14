@@ -9,7 +9,7 @@ Todo el contenido está en **`js/content.js`**:
 - `projects`: copia un bloque para añadir una demo. Capturas en `img/work/` (800×500, `.webp`).
 
 ## Foto y vista previa
-- `img/yehor.jpg` — tu retrato (vertical 4:5, 720×900, < 150 KB).
+- Foto: ahora no hay. Para ponerla, guarda `img/yehor.jpg` (vertical 4:5, 720×900, < 150 KB) y pon `photo: "img/yehor.jpg"` en `js/content.js`.
 - Si cambias la foto, regenera `img/og.jpg` con `tools/make-og.mjs`.
 
 ## Publicar en Vercel

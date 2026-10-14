@@ -14,8 +14,8 @@ window.SITE = {
     email: "yehorwebs@gmail.com",
   },
 
-  // Tu foto. Mientras no exista el archivo se muestra un monograma "Y".
-  photo: "img/yehor.jpg",
+  // Tu foto (vertical 4:5, p. ej. "img/yehor.jpg"). Vacío = el inicio va solo con texto.
+  photo: "",
 
   // ── Caso real ────────────────────────────────────────────────
   caseStudy: {

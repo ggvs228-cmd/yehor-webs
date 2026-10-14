@@ -59,16 +59,16 @@
   /* ── Secciones ─────────────────────────────────────────── */
 
   function hero(t) {
-    var photo = h("div", { class: "hero__photo" },
-      h("span", { class: "hero__mono", "aria-hidden": "true", html: '<svg viewBox="0 0 32 32"><use href="#y-mark"/></svg>' }));
+    // Foto opcional: si "photo" está vacío en content.js, el hero va solo con texto.
+    var photo = null;
     if (filled(S.photo)) {
+      photo = h("div", { class: "hero__photo" });
       var img = h("img", { src: S.photo, alt: t.hero.photoAlt, width: 480, height: 600, fetchpriority: "high", decoding: "async" });
-      img.addEventListener("error", function () { img.remove(); });
-      img.addEventListener("load", function () { photo.classList.add("has-img"); });
+      img.addEventListener("error", function () { photo.remove(); });
       photo.appendChild(img);
     }
 
-    return h("section", { class: "hero wrap", id: "top", "aria-labelledby": "hero-title" },
+    return h("section", { class: "hero wrap" + (photo ? "" : " hero--text"), id: "top", "aria-labelledby": "hero-title" },
       photo,
       h("div", { class: "hero__text" },
         h("p", { class: "eyebrow" }, t.hero.kicker),
