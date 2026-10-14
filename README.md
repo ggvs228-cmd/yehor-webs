@@ -20,3 +20,6 @@ Todo el contenido está en **`js/content.js`**:
 ## Aviso legal
 `aviso-legal.html` (enlazado desde el pie). Tiene `noindex` para que tu NIE y dirección no salgan en Google.
 Si cambias de domicilio, email o teléfono, actualízalo también ahí.
+
+## Después de editar
+Al cambiar `js/content.js`, `js/main.js` o `css/styles.css`, sube el número `?v=` en `index.html` (y en `aviso-legal.html` para el CSS) para que todos los navegadores carguen la versión nueva.
