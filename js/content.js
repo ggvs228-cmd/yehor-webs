@@ -150,10 +150,10 @@ window.SITE = {
       about: {
         eyebrow: "Sobre mí",
         title: "Quién hay detrás",
-        // ▼▼▼ Reescribe con tus datos reales (de dónde eres, por qué haces esto, algo personal).
         paragraphs: [
-          "Soy Yehor y vivo en Barcelona.",
-          "Hago webs para negocios pequeños porque muchos trabajan muy bien pero no se les encuentra en internet.",
+          "Soy Yehor, soy de Ucrania y vivo en Barcelona desde hace más de cuatro años.",
+          "Hablo español, catalán, inglés, ucraniano y ruso, así que tu web puede estar en varios idiomas.",
+          "Mi primer cliente, Nude Beauty Studio, empezó con un mensaje de WhatsApp: les enseñé lo que hacía y les gustó.",
           "Trabajo solo, así que hablas siempre conmigo, desde el primer mensaje hasta después de publicar.",
         ],
       },
@@ -238,8 +238,9 @@ window.SITE = {
         eyebrow: "About me",
         title: "Who's behind this",
         paragraphs: [
-          "I'm Yehor and I live in Barcelona.",
-          "I make websites for small businesses because many of them do great work but are hard to find online.",
+          "I'm Yehor. I'm from Ukraine and I've lived in Barcelona for more than four years.",
+          "I speak Spanish, Catalan, English, Ukrainian and Russian, so your website can be in several languages.",
+          "My first client, Nude Beauty Studio, started with a WhatsApp message: I showed them what I do and they liked it.",
           "I work alone, so you always talk to me, from the first message until after launch.",
         ],
       },
