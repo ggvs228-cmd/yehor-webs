@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Casa Rufina · Tapas y Marisco en el Clot, Barcelona (desde 1981)</title>
+<meta name="description" content="Casa Rufina, bar de tapas y marisco en la Plaça de les Oliveres, el Clot, Barcelona. Abierto cada día desde 1981.">
+
+<meta property="og:title" content="Casa Rufina · Tapas y Marisco desde 1981">
+<meta property="og:description" content="Bar de tapas y marisco en la Plaça de les Oliveres, el Clot, Barcelona. Abierto cada día desde 1981.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "Casa Rufina",
+  "servesCuisine": ["Spanish", "Tapas", "Seafood"],
+  "priceRange": "€€",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Plaça de les Oliveres, 4",
+    "addressLocality": "Barcelona",
+    "postalCode": "08026",
+    "addressCountry": "ES"
+  },
+  "telephone": "+34600000000",
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Sunday"], "opens": "08:30", "closes": "00:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Friday","Saturday"], "opens": "08:30", "closes": "00:30" }
+  ]
+}
+</script>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Work+Sans:wght@400;500;600;700;800&display=swap');
+
+:root{
+  --cream:#F3E8D8;
+  --cream2:#EADCC3;
+  --maroon:#7B2231;
+  --maroon-dark:#54141F;
+  --gold:#BE9A5D;
+  --gold-rgb:190,154,93;
+  --ink:#271B15;
+  --muted:#7C6A57;
+  --on-dark:rgba(255,255,255,.90);
+  --on-dark-muted:rgba(255,255,255,.62);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+@media (prefers-reduced-motion: no-preference){ html{ scroll-behavior:smooth; } }
+body{font-family:'Work Sans',Arial,sans-serif;font-size:16px;line-height:1.7;color:var(--ink);background:var(--cream);overflow-x:hidden;}
+h1,h2,h3{font-family:'Work Sans',Arial,sans-serif;font-weight:800;letter-spacing:-.01em;}
+a{color:inherit;}
+img{max-width:100%;display:block;}
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px;}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
+section{content-visibility:auto;contain-intrinsic-size:auto 700px;}
+
+.logotype{font-family:'Pacifico',cursive;font-weight:400;line-height:1;}
+
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.16em;color:var(--maroon);margin-bottom:14px;}
+.eyebrow::before{content:'';width:22px;height:2px;background:var(--maroon);}
+.eyebrow.on-dark{color:var(--gold);}
+.eyebrow.on-dark::before{background:var(--gold);}
+
+[data-reveal]{opacity:0;transform:translateY(16px);}
+[data-reveal].in{opacity:1;transform:none;transition:opacity .5s ease, transform .5s ease;}
+@media (prefers-reduced-motion: reduce){
+  [data-reveal]{opacity:1;transform:none;transition:none;}
+}
+
+/* Nav */
+#nav{position:sticky;top:0;z-index:100;background:var(--cream);border-bottom:1px solid rgba(39,27,21,.12);}
+.nav-row{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;gap:12px;}
+.brand{display:flex;align-items:baseline;gap:6px;white-space:nowrap;text-decoration:none;}
+.brand .logotype{font-size:24px;color:var(--maroon);}
+.brand small{font-weight:600;font-size:11px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;}
+.nav-links{display:none;align-items:center;gap:24px;}
+.nav-links a{font-size:14px;font-weight:700;padding:12px 2px;}
+.nav-links a:hover{color:var(--maroon);}
+.nav-right{display:flex;align-items:center;gap:14px;}
+.lang{display:flex;align-items:center;gap:2px;}
+.lang button{background:none;border:none;font-family:'Work Sans',sans-serif;font-size:13px;font-weight:700;color:var(--muted);padding:12px 8px;cursor:pointer;min-height:44px;}
+.lang button.active{color:var(--maroon);}
+.nav-call{display:none;font-size:14px;font-weight:700;padding:10px 16px;background:var(--maroon);color:#fff;border-radius:4px;min-height:44px;align-items:center;}
+.burger{display:flex;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;background:none;border:none;cursor:pointer;}
+.burger span{display:block;width:22px;height:2px;background:var(--ink);}
+@media (max-width:400px){.brand small{display:none}.nav-right{gap:10px}}
+#mnav{display:none;position:fixed;inset:0;top:53px;background:var(--cream);z-index:99;padding:24px 20px;overflow-y:auto;}
+#mnav.open{display:block;}
+#mnav a{display:block;font-size:22px;font-weight:800;padding:14px 0;border-bottom:1px solid rgba(39,27,21,.12);}
+#mnav .lang{margin-top:20px;gap:16px;}
+#mnav .lang button{font-size:16px;}
+@media (min-width:860px){
+  .nav-links{display:flex;}
+  .nav-call{display:inline-flex;}
+  .burger{display:none;}
+}
+
+/* Hero */
+#hero{background:var(--maroon);color:var(--on-dark);min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:60px 0 40px;position:relative;overflow:hidden;}
+.hero-arch{position:absolute;left:50%;bottom:-6svh;transform:translateX(-50%);width:min(90vw,520px);opacity:.5;pointer-events:none;}
+.hero-inner{position:relative;z-index:1;}
+.hero-name{font-family:'Pacifico',cursive;font-weight:400;font-size:clamp(48px,15vw,120px);line-height:1;color:#fff;}
+.hero-year{font-size:clamp(16px,3.4vw,22px);font-weight:700;letter-spacing:.14em;color:var(--gold);margin-top:14px;text-transform:uppercase;}
+.hero-tagline{font-size:clamp(17px,3.2vw,21px);color:var(--on-dark-muted);max-width:520px;margin:18px 0 30px;line-height:1.6;font-weight:500;}
+.hero-actions{display:flex;flex-wrap:wrap;gap:14px;align-items:center;}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:12px 24px;border-radius:4px;font-weight:700;font-size:15px;text-decoration:none;border:none;appearance:none;font-family:'Work Sans',sans-serif;cursor:pointer;}
+.btn-solid{background:var(--gold);color:#241505;}
+.btn-line{border:1.5px solid rgba(255,255,255,.5);color:#fff;}
+.btn-solid:hover{background:#d1ac6d;}
+.btn-line:hover{border-color:#fff;}
+
+/* Quick facts */
+#facts{background:var(--cream2);padding:22px 0;}
+.facts-row{display:flex;flex-wrap:wrap;gap:10px 28px;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--maroon);}
+.facts-row span{color:var(--muted);font-weight:500;text-transform:none;letter-spacing:0;font-size:14px;}
+
+/* Menu */
+#menu{background:var(--cream);padding:76px 0;}
+.menu-head{max-width:600px;margin-bottom:34px;}
+.menu-head h2{font-size:clamp(28px,5vw,42px);margin-bottom:10px;text-transform:uppercase;}
+.menu-head p{color:var(--muted);font-size:16px;}
+
+.menu-card{background:var(--maroon-dark);color:var(--on-dark);border:3px dotted rgba(var(--gold-rgb),.6);border-radius:6px;padding:clamp(20px,5vw,44px);position:relative;}
+.menu-card-title{display:inline-block;margin:0 auto 30px;padding:8px 34px;border:2px solid var(--gold);border-radius:3px;font-size:14px;font-weight:800;letter-spacing:.3em;color:var(--gold);text-align:center;position:relative;left:50%;transform:translateX(-50%);}
+
+.menu-sub-head{display:flex;align-items:center;gap:14px;margin:34px 0 18px;}
+.menu-sub-head:first-of-type{margin-top:0;}
+.menu-sub-head span{font-family:'Pacifico',cursive;font-size:clamp(22px,4vw,28px);color:var(--gold);}
+.menu-sub-head::after{content:'';flex:1;height:1px;background:rgba(var(--gold-rgb),.4);}
+
+.menu-columns{display:grid;gap:0 28px;}
+.menu-columns ul{list-style:none;}
+.menu-columns li{display:flex;align-items:baseline;gap:8px;padding:8px 0;font-size:14.5px;border-bottom:1px dashed rgba(255,255,255,.14);}
+.menu-columns li .name{flex:0 1 auto;}
+.menu-columns li .fill{flex:1 1 auto;border-bottom:1px dotted rgba(255,255,255,.28);height:0;margin-bottom:4px;}
+.menu-columns li .price{flex:0 0 auto;font-weight:700;color:var(--gold);white-space:nowrap;}
+@media (min-width:640px){ .menu-columns.cols-2{grid-template-columns:1fr 1fr;} }
+@media (min-width:860px){ .menu-columns.cols-3{grid-template-columns:1fr 1fr 1fr;} }
+
+.menu-folders{display:grid;gap:12px;margin-bottom:6px;}
+.menu-folder{background:rgba(0,0,0,.16);border:1px solid rgba(var(--gold-rgb),.3);border-radius:6px;overflow:hidden;}
+.menu-folder summary{display:flex;align-items:center;gap:12px;padding:13px 16px;min-height:44px;cursor:pointer;font-weight:700;font-size:15px;list-style:none;-webkit-tap-highlight-color:transparent;}
+.menu-folder summary::-webkit-details-marker{display:none;}
+.menu-folder summary::marker{content:'';}
+.menu-folder summary:hover{background:rgba(var(--gold-rgb),.08);}
+.menu-folder .count{margin-left:auto;font-size:12px;font-weight:500;color:var(--on-dark-muted);}
+.menu-folder .chevron{flex:0 0 auto;color:var(--gold);transition:transform .25s ease;}
+.menu-folder[open] .chevron{transform:rotate(180deg);}
+.menu-folder[open] summary{border-bottom:1px dotted rgba(var(--gold-rgb),.3);}
+.menu-folder .menu-columns{padding:8px 16px 14px;}
+
+.vermut-box{margin-top:34px;padding:18px 20px;background:rgba(var(--gold-rgb),.12);border:1px solid rgba(var(--gold-rgb),.4);border-radius:4px;}
+.vermut-box .vermut-title{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;font-size:15px;}
+.vermut-box .vermut-title .price{color:var(--gold);font-size:17px;}
+.vermut-box p{margin-top:6px;font-size:13.5px;color:var(--on-dark-muted);}
+
+
+/* Story */
+#story{background:var(--maroon-dark);color:var(--on-dark);padding:80px 0;}
+.story-grid{display:grid;gap:28px;}
+#story h2{font-size:clamp(28px,5vw,42px);color:#fff;max-width:520px;margin-bottom:26px;text-transform:uppercase;}
+#story p{color:var(--on-dark-muted);font-size:17px;max-width:640px;margin-bottom:18px;}
+#story .quote{color:var(--gold);font-style:italic;}
+@media (min-width:860px){
+  .story-grid{grid-template-columns:1fr 2fr;align-items:start;}
+}
+
+/* Practical */
+#practical{background:var(--cream);padding:76px 0;}
+.practical-head{max-width:600px;margin-bottom:36px;}
+.practical-head h2{font-size:clamp(26px,4.5vw,36px);text-transform:uppercase;}
+.practical-grid{display:grid;gap:36px;}
+.practical-block h3{font-size:15px;text-transform:uppercase;letter-spacing:.1em;color:var(--maroon);margin-bottom:12px;font-weight:800;}
+.practical-block p{font-size:16px;margin-bottom:6px;}
+.hours-table div{display:flex;justify-content:space-between;gap:12px;padding:7px 0;font-size:15px;border-bottom:1px dashed rgba(39,27,21,.14);}
+.hours-table div:last-child{border-bottom:none;}
+.hours-table span:first-child{font-weight:700;}
+.hours-table span:last-child{color:var(--muted);}
+.practical-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px;}
+@media (min-width:860px){
+  .practical-grid{grid-template-columns:1fr 1fr;}
+}
+
+/* Booking */
+#booking{background:var(--maroon-dark);color:var(--on-dark);padding:76px 0;}
+.booking-head{max-width:600px;margin-bottom:34px;}
+.booking-head h2{font-size:clamp(28px,5vw,42px);margin-bottom:10px;text-transform:uppercase;color:#fff;}
+.booking-head p{color:var(--on-dark-muted);font-size:16px;}
+.booking-form{background:rgba(0,0,0,.16);border:1px solid rgba(var(--gold-rgb),.3);border-radius:8px;padding:clamp(18px,4vw,32px);max-width:680px;}
+.booking-grid{display:grid;gap:16px;margin-bottom:22px;}
+.booking-form label{display:flex;flex-direction:column;gap:8px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);}
+.booking-form input,.booking-form select{font-family:'Work Sans',sans-serif;font-size:16px;font-weight:500;color:#fff;background:rgba(255,255,255,.06);border:1px solid rgba(var(--gold-rgb),.4);border-radius:4px;padding:12px 14px;min-height:48px;color-scheme:dark;}
+.booking-form input::placeholder{color:var(--on-dark-muted);}
+.booking-form input:focus,.booking-form select:focus{outline:2px solid var(--gold);outline-offset:2px;}
+.booking-form select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23BE9A5D' stroke-width='2.4'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;background-size:14px;}
+.booking-form select option{background:var(--maroon-dark);color:#fff;}
+.booking-note{margin-top:16px;font-size:13px;color:var(--on-dark-muted);}
+@media (min-width:640px){ .booking-grid{grid-template-columns:1fr 1fr;} }
+
+/* Legal stub */
+#legal{background:var(--cream2);padding:36px 0;font-size:13px;color:var(--muted);}
+#legal h2{font-size:14px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink);margin-bottom:8px;font-weight:800;}
+
+/* Footer */
+#footer{background:var(--maroon-dark);color:var(--on-dark-muted);padding:40px 0;font-size:14px;}
+.footer-row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;align-items:center;}
+.footer-links{display:flex;gap:20px;flex-wrap:wrap;}
+.footer-links a:hover{color:#fff;}
+
+/* Fixed call button */
+#callbtn{position:fixed;right:16px;bottom:16px;z-index:200;background:var(--gold);color:#241505;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.32);}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="wrap nav-row">
+    <a href="#hero" class="brand"><span class="logotype">Casa Rufina</span><small>desde 1981</small></a>
+    <div class="nav-links">
+      <a href="#menu" data-i18n="nav_menu">Carta</a>
+      <a href="#story" data-i18n="nav_story">Historia</a>
+      <a href="#practical" data-i18n="nav_practical">Cómo Llegar</a>
+      <a href="#booking" data-i18n="nav_booking">Reservas</a>
+    </div>
+    <div class="nav-right">
+      <div class="lang">
+        <button type="button" data-lang="es">ES</button>
+        <button type="button" data-lang="ca">CA</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+      <a href="tel:+34600000000" class="nav-call" data-i18n="nav_call">Llamar</a>
+      <button class="burger" id="burger" aria-label="Menú"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<div id="mnav">
+  <a href="#menu" data-i18n="nav_menu">Carta</a>
+  <a href="#story" data-i18n="nav_story">Historia</a>
+  <a href="#practical" data-i18n="nav_practical">Cómo Llegar</a>
+  <a href="#booking" data-i18n="nav_booking">Reservas</a>
+  <a href="tel:+34600000000" data-i18n="nav_call">Llamar</a>
+  <div class="lang">
+    <button type="button" data-lang="es">ES</button>
+    <button type="button" data-lang="ca">CA</button>
+    <button type="button" data-lang="en">EN</button>
+  </div>
+</div>
+
+<section id="hero">
+  <svg class="hero-arch" viewBox="0 0 300 210" fill="none" aria-hidden="true">
+    <path d="M18 210 V95 A42 55 0 0 1 102 95 V210" stroke="#BE9A5D" stroke-width="2.5"/>
+    <path d="M198 210 V95 A42 55 0 0 1 282 95 V210" stroke="#BE9A5D" stroke-width="2.5"/>
+    <path d="M132 210 V72 A18 22 0 0 1 168 72 V210" stroke="#BE9A5D" stroke-width="2.5"/>
+    <line x1="0" y1="210" x2="300" y2="210" stroke="#BE9A5D" stroke-width="2.5"/>
+    <line x1="150" y1="72" x2="150" y2="210" stroke="#BE9A5D" stroke-width="1.4" stroke-dasharray="3 5"/>
+  </svg>
+  <div class="wrap hero-inner">
+    <h1 class="hero-name">Casa Rufina</h1>
+    <div class="hero-year" data-i18n="hero_since">Desde 1981 · Plaça de les Oliveres</div>
+    <p class="hero-tagline" data-i18n="hero_tagline">Tapas, marisco y vermut, en la barra de siempre.</p>
+    <div class="hero-actions">
+      <a href="#menu" class="btn btn-solid" data-i18n="hero_cta_menu">Ver la Carta</a>
+      <a href="tel:+34600000000" class="btn btn-line" data-i18n="hero_cta_call">Llamar +34 600 000 000</a>
+    </div>
+  </div>
+</section>
+
+<section id="facts">
+  <div class="wrap facts-row">
+    <span data-i18n="fact_since">Desde 1981</span>
+    <span>Plaça de les Oliveres, el Clot</span>
+    <span data-i18n="fact_hours">Abierto 8:30 - 00:00</span>
+    <span>@casarufina.bcn</span>
+  </div>
+</section>
+
+<section id="menu">
+  <div class="wrap">
+    <div class="menu-head" data-reveal>
+      <div class="eyebrow" data-i18n="menu_label">LA CARTA</div>
+      <h2 data-i18n="menu_headline">Tapas, Marisco y Vermut</h2>
+      <p data-i18n="menu_sub">Croquetas caseras, pulpo gallego y toda la barra de marisco, tal como se sirve en Casa Rufina desde 1981.</p>
+    </div>
+
+    <div class="menu-card" data-reveal>
+      <div class="menu-card-title">TAPAS</div>
+
+      <div class="menu-sub-head"><span data-i18n="group_hot">Calientes</span></div>
+      <div class="menu-folders">
+        <details class="menu-folder" open>
+          <summary>
+            <span data-i18n="cat_croquetas">Croquetas</span>
+            <span class="count">9</span>
+            <svg class="chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <div class="menu-columns cols-2">
+            <ul>
+              <li><span class="name">Surtido de croquetas</span><span class="fill"></span><span class="price">12,70€</span></li>
+              <li><span class="name">Croqueta de pollo</span><span class="fill"></span><span class="price">1,50€</span></li>
+              <li><span class="name">Croqueta de bacalao</span><span class="fill"></span><span class="price">1,50€</span></li>
+              <li><span class="name">Croqueta de gambas al ajillo</span><span class="fill"></span><span class="price">1,95€</span></li>
+              <li><span class="name">Croqueta de chorizo</span><span class="fill"></span><span class="price">1,50€</span></li>
+            </ul>
+            <ul>
+              <li><span class="name">Croqueta de setas</span><span class="fill"></span><span class="price">1,50€</span></li>
+              <li><span class="name">Croqueta de jamón ibérico</span><span class="fill"></span><span class="price">1,50€</span></li>
+              <li><span class="name">Croqueta de rabo de toro</span><span class="fill"></span><span class="price">1,95€</span></li>
+              <li><span class="name">Bomba</span><span class="fill"></span><span class="price">4,00€</span></li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="menu-folder">
+          <summary>
+            <span data-i18n="cat_brasa">De la Sartén y la Brasa</span>
+            <span class="count">22</span>
+            <svg class="chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <div class="menu-columns cols-3">
+            <ul>
+              <li><span class="name">Huevos rotos con jamón</span><span class="fill"></span><span class="price">9,00€</span></li>
+              <li><span class="name">Timbal de escalivada con queso de cabra</span><span class="fill"></span><span class="price">7,95€</span></li>
+              <li><span class="name">Patatas bravas</span><span class="fill"></span><span class="price">3,70€ / 5,15€</span></li>
+              <li><span class="name">Nachos caseros con carne mechada</span><span class="fill"></span><span class="price">14,30€</span></li>
+              <li><span class="name">Tortilla de patatas</span><span class="fill"></span><span class="price">5,15€</span></li>
+              <li><span class="name">Tigres, unidad</span><span class="fill"></span><span class="price">2,10€</span></li>
+              <li><span class="name">Morcilla, unidad</span><span class="fill"></span><span class="price">3,45€</span></li>
+            </ul>
+            <ul>
+              <li><span class="name">Alitas de pollo</span><span class="fill"></span><span class="price">4,40€ / 8,10€</span></li>
+              <li><span class="name">Lágrimas de pollo</span><span class="fill"></span><span class="price">4,40€ / 8,10€</span></li>
+              <li><span class="name">Pimientos de padrón</span><span class="fill"></span><span class="price">4,00€ / 6,90€</span></li>
+              <li><span class="name">Torrezno, unidad</span><span class="fill"></span><span class="price">3,60€</span></li>
+              <li><span class="name">Morro</span><span class="fill"></span><span class="price">4,00€ / 7,15€</span></li>
+              <li><span class="name">Pincho moruno</span><span class="fill"></span><span class="price">4,40€ / 8,10€</span></li>
+              <li><span class="name">Oreja</span><span class="fill"></span><span class="price">6,90€</span></li>
+            </ul>
+            <ul>
+              <li><span class="name">Callos</span><span class="fill"></span><span class="price">7,95€</span></li>
+              <li><span class="name">Ancas de rana</span><span class="fill"></span><span class="price">7,95€</span></li>
+              <li><span class="name">Caracoles de la abuela</span><span class="fill"></span><span class="price">7,95€</span></li>
+              <li><span class="name">Provolone</span><span class="fill"></span><span class="price">7,40€</span></li>
+              <li><span class="name">Provolone con sobrasada</span><span class="fill"></span><span class="price">8,10€</span></li>
+              <li><span class="name">Provolone con beicon</span><span class="fill"></span><span class="price">8,10€</span></li>
+              <li><span class="name">Choricitos del infierno</span><span class="fill"></span><span class="price">6,90€</span></li>
+              <li><span class="name">Chistorra de la casa</span><span class="fill"></span><span class="price">4,20€ / 7,95€</span></li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="menu-folder">
+          <summary>
+            <span data-i18n="cat_iberico">Ibéricos, Quesos y Pan</span>
+            <span class="count">6</span>
+            <svg class="chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <div class="menu-columns cols-2">
+            <ul>
+              <li><span class="name">Tabla de jamón ibérico</span><span class="fill"></span><span class="price">9,00€ / 16,95€</span></li>
+              <li><span class="name">Tabla de lacón</span><span class="fill"></span><span class="price">7,15€ / 12,70€</span></li>
+              <li><span class="name">Tabla de queso</span><span class="fill"></span><span class="price">6,90€ / 12,70€</span></li>
+            </ul>
+            <ul>
+              <li><span class="name">Surtido de embutidos</span><span class="fill"></span><span class="price">16,95€</span></li>
+              <li><span class="name">Pan con tomate</span><span class="fill"></span><span class="price">2,65€</span></li>
+              <li><span class="name">Pan</span><span class="fill"></span><span class="price">1,35€</span></li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="menu-folder">
+          <summary>
+            <span data-i18n="cat_mar_caliente">Marisco y Pescado Caliente</span>
+            <span class="count">14</span>
+            <svg class="chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <div class="menu-columns cols-2">
+            <ul>
+              <li><span class="name">Pulpo gallego</span><span class="fill"></span><span class="price">19,60€</span></li>
+              <li><span class="name">Pulpitos</span><span class="fill"></span><span class="price">12,70€</span></li>
+              <li><span class="name">Gambas a la plancha</span><span class="fill"></span><span class="price">14,85€</span></li>
+              <li><span class="name">Gambas al ajillo</span><span class="fill"></span><span class="price">9,00€</span></li>
+              <li><span class="name">Sepia a la plancha</span><span class="fill"></span><span class="price">s/m</span></li>
+              <li><span class="name">Mejillones al vapor</span><span class="fill"></span><span class="price">7,95€</span></li>
+              <li><span class="name">Almejas</span><span class="fill"></span><span class="price">12,70€</span></li>
+            </ul>
+            <ul>
+              <li><span class="name">Chocos</span><span class="fill"></span><span class="price">5,25€ / 10,05€</span></li>
+              <li><span class="name">Zamburiñas</span><span class="fill"></span><span class="price">2,40€ / ud</span></li>
+              <li><span class="name">Chipirones</span><span class="fill"></span><span class="price">5,85€ / 10,05€</span></li>
+              <li><span class="name">Calamares a la romana</span><span class="fill"></span><span class="price">5,05€ / 9,00€</span></li>
+              <li><span class="name">Rejos</span><span class="fill"></span><span class="price">5,25€ / 10,05€</span></li>
+              <li><span class="name">Cazón en adobo</span><span class="fill"></span><span class="price">5,30€ / 10,05€</span></li>
+              <li><span class="name">Pescadito frito</span><span class="fill"></span><span class="price">5,25€ / 10,05€</span></li>
+            </ul>
+          </div>
+        </details>
+      </div>
+
+      <div class="menu-sub-head"><span data-i18n="group_cold">Frías</span></div>
+      <div class="menu-folders">
+        <details class="menu-folder">
+          <summary>
+            <span data-i18n="cat_mar_frio">Marisco y Conservas</span>
+            <span class="count">7</span>
+            <svg class="chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <div class="menu-columns cols-2">
+            <ul>
+              <li><span class="name">Ostras, unidad</span><span class="fill"></span><span class="price">4,00€</span></li>
+              <li><span class="name">Cañaillas</span><span class="fill"></span><span class="price">5,85€ / 10,05€</span></li>
+              <li><span class="name">Caracolillos de mar</span><span class="fill"></span><span class="price">5,85€ / 10,05€</span></li>
+              <li><span class="name">Gambas saladas</span><span class="fill"></span><span class="price">6,35€ / 9,55€</span></li>
+            </ul>
+            <ul>
+              <li><span class="name">Boquerones en vinagre</span><span class="fill"></span><span class="price">4,75€ / 8,50€</span></li>
+              <li><span class="name">Berberechos, lata</span><span class="fill"></span><span class="price">9,00€</span></li>
+              <li><span class="name">Montadito anchoa 000 del Cantábrico</span><span class="fill"></span><span class="price">2,65€ / ud</span></li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="menu-folder">
+          <summary>
+            <span data-i18n="cat_picar">Para Picar</span>
+            <span class="count">3</span>
+            <svg class="chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <div class="menu-columns">
+            <ul>
+              <li><span class="name">Ensaladilla rusa</span><span class="fill"></span><span class="price">6,00€</span></li>
+              <li><span class="name">Aceitunas con hueso</span><span class="fill"></span><span class="price">3,20€</span></li>
+              <li><span class="name">Aceitunas rellenas</span><span class="fill"></span><span class="price">3,20€</span></li>
+            </ul>
+          </div>
+        </details>
+      </div>
+
+      <div class="vermut-box">
+        <div class="vermut-title"><span>Vermut Mixto</span><span class="price">26,50€</span></div>
+        <p data-i18n="vermut_desc">Gambas saladas, caracolillos, cañaillas, boquerones, almejas, pulpitos, mejillones...</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="story">
+  <div class="wrap story-grid">
+    <div data-reveal>
+      <div class="eyebrow on-dark" data-i18n="story_label">LA CASA</div>
+      <h2 data-i18n="story_headline">Barra, Marisco y Barrio Desde 1981</h2>
+    </div>
+    <div data-reveal>
+      <p data-i18n="story_p1">Casa Rufina abrió en 1981 en una esquina de la Plaça de les Oliveres y la barra apenas ha cambiado desde entonces. La carta es la de un bar de tapas de siempre: croquetas caseras hechas una a una, pulpo gallego, tabla de jamón ibérico y una barra de marisco entera, de las ostras a las cañaillas.</p>
+      <p data-i18n="story_p2"><span class="quote">"Cada mañana, lo que traiga el mercado: mira la pizarra antes de pedir."</span></p>
+      <p data-i18n="story_p3">Es lo primero que te dicen si es tu primera vez. Así se cocina en Casa Rufina: los clásicos de siempre, más los platos del día.</p>
+    </div>
+  </div>
+</section>
+
+<section id="practical">
+  <div class="wrap">
+    <div class="practical-head" data-reveal>
+      <div class="eyebrow" data-i18n="practical_label">PRÁCTICO</div>
+      <h2 data-i18n="practical_headline">Cómo Llegar y Cuándo Venir</h2>
+    </div>
+    <div class="practical-grid" data-reveal>
+      <div class="practical-block">
+        <h3 data-i18n="address_title">Dirección</h3>
+        <p>Plaça de les Oliveres, 4, 08026 Barcelona</p>
+        <p data-i18n="metro_note">Metro Clot, L1 · L2</p>
+        <p>Tel. 93 000 00 00 · 600 000 000</p>
+        <div class="practical-actions">
+          <a class="btn btn-solid" style="background:var(--maroon);color:#fff;" href="https://www.google.com/maps/search/Barcelona" target="_blank" rel="noopener" data-i18n="map_link_text">Ver en Google Maps</a>
+          <a class="btn btn-line" style="border-color:rgba(39,27,21,.3);color:var(--ink);" href="https://wa.me/34600000000" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+      </div>
+      <div class="practical-block">
+        <h3 data-i18n="hours_title">Horario</h3>
+        <div class="hours-table">
+          <div><span data-i18n="day_mon">Lunes</span><span>8:30 - 00:00</span></div>
+          <div><span data-i18n="day_tue">Martes</span><span>8:30 - 00:00</span></div>
+          <div><span data-i18n="day_wed">Miércoles</span><span>8:30 - 00:00</span></div>
+          <div><span data-i18n="day_thu">Jueves</span><span>8:30 - 00:00</span></div>
+          <div><span data-i18n="day_fri">Viernes</span><span>8:30 - 00:30</span></div>
+          <div><span data-i18n="day_sat">Sábado</span><span>8:30 - 00:30</span></div>
+          <div><span data-i18n="day_sun">Domingo</span><span>8:30 - 00:00</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="booking">
+  <div class="wrap">
+    <div class="booking-head" data-reveal>
+      <div class="eyebrow on-dark" data-i18n="booking_label">RESERVAS</div>
+      <h2 data-i18n="booking_headline">Reserva tu Mesa</h2>
+      <p data-i18n="booking_sub">Dinos cuándo venís y os confirmamos por WhatsApp.</p>
+    </div>
+    <form class="booking-form" id="bookingForm" data-reveal>
+      <div class="booking-grid">
+        <label>
+          <span data-i18n="booking_name">Nombre</span>
+          <input type="text" id="bk-name" name="name" required autocomplete="name">
+        </label>
+        <label>
+          <span data-i18n="booking_people">Personas</span>
+          <input type="number" id="bk-people" name="people" min="1" max="70" value="2" required>
+        </label>
+        <label>
+          <span data-i18n="booking_date">Fecha</span>
+          <input type="date" id="bk-date" name="date" required>
+        </label>
+        <label>
+          <span data-i18n="booking_time">Hora</span>
+          <select id="bk-time" name="time" required>
+            <option value="" data-i18n="booking_time_placeholder">Elige hora</option>
+          </select>
+        </label>
+      </div>
+      <button type="submit" class="btn btn-solid" data-i18n="booking_submit">Reservar por WhatsApp</button>
+      <p class="booking-note" data-i18n="booking_note">También puedes reservar llamando al 93 000 00 00 / 600 000 000.</p>
+    </form>
+  </div>
+</section>
+
+<section id="legal">
+  <div class="wrap">
+    <h2 data-i18n="footer_legal">Aviso Legal</h2>
+    <p data-i18n="legal_body">Casa Rufina, Plaça de les Oliveres 4, 08026 Barcelona. Esta página es una versión de demostración. No se recopilan datos personales de quienes la visitan. Para cualquier consulta, contacta por teléfono o visítanos en persona.</p>
+  </div>
+</section>
+
+<footer id="footer">
+  <div class="wrap footer-row">
+    <span data-i18n="footer_bottom">© 2026 Casa Rufina. Tapas y marisco en el Clot, Barcelona.</span>
+    <div class="footer-links">
+      <a href="tel:+34600000000">+34 600 000 000</a>
+      <a href="https://instagram.com/" target="_blank" rel="noopener">@casarufina.bcn</a>
+      <a href="#legal" data-i18n="footer_privacy">Privacidad y Cookies</a>
+    </div>
+  </div>
+</footer>
+
+<a href="tel:+34600000000" id="callbtn" aria-label="Llamar">☎</a>
+
+<script>
+const I18N = {
+  es: {
+    nav_menu:"Carta", nav_story:"Historia", nav_practical:"Cómo Llegar", nav_booking:"Reservas", nav_call:"Llamar",
+    hero_since:"Desde 1981 · Plaça de les Oliveres",
+    hero_tagline:"Tapas, marisco y vermut, en la barra de siempre.",
+    hero_cta_menu:"Ver la Carta", hero_cta_call:"Llamar +34 600 000 000",
+    fact_since:"Desde 1981", fact_hours:"Abierto 8:30 - 00:00",
+    menu_label:"LA CARTA", menu_headline:"Tapas, Marisco y Vermut",
+    menu_sub:"Croquetas caseras, pulpo gallego y toda la barra de marisco, tal como se sirve en Casa Rufina desde 1981.",
+    group_hot:"Calientes", group_cold:"Frías",
+    cat_croquetas:"Croquetas", cat_brasa:"De la Sartén y la Brasa", cat_iberico:"Ibéricos, Quesos y Pan", cat_mar_caliente:"Marisco y Pescado Caliente", cat_mar_frio:"Marisco y Conservas", cat_picar:"Para Picar",
+    vermut_desc:"Gambas saladas, caracolillos, cañaillas, boquerones, almejas, pulpitos, mejillones...",
+    story_label:"LA CASA", story_headline:"Barra, Marisco y Barrio Desde 1981",
+    story_p1:"Casa Rufina abrió en 1981 en una esquina de la Plaça de les Oliveres y la barra apenas ha cambiado desde entonces. La carta es la de un bar de tapas de siempre: croquetas caseras hechas una a una, pulpo gallego, tabla de jamón ibérico y una barra de marisco entera, de las ostras a las cañaillas.",
+    story_p2:"\"Cada mañana, lo que traiga el mercado: mira la pizarra antes de pedir.\"",
+    story_p3:"Es lo primero que te dicen si es tu primera vez. Así se cocina en Casa Rufina: los clásicos de siempre, más los platos del día.",
+    practical_label:"PRÁCTICO", practical_headline:"Cómo Llegar y Cuándo Venir",
+    hours_title:"Horario",
+    day_mon:"Lunes", day_tue:"Martes", day_wed:"Miércoles", day_thu:"Jueves", day_fri:"Viernes", day_sat:"Sábado", day_sun:"Domingo",
+    address_title:"Dirección", metro_note:"Metro Clot, L1 · L2", map_link_text:"Ver en Google Maps",
+    booking_label:"RESERVAS", booking_headline:"Reserva tu Mesa", booking_sub:"Dinos cuándo venís y os confirmamos por WhatsApp.",
+    booking_name:"Nombre", booking_people:"Personas", booking_date:"Fecha", booking_time:"Hora", booking_time_placeholder:"Elige hora",
+    booking_submit:"Reservar por WhatsApp", booking_note:"También puedes reservar llamando al 93 000 00 00 / 600 000 000.",
+    booking_msg:"Hola, querría reservar mesa para {people} personas el {date} a las {time}. Nombre: {name}.",
+    footer_legal:"Aviso Legal", footer_privacy:"Privacidad y Cookies",
+    legal_body:"Casa Rufina, Plaça de les Oliveres 4, 08026 Barcelona. Esta página es una versión de demostración. No se recopilan datos personales de quienes la visitan. Para cualquier consulta, contacta por teléfono o visítanos en persona.",
+    footer_bottom:"© 2026 Casa Rufina. Tapas y marisco en el Clot, Barcelona."
+  },
+  ca: {
+    nav_menu:"Carta", nav_story:"Història", nav_practical:"Com Arribar", nav_booking:"Reserves", nav_call:"Trucar",
+    hero_since:"Des de 1981 · Plaça de les Oliveres",
+    hero_tagline:"Tapes, marisc i vermut, a la barra de sempre.",
+    hero_cta_menu:"Veure la Carta", hero_cta_call:"Trucar +34 600 000 000",
+    fact_since:"Des de 1981", fact_hours:"Obert 8:30 - 00:00",
+    menu_label:"LA CARTA", menu_headline:"Tapes, Marisc i Vermut",
+    menu_sub:"Croquetes casolanes, pop gallec i tota la barra de marisc, tal com se serveix a Casa Rufina des de 1981.",
+    group_hot:"Calentes", group_cold:"Fredes",
+    cat_croquetas:"Croquetes", cat_brasa:"De la Paella i la Brasa", cat_iberico:"Ibèrics, Formatges i Pa", cat_mar_caliente:"Marisc i Peix Calent", cat_mar_frio:"Marisc i Conserves", cat_picar:"Per Picar",
+    vermut_desc:"Gambes salades, caragolins, cargols de mar, seitons, cloïsses, pop petit, musclos...",
+    story_label:"LA CASA", story_headline:"Barra, Marisc i Barri Des de 1981",
+    story_p1:"Casa Rufina va obrir el 1981 en una cantonada de la Plaça de les Oliveres i la barra gairebé no ha canviat des de llavors. La carta és la d'un bar de tapes de sempre: croquetes casolanes fetes una a una, pop gallec, taula de pernil ibèric i tota una barra de marisc, de les ostres a les caragolins.",
+    story_p2:"\"Cada matí, el que porti el mercat: mira la pissarra abans de demanar.\"",
+    story_p3:"És el primer que et diuen si és la teva primera vegada. Així es cuina a Casa Rufina: els clàssics de sempre, més els plats del dia.",
+    practical_label:"PRÀCTIC", practical_headline:"Com Arribar i Quan Venir",
+    hours_title:"Horari",
+    day_mon:"Dilluns", day_tue:"Dimarts", day_wed:"Dimecres", day_thu:"Dijous", day_fri:"Divendres", day_sat:"Dissabte", day_sun:"Diumenge",
+    address_title:"Adreça", metro_note:"Metro Clot, L1 · L2", map_link_text:"Veure a Google Maps",
+    booking_label:"RESERVES", booking_headline:"Reserva la teva Taula", booking_sub:"Digues-nos quan veniu i us confirmem per WhatsApp.",
+    booking_name:"Nom", booking_people:"Persones", booking_date:"Data", booking_time:"Hora", booking_time_placeholder:"Tria hora",
+    booking_submit:"Reservar per WhatsApp", booking_note:"També pots reservar trucant al 93 000 00 00 / 600 000 000.",
+    booking_msg:"Hola, voldria reservar taula per a {people} persones el {date} a les {time}. Nom: {name}.",
+    footer_legal:"Avís Legal", footer_privacy:"Privacitat i Cookies",
+    legal_body:"Casa Rufina, Plaça de les Oliveres 4, 08026 Barcelona. Aquesta pàgina és una versió de demostració. No es recullen dades personals de qui la visita. Per a qualsevol consulta, contacta per telèfon o visita'ns en persona.",
+    footer_bottom:"© 2026 Casa Rufina. Tapes i marisc al Clot, Barcelona."
+  },
+  en: {
+    nav_menu:"Menu", nav_story:"Story", nav_practical:"Getting Here", nav_booking:"Booking", nav_call:"Call",
+    hero_since:"Since 1981 · Plaça de les Oliveres",
+    hero_tagline:"Tapas, seafood and vermouth, at the same old bar.",
+    hero_cta_menu:"See the Menu", hero_cta_call:"Call +34 600 000 000",
+    fact_since:"Since 1981", fact_hours:"Open 8:30 - 00:00",
+    menu_label:"THE MENU", menu_headline:"Tapas, Seafood and Vermouth",
+    menu_sub:"Homemade croquettes, Galician-style octopus and a full seafood bar, served at Casa Rufina the way it has been since 1981.",
+    group_hot:"Hot", group_cold:"Cold",
+    cat_croquetas:"Croquettes", cat_brasa:"From the Pan and the Grill", cat_iberico:"Iberian Cured Meats, Cheese and Bread", cat_mar_caliente:"Hot Seafood and Fish", cat_mar_frio:"Seafood and Tinned Fish", cat_picar:"Small Bites",
+    vermut_desc:"Salted prawns, sea snails, whelks, marinated anchovies, clams, baby octopus, mussels...",
+    story_label:"THE HOUSE", story_headline:"Bar, Seafood and Neighborhood Since 1981",
+    story_p1:"Casa Rufina opened in 1981 on a corner of Plaça de les Oliveres, and the bar has barely changed since. It's a classic neighbourhood tapas bar: homemade croquettes made one by one, Galician-style octopus, a board of Iberian ham, and a full seafood counter, from oysters to sea snails.",
+    story_p2:"\"Every morning, whatever the market brings: check the board before you order.\"",
+    story_p3:"It's the first thing they tell you on your first visit. That's how they cook at Casa Rufina: the classics, plus the dishes of the day.",
+    practical_label:"PRACTICAL", practical_headline:"How to Get There and When to Come",
+    hours_title:"Hours",
+    day_mon:"Monday", day_tue:"Tuesday", day_wed:"Wednesday", day_thu:"Thursday", day_fri:"Friday", day_sat:"Saturday", day_sun:"Sunday",
+    address_title:"Address", metro_note:"Clot Metro, Lines 1 and 2", map_link_text:"View on Google Maps",
+    booking_label:"BOOKING", booking_headline:"Reserve a Table", booking_sub:"Tell us when you're coming and we'll confirm on WhatsApp.",
+    booking_name:"Name", booking_people:"People", booking_date:"Date", booking_time:"Time", booking_time_placeholder:"Choose a time",
+    booking_submit:"Book via WhatsApp", booking_note:"You can also book by calling 93 000 00 00 / 600 000 000.",
+    booking_msg:"Hi, I'd like to book a table for {people} people on {date} at {time}. Name: {name}.",
+    footer_legal:"Legal Notice", footer_privacy:"Privacy and Cookies",
+    legal_body:"Casa Rufina, Plaça de les Oliveres 4, 08026 Barcelona. This page is a demo version. No personal data is collected from visitors. For any inquiry, contact by phone or visit us in person.",
+    footer_bottom:"© 2026 Casa Rufina. Tapas and seafood in El Clot, Barcelona."
+  }
+};
+
+let currentLang = "es";
+function setLanguage(lang){
+  if(!I18N[lang]) return;
+  currentLang = lang;
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    const key = el.getAttribute('data-i18n');
+    if(I18N[lang][key] !== undefined) el.textContent = I18N[lang][key];
+  });
+  document.querySelectorAll('[data-lang]').forEach(function(btn){
+    btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+  });
+  try{ localStorage.setItem('casarufina_lang', lang); }catch(e){}
+}
+document.querySelectorAll('[data-lang]').forEach(function(btn){
+  btn.addEventListener('click', function(){ setLanguage(btn.getAttribute('data-lang')); });
+});
+let savedLang = 'es';
+try{ savedLang = localStorage.getItem('casarufina_lang') || 'es'; }catch(e){}
+setLanguage(savedLang);
+
+const burger = document.getElementById('burger');
+const mnav = document.getElementById('mnav');
+burger.addEventListener('click', function(){ mnav.classList.toggle('open'); });
+mnav.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ mnav.classList.remove('open'); }); });
+
+const io = new IntersectionObserver(function(entries){
+  for(const e of entries){
+    if(e.isIntersecting){
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    }
+  }
+}, { rootMargin: '0px 0px -10% 0px' });
+document.querySelectorAll('[data-reveal]').forEach(function(el){ io.observe(el); });
+
+const bkTime = document.getElementById('bk-time');
+for(let h = 8; h <= 23; h++){
+  for(let m of [0, 30]){
+    if(h === 8 && m === 0) continue;
+    const hh = String(h).padStart(2, '0');
+    const mm = String(m).padStart(2, '0');
+    const opt = document.createElement('option');
+    opt.value = hh + ':' + mm;
+    opt.textContent = hh + ':' + mm;
+    bkTime.appendChild(opt);
+  }
+}
+
+const bkDate = document.getElementById('bk-date');
+bkDate.min = new Date().toISOString().split('T')[0];
+
+document.getElementById('bookingForm').addEventListener('submit', function(ev){
+  ev.preventDefault();
+  const name = document.getElementById('bk-name').value.trim();
+  const people = document.getElementById('bk-people').value;
+  const date = document.getElementById('bk-date').value;
+  const time = document.getElementById('bk-time').value;
+  const template = I18N[currentLang].booking_msg;
+  const message = template
+    .replace('{people}', people)
+    .replace('{date}', date)
+    .replace('{time}', time)
+    .replace('{name}', name);
+  window.open('https://wa.me/34600000000?text=' + encodeURIComponent(message), '_blank', 'noopener');
+});
+</script>
+<script src="/demos/demo-kit.js" data-name="Casa Rufina"></script>
+</body>
+</html>

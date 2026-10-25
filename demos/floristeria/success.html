@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Floreta</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%231d2b23'/><g fill='%23c4756e'><circle cx='16' cy='10.2' r='4.1'/><circle cx='21.8' cy='14.4' r='4.1'/><circle cx='19.6' cy='21.3' r='4.1'/><circle cx='12.4' cy='21.3' r='4.1'/><circle cx='10.2' cy='14.4' r='4.1'/></g><circle cx='16' cy='16' r='2.9' fill='%23faf7f2'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+<style>
+  .ok{min-height:100dvh;display:grid;place-items:center;text-align:center;padding:2rem}
+  .ok-in{max-width:34rem}
+  .ok h1{font-family:var(--serif);font-weight:400;font-size:clamp(2rem,6vw,3rem);
+         letter-spacing:-.03em;margin:0 0 1rem;line-height:1.05}
+  .ok p{color:var(--ink-2);font-size:1.02rem;line-height:1.65;margin:0 0 2rem}
+</style>
+</head>
+<body>
+<main class="ok">
+  <div class="ok-in">
+    <h1 id="okTitle">¡Pedido recibido!</h1>
+    <p id="okBody">Te hemos enviado el resumen por email. Te escribimos por WhatsApp para confirmar la entrega.</p>
+    <a class="btn btn-solid" href="./" id="okBack">Volver a la tienda</a>
+  </div>
+</main>
+
+<script src="assets/js/i18n.js"></script>
+<script>
+  // The payment went through, so the basket is done with.
+  try { localStorage.removeItem('fl_cart'); } catch (e) {}
+
+  var lang = 'es';
+  try {
+    var saved = localStorage.getItem('fl_lang');
+    if (['es', 'ca', 'en'].indexOf(saved) > -1) lang = saved;
+  } catch (e) {}
+
+  var d = I18N[lang] || I18N.es;
+  document.documentElement.lang = lang;
+  document.getElementById('okTitle').textContent = d['ok.title'];
+  document.getElementById('okBody').textContent = d['ok.body'];
+  document.getElementById('okBack').textContent = d['ok.back'];
+</script>
+</body>
+</html>

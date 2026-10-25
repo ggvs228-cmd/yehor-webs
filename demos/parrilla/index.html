@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Austral — Parrilla Argentina, Sant Andreu, Barcelona</title>
+<meta name="description" content="Austral. Parrilla argentina en Carrer del Foc 18, Barcelona. Pedí la parrilla. Menú del día 14,50€.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500;1,9..144,600&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ANCHOR OBJECT: Argentine flag blue (#75aadb) used exactly once — the thin rule beneath
+     "Patagonia" in the origin story. Everywhere else the palette stays embers/charcoal/bone/ash. */
+
+  :root{
+    --ground:#120f0d;
+    --charcoal:#221d1a;
+    --charcoal-2:#2c2622;
+    --ember:#c9531f;
+    --ember-bright:#e37a34;
+    --ember-deep:#8c2f16;
+    --bone:#f3ead9;
+    --bone-dim:#d9cdb8;
+    --ash:#8f887b;
+    --ash-dim:#5c564c;
+    --argentine-blue:#75aadb;
+    --serif: "Fraunces", Georgia, serif;
+    --grotesque: "Archivo", Helvetica, Arial, sans-serif;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ground);
+    color:var(--bone);
+    font-family:var(--grotesque);
+    line-height:1.5;
+    overflow-x:hidden;
+  }
+  img{max-width:100%; display:block;}
+  a{color:inherit;}
+  .wrap{max-width:1240px; margin:0 auto; padding:0 32px;}
+
+  /* ---------- entrance sequence (runs once on load) ---------- */
+  .load-in{
+    opacity:0;
+    transform:translateY(18px);
+    animation:riseIn .9s cubic-bezier(.19,1,.22,1) forwards;
+  }
+  @keyframes riseIn{ to{opacity:1; transform:translateY(0);} }
+  .d1{animation-delay:.05s} .d2{animation-delay:.22s} .d3{animation-delay:.38s}
+  .d4{animation-delay:.54s} .d5{animation-delay:.68s} .d6{animation-delay:.82s}
+
+  /* ---------- header / lang switch ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:22px 32px;
+    background:var(--ground);
+    border-bottom:1px solid var(--charcoal-2);
+  }
+  .brand{font-family:var(--serif); font-weight:700; font-size:1.15rem; letter-spacing:.04em; text-decoration:none;}
+  nav.langs{display:flex; gap:6px; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase;}
+  nav.langs button{
+    background:none; border:1px solid var(--ash-dim); color:var(--ash);
+    padding:5px 10px; cursor:pointer; font-family:var(--grotesque);
+    font-size:.72rem; letter-spacing:.08em; text-transform:uppercase;
+    transition:border-color .2s, color .2s;
+  }
+  nav.langs button.active, nav.langs button:hover{ color:var(--bone); border-color:var(--ember); }
+
+  /* ---------- opening: editorial text grid ---------- */
+  .opening{
+    min-height:100svh;
+    display:flex; flex-direction:column; justify-content:center;
+    padding:140px 0 80px;
+    position:relative;
+    background:
+      radial-gradient(ellipse at 15% 0%, rgba(201,83,31,.12), transparent 55%),
+      var(--ground);
+  }
+  .eyebrow{
+    font-size:.82rem; letter-spacing:.22em; text-transform:uppercase;
+    color:var(--ember-bright); margin-bottom:22px; font-weight:600;
+  }
+  h1.headline{
+    font-family:var(--serif);
+    font-weight:600;
+    font-style:italic;
+    font-size:clamp(3rem, 8.4vw, 7.2rem);
+    line-height:0.98;
+    letter-spacing:-.01em;
+    color:var(--bone);
+    max-width:14ch;
+  }
+  h1.headline em{
+    font-style:normal;
+    color:var(--ember);
+  }
+  .sub-lede{
+    margin-top:28px;
+    max-width:52ch;
+    font-size:1.15rem;
+    color:var(--bone-dim);
+    font-weight:400;
+  }
+
+  .text-grid{
+    margin-top:72px;
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:1px;
+    background:var(--ash-dim);
+    border-top:1px solid var(--ash-dim);
+    border-bottom:1px solid var(--ash-dim);
+  }
+  .text-grid .cell{
+    background:var(--ground);
+    padding:24px 20px;
+  }
+  .cell .label{
+    font-size:.68rem; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--ash); margin-bottom:10px;
+  }
+  .cell .value{
+    font-family:var(--serif); font-size:1.35rem; font-weight:500; color:var(--bone);
+  }
+  .cell .value.stars{ color:var(--ember-bright); }
+  .cell .value small{ display:block; font-family:var(--grotesque); font-size:.78rem; color:var(--ash); font-weight:400; margin-top:4px;}
+
+  /* ---------- full-bleed hero photograph, below the fold ---------- */
+  .hero-photo{
+    position:relative;
+    height:92vh;
+    min-height:520px;
+    overflow:hidden;
+  }
+  .hero-photo img{
+    width:100%; height:100%; object-fit:cover;
+    object-position:center 38%;
+    filter:saturate(1.05) contrast(1.05);
+  }
+  .hero-photo::after{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(18,15,13,.15) 0%, rgba(18,15,13,.05) 40%, rgba(18,15,13,.85) 100%);
+  }
+  .hero-wordmark{
+    position:absolute; left:0; right:0; bottom:0;
+    padding:0 32px 56px;
+    z-index:2;
+  }
+  .hero-wordmark .wrap{ display:flex; align-items:flex-end; justify-content:space-between; gap:24px; flex-wrap:wrap;}
+  .hero-wordmark h2{
+    font-family:var(--serif);
+    font-weight:900;
+    font-size:clamp(3.2rem, 11vw, 9rem);
+    letter-spacing:-.01em;
+    line-height:.85;
+    color:var(--bone);
+    text-shadow:0 8px 40px rgba(0,0,0,.5);
+  }
+  .hero-wordmark .tagline{
+    font-size:.95rem; color:var(--bone-dim); max-width:28ch; padding-bottom:.6em;
+    border-left:2px solid var(--ember); padding-left:16px;
+  }
+
+  /* ---------- origin story ---------- */
+  section.origin{
+    padding:120px 0;
+    background:var(--charcoal);
+  }
+  .origin .kicker{
+    font-size:.72rem; letter-spacing:.18em; text-transform:uppercase; color:var(--ash);
+    margin-bottom:18px;
+  }
+  .origin .grid{
+    display:grid; grid-template-columns:1.1fr 1fr; gap:80px; align-items:start;
+  }
+  .origin h3{
+    font-family:var(--serif); font-weight:500; font-style:italic;
+    font-size:clamp(1.9rem, 3.4vw, 2.6rem); line-height:1.15; color:var(--bone);
+    max-width:16ch;
+  }
+  .origin p{ color:var(--bone-dim); font-size:1.02rem; margin-top:22px; max-width:52ch; }
+  .mardel{
+    color:var(--bone);
+  }
+  .origin .handle{
+    margin-top:28px; font-size:.85rem; color:var(--ash); letter-spacing:.02em;
+  }
+  .origin .handle a{ color:var(--ember-bright); text-decoration:none; border-bottom:1px solid var(--ember-deep); }
+
+  /* ---------- market board: the signature element ---------- */
+  section.board{
+    padding:100px 0 130px;
+    background:var(--ground);
+    position:relative;
+  }
+  section.board::before{
+    content:"";
+    position:absolute; inset:0;
+    background:radial-gradient(ellipse at 85% 20%, rgba(201,83,31,.10), transparent 50%);
+    pointer-events:none;
+  }
+  .board-inner{
+    position:relative;
+    background:var(--charcoal-2);
+    border:1px solid var(--ash-dim);
+    padding:clamp(36px, 6vw, 72px);
+    box-shadow:0 30px 80px -30px rgba(0,0,0,.6);
+  }
+  .board-head{
+    display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:20px;
+    border-bottom:1px dashed var(--ash-dim);
+    padding-bottom:28px; margin-bottom:36px;
+  }
+  .board-head h3{
+    font-family:var(--serif); font-weight:600; font-style:italic;
+    font-size:clamp(2rem,4.2vw,3rem); color:var(--bone);
+  }
+  .board-price{
+    font-family:var(--serif); font-weight:900; font-size:clamp(2.6rem,6vw,4.2rem);
+    color:var(--ember-bright); line-height:1; white-space:nowrap;
+  }
+  .board-price small{ display:block; font-family:var(--grotesque); font-size:.7rem; letter-spacing:.12em; text-transform:uppercase; color:var(--ash); font-weight:600; margin-top:6px;}
+  .board-cols{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:44px;
+  }
+  .board-col .num{
+    font-family:var(--serif); font-style:italic; color:var(--ember); font-size:1.1rem; margin-bottom:10px; display:block;
+  }
+  .board-col h4{
+    font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color:var(--ash); margin-bottom:16px;
+  }
+  .board-col ul{ list-style:none; }
+  .board-col li{
+    font-family:var(--serif); font-size:1.28rem; color:var(--bone); padding:9px 0;
+    border-bottom:1px solid rgba(143,136,123,.18);
+  }
+  .board-col li:last-child{ border-bottom:none; }
+  .board-foot{
+    margin-top:36px; padding-top:24px; border-top:1px dashed var(--ash-dim);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;
+    font-size:.85rem; color:var(--ash);
+  }
+  .board-foot strong{ color:var(--bone-dim); font-weight:600; }
+
+  /* ---------- dishes ---------- */
+  section.dishes{ padding:20px 0 120px; background:var(--ground); }
+  .dishes-head{ padding-bottom:56px; }
+  .dishes-head .kicker{ font-size:.72rem; letter-spacing:.18em; text-transform:uppercase; color:var(--ash); margin-bottom:16px;}
+  .dishes-head h3{
+    font-family:var(--serif); font-weight:500; font-style:italic;
+    font-size:clamp(2.1rem,4.4vw,3.4rem); color:var(--bone); max-width:16ch;
+  }
+  .dish-grid{
+    display:grid; grid-template-columns:repeat(3,1fr);
+    grid-template-rows:repeat(2, clamp(300px, 32vw, 460px));
+    gap:2px;
+    background:var(--ash-dim);
+  }
+  .dish{
+    background:var(--ground);
+    position:relative;
+    overflow:hidden;
+    height:100%;
+  }
+  .dish img{
+    width:100%; height:100%; object-fit:cover;
+    transition:transform .8s cubic-bezier(.19,1,.22,1);
+    filter:saturate(1.08) contrast(1.05);
+  }
+  .dish:hover img{ transform:scale(1.06); }
+  .dish::after{
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(180deg, transparent 40%, rgba(18,15,13,.92) 100%);
+  }
+  .dish .cap{
+    position:absolute; left:0; right:0; bottom:0; padding:22px; z-index:2;
+  }
+  .dish .cap .name{ font-family:var(--serif); font-size:1.35rem; color:var(--bone); font-weight:600;}
+  .dish .cap .desc{ font-size:.82rem; color:var(--bone-dim); margin-top:6px;}
+  .dish.wide{ grid-column:span 2; }
+
+  .callouts{
+    margin-top:2px;
+    display:grid; grid-template-columns:repeat(2,1fr); gap:2px;
+    background:var(--ash-dim);
+  }
+  .callout{
+    background:var(--charcoal); padding:32px;
+  }
+  .callout .name{ font-family:var(--serif); font-size:1.15rem; color:var(--bone); font-style:italic; margin-bottom:8px;}
+  .callout .desc{ font-size:.88rem; color:var(--ash); }
+
+  /* ---------- reviews / stat ---------- */
+  section.reviews{
+    padding:110px 0; background:var(--charcoal);
+    border-top:1px solid var(--ash-dim); border-bottom:1px solid var(--ash-dim);
+  }
+  .reviews .grid{
+    display:grid; grid-template-columns:.8fr 1.2fr; gap:80px; align-items:center;
+  }
+  .stat-big{ display:flex; align-items:baseline; gap:16px; }
+  .stat-big .num{ font-family:var(--serif); font-weight:900; font-size:clamp(4rem,9vw,7rem); color:var(--ember-bright); line-height:.9;}
+  .stat-stars{ color:var(--ember-bright); font-size:1.3rem; letter-spacing:.06em; margin-top:14px;}
+  .stat-count{ color:var(--ash); font-size:.95rem; margin-top:8px;}
+  .quotes p{
+    font-family:var(--serif); font-style:italic; font-size:1.3rem; color:var(--bone-dim);
+    padding:20px 0; border-bottom:1px solid rgba(143,136,123,.18);
+  }
+  .quotes p:last-child{ border-bottom:none; }
+  .quotes p span{ color:var(--ash); font-family:var(--grotesque); font-style:normal; font-size:.78rem; display:block; margin-top:8px; letter-spacing:.06em; text-transform:uppercase;}
+
+  /* ---------- location / footer ---------- */
+  section.location{ padding:110px 0 60px; background:var(--ground); }
+  .loc-grid{ display:grid; grid-template-columns:1fr 1fr; gap:60px; }
+  .loc-grid h3{
+    font-family:var(--serif); font-weight:500; font-style:italic; font-size:clamp(2rem,4vw,2.8rem); color:var(--bone); margin-bottom:28px;
+  }
+  .loc-item{ margin-bottom:26px; }
+  .loc-item .label{ font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ash); margin-bottom:6px;}
+  .loc-item .val{ font-size:1.05rem; color:var(--bone-dim); }
+  .loc-item a.btn{
+    display:inline-block; margin-top:6px; font-size:.85rem; color:var(--ember-bright);
+    text-decoration:none; border-bottom:1px solid var(--ember-deep);
+  }
+  .hours-table{ width:100%; border-collapse:collapse; }
+  .hours-table td{ padding:10px 0; border-bottom:1px solid rgba(143,136,123,.18); font-size:.95rem; color:var(--bone-dim);}
+  .hours-table td:first-child{ color:var(--ash); text-transform:uppercase; font-size:.75rem; letter-spacing:.08em; }
+  .hours-table td:last-child{ text-align:right; font-family:var(--serif); color:var(--bone);}
+
+  footer{
+    padding:60px 0 40px; background:var(--ground);
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;
+    border-top:1px solid var(--ash-dim);
+  }
+  footer .brand{ font-size:1rem; }
+  footer .meta{ font-size:.78rem; color:var(--ash); text-align:right; }
+  footer .meta a{ color:var(--ash); text-decoration:none; }
+  footer .meta a:hover{ color:var(--ember-bright); }
+
+  @media (max-width:880px){
+    .wrap{ padding:0 24px; }
+    header{ padding:18px 24px; }
+    .opening{ padding:118px 0 60px; }
+    .text-grid{ grid-template-columns:repeat(2,1fr); margin-top:48px; }
+    .origin{ padding:80px 0; }
+    .origin .grid, .reviews .grid, .loc-grid{ grid-template-columns:1fr; gap:36px; }
+    section.board{ padding:64px 0 80px; }
+    section.dishes{ padding:8px 0 80px; }
+    .dishes-head{ padding-bottom:36px; }
+    section.reviews{ padding:72px 0; }
+    section.location{ padding:72px 0 40px; }
+    .dish-grid, .callouts{ grid-template-columns:1fr; }
+    .dish-grid{ grid-template-rows:none; }
+    .dish.wide{ grid-column:span 1; }
+    .dish{ aspect-ratio:4/3; height:auto; }
+    .board-cols{ grid-template-columns:1fr; gap:26px; }
+    .board-head{ flex-direction:column; align-items:flex-start; gap:16px; }
+    .hero-photo{ height:78vh; min-height:440px; }
+    .hero-wordmark{ padding:0 24px 36px; }
+    .hero-wordmark .wrap{ flex-direction:column; align-items:flex-start; gap:16px; }
+    .hours-table td{ font-size:.88rem; }
+  }
+
+  @media (max-width:520px){
+    .wrap{ padding:0 18px; }
+    header{ padding:16px 18px; }
+    nav.langs button{ padding:5px 8px; }
+    .opening{ padding:104px 0 48px; }
+    .eyebrow{ font-size:.72rem; letter-spacing:.16em; margin-bottom:16px; }
+    .sub-lede{ font-size:1.02rem; margin-top:20px; }
+    .text-grid{ grid-template-columns:1fr 1fr; margin-top:36px; }
+    .cell{ padding:18px 14px; }
+    .cell .value{ font-size:1.15rem; }
+    .hero-photo{ height:68vh; min-height:380px; }
+    .hero-wordmark{ padding:0 18px 28px; }
+    .board-inner{ padding:28px 20px; }
+    .board-price{ font-size:2.4rem; }
+    .board-col li{ font-size:1.12rem; }
+    .callout{ padding:24px 20px; }
+    .stat-big .num{ font-size:4.4rem; }
+    .quotes p{ font-size:1.1rem; }
+    .loc-item .val{ font-size:.98rem; }
+    footer{ flex-direction:column; align-items:flex-start; gap:10px; padding:44px 0 32px; }
+    footer .meta{ text-align:left; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="#top" class="brand">Austral</a>
+  <nav class="langs" aria-label="Idioma">
+    <button data-lang="es" class="active">ES</button>
+    <button data-lang="ca">CA</button>
+    <button data-lang="en">EN</button>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- OPENING: editorial headline over text grid -->
+  <section class="opening">
+    <div class="wrap">
+      <p class="eyebrow load-in d1" data-i18n="eyebrow">Parrilla argentina — Sant Andreu, Barcelona</p>
+      <h1 class="headline load-in d2" data-i18n="headline">Pedí <em>la parrilla</em>.</h1>
+      <p class="sub-lede load-in d3" data-i18n="sublede">Así lo dicen, una y otra vez, en 860 reseñas. Carne a la brasa, patatas hechas a mano y un menú del día que la gente todavía no se cree.</p>
+
+      <div class="text-grid load-in d4">
+        <div class="cell">
+          <div class="label" data-i18n="cellRatingLabel">Valoración</div>
+          <div class="value stars">★★★★★ 4.6</div>
+        </div>
+        <div class="cell">
+          <div class="label" data-i18n="cellReviewsLabel">Reseñas</div>
+          <div class="value">860</div>
+        </div>
+        <div class="cell">
+          <div class="label" data-i18n="cellMenuLabel">Menú del día</div>
+          <div class="value">14,50€</div>
+        </div>
+        <div class="cell">
+          <div class="label" data-i18n="cellAddrLabel">Dirección</div>
+          <div class="value" style="font-size:1.05rem;">Carrer del Foc, 18</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HERO PHOTOGRAPH: full-bleed, name over it -->
+  <section class="hero-photo load-in d5">
+    <img src="img/hero-parrilla.jpg" alt="Parrillada humeante recién salida de la brasa en Austral">
+    <div class="hero-wordmark">
+      <div class="wrap">
+        <h2>Austral</h2>
+        <p class="tagline" data-i18n="heroTagline">La brasa manda. Todo lo demás gira alrededor de la parrilla.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ORIGIN STORY -->
+  <section class="origin">
+    <div class="wrap">
+      <p class="kicker" data-i18n="originKicker">De dónde viene el nombre</p>
+      <div class="grid">
+        <h3 data-i18n="originHeadline">Una palabra que lleva al sur.</h3>
+        <div>
+          <p data-i18n="originP1">Austral significa “del sur”. En Argentina es la palabra de la <span class="mardel">Patagonia</span>: asados largos, fuego lento y mesas que se comparten. El nombre dice lo que hay en la carta.</p>
+          <p data-i18n="originP2">La parrilla de Sant Andreu funciona con esa misma lógica del sur: fuego directo, cortes generosos, sal gruesa y nada que distraiga de la brasa. Un pedazo del sur argentino, trasplantado a un local de barrio en Barcelona.</p>
+          <p class="handle" data-i18n="originHandle">Síguenos en <a href="https://www.instagram.com/" target="_blank" rel="noopener">@australparrilla</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARKET BOARD: menú del día, the signature element -->
+  <section class="board">
+    <div class="wrap">
+      <div class="board-inner">
+        <div class="board-head">
+          <h3 data-i18n="boardTitle">Menú del día</h3>
+          <div class="board-price">14,50€<small data-i18n="boardPriceNote">Pan y bebida incluidos</small></div>
+        </div>
+        <div class="board-cols">
+          <div class="board-col">
+            <span class="num">I.</span>
+            <h4 data-i18n="boardCol1">Primeros</h4>
+            <ul>
+              <li data-i18n="board1a">Ensalada mixta</li>
+              <li data-i18n="board1b">Empanadas criollas</li>
+              <li data-i18n="board1c">Provoleta a la parrilla</li>
+              <li data-i18n="board1d">Sopa del día</li>
+            </ul>
+          </div>
+          <div class="board-col">
+            <span class="num">II.</span>
+            <h4 data-i18n="boardCol2">Segundos</h4>
+            <ul>
+              <li data-i18n="board2a">Entraña a la brasa</li>
+              <li data-i18n="board2b">Hamburguesa Austral gratinada</li>
+              <li data-i18n="board2c">Milanesa napolitana</li>
+              <li data-i18n="board2d">Pollo a la parrilla</li>
+            </ul>
+          </div>
+          <div class="board-col">
+            <span class="num">III.</span>
+            <h4 data-i18n="boardCol3">Postre</h4>
+            <ul>
+              <li data-i18n="board3a">Flan casero</li>
+              <li data-i18n="board3b">Fruta de temporada</li>
+              <li data-i18n="board3c">Helado</li>
+            </ul>
+          </div>
+        </div>
+        <div class="board-foot">
+          <span data-i18n="boardFootDays"><strong>Martes a viernes</strong> — mediodía</span>
+          <span data-i18n="boardFootNote">Precio de referencia — consultar en sala</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DISHES -->
+  <section class="dishes">
+    <div class="wrap">
+      <div class="dishes-head">
+        <p class="kicker" data-i18n="dishesKicker">Lo que pide todo el mundo</p>
+        <h3 data-i18n="dishesHeadline">Los platos por los que vuelven.</h3>
+      </div>
+
+      <div class="dish-grid">
+        <div class="dish wide">
+          <img src="img/parrillada-argentina.jpg" alt="Parrillada argentina para compartir en Austral">
+          <div class="cap">
+            <div class="name" data-i18n="dish1name">Parrillada argentina</div>
+            <div class="desc" data-i18n="dish1desc">Para compartir. La razón por la que existe esta carta.</div>
+          </div>
+        </div>
+        <div class="dish">
+          <img src="img/entrana.jpg" alt="Entraña a la brasa cortada en tiras en Austral">
+          <div class="cap">
+            <div class="name" data-i18n="dish2name">Entraña</div>
+            <div class="desc" data-i18n="dish2desc">Al punto, con sal gruesa. Sin adornos.</div>
+          </div>
+        </div>
+        <div class="dish">
+          <img src="img/hamburguesa.jpg" alt="Hamburguesa Austral gratinada con queso y tomate">
+          <div class="cap">
+            <div class="name" data-i18n="dish3name">Hamburguesa Austral</div>
+            <div class="desc" data-i18n="dish3desc">Gratinada, con queso fundido sobre tostada.</div>
+          </div>
+        </div>
+        <div class="dish wide">
+          <img src="img/secreto-fritas.jpg" alt="Secreto ibérico con patatas fritas hechas a mano y pimientos de Padrón">
+          <div class="cap">
+            <div class="name" data-i18n="dish4name">Secreto con fritas hechas a mano</div>
+            <div class="desc" data-i18n="dish4desc">Patatas cortadas y fritas en casa, nada de congelado.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callouts">
+        <div class="callout">
+          <div class="name" data-i18n="callout1name">Patatas bravas Austral</div>
+          <div class="desc" data-i18n="callout1desc">Su propia versión de la brava — no la vas a encontrar igual en otro sitio.</div>
+        </div>
+        <div class="callout">
+          <div class="name" data-i18n="callout2name">Focaccia de la casa</div>
+          <div class="desc" data-i18n="callout2desc">Para empezar mientras llega la brasa.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="reviews">
+    <div class="wrap">
+      <div class="grid">
+        <div>
+          <div class="stat-big"><span class="num">4.6</span></div>
+          <div class="stat-stars">★★★★★</div>
+          <div class="stat-count" data-i18n="reviewsCount">860 reseñas en Google</div>
+        </div>
+        <div class="quotes">
+          <p data-i18n="quote1">"Pedí la parrilla" — es lo primero que te va a decir cualquiera que ya haya estado.<span data-i18n="quote1attr">Lo más repetido en las reseñas</span></p>
+          <p data-i18n="quote2">El menú del día, por lo que cuesta, no debería ser tan bueno.<span data-i18n="quote2attr">Sobre la relación calidad-precio</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCATION -->
+  <section class="location">
+    <div class="wrap">
+      <div class="loc-grid">
+        <div>
+          <h3 data-i18n="locHeadline">Encontranos</h3>
+          <div class="loc-item">
+            <div class="label" data-i18n="locAddrLabel">Dirección</div>
+            <div class="val">Carrer del Foc, 18<br>08030 Barcelona</div>
+            <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Sant+Andreu+Barcelona" target="_blank" rel="noopener" data-i18n="locMapLink">Cómo llegar →</a>
+          </div>
+          <div class="loc-item">
+            <div class="label" data-i18n="locPhoneLabel">Teléfono</div>
+            <div class="val">600 000 000</div>
+          </div>
+          <div class="loc-item">
+            <div class="label" data-i18n="locInstaLabel">Instagram</div>
+            <div class="val"><a href="https://www.instagram.com/" target="_blank" rel="noopener">@australparrilla</a></div>
+          </div>
+        </div>
+        <div>
+          <h3 data-i18n="locHoursHeadline">Horario</h3>
+          <table class="hours-table">
+            <tr><td data-i18n="hoursMonLabel">Lunes</td><td data-i18n="hoursClosed">Cerrado</td></tr>
+            <tr><td data-i18n="hoursMidweekLabel">Martes a jueves</td><td>13:00–16:00</td></tr>
+            <tr><td data-i18n="hoursWeekendLabel">Viernes y sábado</td><td>13:00–16:00 / 20:00–00:00</td></tr>
+            <tr><td data-i18n="hoursSundayLabel">Domingo</td><td>13:00–16:00</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; width:100%;">
+      <span class="brand" style="font-family:var(--serif); font-weight:700;">Austral</span>
+      <span class="meta" data-i18n="footerMeta">Parrilla argentina · Sant Andreu, Barcelona · <a href="https://www.instagram.com/" target="_blank" rel="noopener">@australparrilla</a></span>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+const i18n = {
+  es: {
+    eyebrow: "Parrilla argentina — Sant Andreu, Barcelona",
+    headline: 'Pedí <em>la parrilla</em>.',
+    sublede: "Así lo dicen, una y otra vez, en 860 reseñas. Carne a la brasa, patatas hechas a mano y un menú del día que la gente todavía no se cree.",
+    cellRatingLabel: "Valoración", cellReviewsLabel: "Reseñas", cellMenuLabel: "Menú del día", cellAddrLabel: "Dirección",
+    heroTagline: "La brasa manda. Todo lo demás gira alrededor de la parrilla.",
+    originKicker: "De dónde viene el nombre",
+    originHeadline: "Una palabra que lleva al sur.",
+    originP1: 'Austral significa “del sur”. En Argentina es la palabra de la <span class="mardel">Patagonia</span>: asados largos, fuego lento y mesas que se comparten. El nombre dice lo que hay en la carta.',
+    originP2: "La parrilla de Sant Andreu funciona con esa misma lógica del sur: fuego directo, cortes generosos, sal gruesa y nada que distraiga de la brasa. Un pedazo del sur argentino, trasplantado a un local de barrio en Barcelona.",
+    originHandle: 'Síguenos en <a href="https://www.instagram.com/" target="_blank" rel="noopener">@australparrilla</a>',
+    boardTitle: "Menú del día", boardPriceNote: "Pan y bebida incluidos",
+    boardCol1: "Primeros", boardCol2: "Segundos", boardCol3: "Postre",
+    board1a: "Ensalada mixta", board1b: "Empanadas criollas", board1c: "Provoleta a la parrilla", board1d: "Sopa del día",
+    board2a: "Entraña a la brasa", board2b: "Hamburguesa Austral gratinada", board2c: "Milanesa napolitana", board2d: "Pollo a la parrilla",
+    board3a: "Flan casero", board3b: "Fruta de temporada", board3c: "Helado",
+    boardFootDays: "<strong>Martes a viernes</strong> — mediodía", boardFootNote: "Precio de referencia — consultar en sala",
+    dishesKicker: "Lo que pide todo el mundo", dishesHeadline: "Los platos por los que vuelven.",
+    dish1name: "Parrillada argentina", dish1desc: "Para compartir. La razón por la que existe esta carta.",
+    dish2name: "Entraña", dish2desc: "Al punto, con sal gruesa. Sin adornos.",
+    dish3name: "Hamburguesa Austral", dish3desc: "Gratinada, con queso fundido sobre tostada.",
+    dish4name: "Secreto con fritas hechas a mano", dish4desc: "Patatas cortadas y fritas en casa, nada de congelado.",
+    callout1name: "Patatas bravas Austral", callout1desc: "Su propia versión de la brava — no la vas a encontrar igual en otro sitio.",
+    callout2name: "Focaccia de la casa", callout2desc: "Para empezar mientras llega la brasa.",
+    reviewsCount: "860 reseñas en Google",
+    quote1: '"Pedí la parrilla" — es lo primero que te va a decir cualquiera que ya haya estado.', quote1attr: "Lo más repetido en las reseñas",
+    quote2: "El menú del día, por lo que cuesta, no debería ser tan bueno.", quote2attr: "Sobre la relación calidad-precio",
+    locHeadline: "Encontranos", locAddrLabel: "Dirección", locMapLink: "Cómo llegar →", locPhoneLabel: "Teléfono", locInstaLabel: "Instagram",
+    locHoursHeadline: "Horario",
+    hoursMonLabel: "Lunes", hoursClosed: "Cerrado",
+    hoursMidweekLabel: "Martes a jueves", hoursWeekendLabel: "Viernes y sábado", hoursSundayLabel: "Domingo",
+    footerMeta: 'Parrilla argentina · Sant Andreu, Barcelona · <a href="https://www.instagram.com/" target="_blank" rel="noopener">@australparrilla</a>'
+  },
+  ca: {
+    eyebrow: "Graella argentina — Sant Andreu, Barcelona",
+    headline: 'Demana <em>la graella</em>.',
+    sublede: "Ho diuen, una vegada i una altra, en 860 ressenyes. Carn a la brasa, patates fetes a mà i un menú del dia que la gent encara no s'ho creu.",
+    cellRatingLabel: "Valoració", cellReviewsLabel: "Ressenyes", cellMenuLabel: "Menú del dia", cellAddrLabel: "Adreça",
+    heroTagline: "La brasa mana. Tota la resta gira al voltant de la graella.",
+    originKicker: "D'on ve el nom",
+    originHeadline: "Una paraula que porta al sud.",
+    originP1: 'Austral vol dir “del sud”. A l’Argentina és la paraula de la <span class="mardel">Patagònia</span>: rostits llargs, foc lent i taules que es comparteixen. El nom diu el que hi ha a la carta.',
+    originP2: "La graella de Sant Andreu funciona amb la mateixa lògica del sud: foc directe, talls generosos, sal gruixuda i res que distregui de la brasa. Un tros del sud argentí, traslladat a un local de barri a Barcelona.",
+    originHandle: 'Segueix-nos a <a href="https://www.instagram.com/" target="_blank" rel="noopener">@australparrilla</a>',
+    boardTitle: "Menú del dia", boardPriceNote: "Pa i beguda inclosos",
+    boardCol1: "Primers", boardCol2: "Segons", boardCol3: "Postres",
+    board1a: "Amanida mixta", board1b: "Empanades criolles", board1c: "Provoleta a la graella", board1d: "Sopa del dia",
+    board2a: "Entranya a la brasa", board2b: "Hamburguesa Austral gratinada", board2c: "Milanesa napolitana", board2d: "Pollastre a la graella",
+    board3a: "Flam casolà", board3b: "Fruita de temporada", board3c: "Gelat",
+    boardFootDays: "<strong>Dimarts a divendres</strong> — migdia", boardFootNote: "Preu de referència — consultar a sala",
+    dishesKicker: "El que demana tothom", dishesHeadline: "Els plats pels quals tornen.",
+    dish1name: "Graellada argentina", dish1desc: "Per compartir. La raó per la qual existeix aquesta carta.",
+    dish2name: "Entranya", dish2desc: "Al punt, amb sal gruixuda. Sense adorns.",
+    dish3name: "Hamburguesa Austral", dish3desc: "Gratinada, amb formatge fos sobre torrada.",
+    dish4name: "Secreto amb patates fregides fetes a mà", dish4desc: "Patates tallades i fregides a casa, gens de congelat.",
+    callout1name: "Patates braves Austral", callout1desc: "La seva pròpia versió de la brava — no la trobaràs igual enlloc més.",
+    callout2name: "Focaccia de la casa", callout2desc: "Per començar mentre arriba la brasa.",
+    reviewsCount: "860 ressenyes a Google",
+    quote1: '"Demana la graella" — és el primer que et dirà qualsevol que ja hi hagi estat.', quote1attr: "El més repetit a les ressenyes",
+    quote2: "El menú del dia, pel que costa, no hauria de ser tan bo.", quote2attr: "Sobre la relació qualitat-preu",
+    locHeadline: "Troba'ns", locAddrLabel: "Adreça", locMapLink: "Com arribar →", locPhoneLabel: "Telèfon", locInstaLabel: "Instagram",
+    locHoursHeadline: "Horari",
+    hoursMonLabel: "Dilluns", hoursClosed: "Tancat",
+    hoursMidweekLabel: "Dimarts a dijous", hoursWeekendLabel: "Divendres i dissabte", hoursSundayLabel: "Diumenge",
+    footerMeta: 'Graella argentina · Sant Andreu, Barcelona · <a href="https://www.instagram.com/" target="_blank" rel="noopener">@australparrilla</a>'
+  },
+  en: {
+    eyebrow: "Argentine grill — Sant Andreu, Barcelona",
+    headline: 'Order <em>the parrilla</em>.',
+    sublede: "That's what 860 reviews keep saying. Wood-fired meat, hand-cut fries, and a lunch menu people still can't quite believe.",
+    cellRatingLabel: "Rating", cellReviewsLabel: "Reviews", cellMenuLabel: "Lunch menu", cellAddrLabel: "Address",
+    heroTagline: "The fire runs the show. Everything else revolves around the grill.",
+    originKicker: "Where the name comes from",
+    originHeadline: "One word that takes you south.",
+    originP1: 'Austral means “of the south”. In Argentina it is the word for <span class="mardel">Patagonia</span>: long asados, slow fire and shared tables. The name says what is on the menu.',
+    originP2: "The grill in Sant Andreu runs on that same southern logic: direct fire, generous cuts, coarse salt, and nothing to distract from the embers. A piece of the Argentine south, transplanted into a neighbourhood spot in Barcelona.",
+    originHandle: 'Follow us at <a href="https://www.instagram.com/" target="_blank" rel="noopener">@australparrilla</a>',
+    boardTitle: "Lunch menu", boardPriceNote: "Bread and drink included",
+    boardCol1: "Starters", boardCol2: "Mains", boardCol3: "Dessert",
+    board1a: "Mixed salad", board1b: "Criollo empanadas", board1c: "Grilled provoleta", board1d: "Soup of the day",
+    board2a: "Grilled entraña", board2b: "Austral burger, gratinated", board2c: "Milanesa napolitana", board2d: "Grilled chicken",
+    board3a: "Homemade flan", board3b: "Seasonal fruit", board3c: "Ice cream",
+    boardFootDays: "<strong>Tuesday to Friday</strong> — lunch", boardFootNote: "Reference price — confirm in house",
+    dishesKicker: "What everyone orders", dishesHeadline: "The dishes people come back for.",
+    dish1name: "Argentine parrillada", dish1desc: "Built to share. The whole reason this menu exists.",
+    dish2name: "Entraña", dish2desc: "Cooked to the point, coarse salt. No embellishment.",
+    dish3name: "Austral burger", dish3desc: "Gratinated, melted cheese over toast.",
+    dish4name: "Secreto with hand-cut fries", dish4desc: "Potatoes cut and fried in-house — nothing frozen.",
+    callout1name: "Patatas bravas Austral", callout1desc: "Their own take on bravas — you won't find this version anywhere else.",
+    callout2name: "House focaccia", callout2desc: "To start with while the fire does its work.",
+    reviewsCount: "860 reviews on Google",
+    quote1: '"Order la parrilla" — the first thing anyone who\'s been will tell you.', quote1attr: "The line that shows up over and over",
+    quote2: "For what it costs, the lunch menu shouldn't be this good.", quote2attr: "On the value",
+    locHeadline: "Find us", locAddrLabel: "Address", locMapLink: "Get directions →", locPhoneLabel: "Phone", locInstaLabel: "Instagram",
+    locHoursHeadline: "Hours",
+    hoursMonLabel: "Monday", hoursClosed: "Closed",
+    hoursMidweekLabel: "Tuesday to Thursday", hoursWeekendLabel: "Friday and Saturday", hoursSundayLabel: "Sunday",
+    footerMeta: 'Argentine parrilla · Sant Andreu, Barcelona · <a href="https://www.instagram.com/" target="_blank" rel="noopener">@australparrilla</a>'
+  }
+};
+
+function setLang(lang){
+  const dict = i18n[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key = el.getAttribute('data-i18n');
+    if(dict[key] !== undefined) el.innerHTML = dict[key];
+  });
+  document.documentElement.lang = lang;
+  document.querySelectorAll('nav.langs button').forEach(b=>{
+    b.classList.toggle('active', b.dataset.lang === lang);
+  });
+}
+
+document.querySelectorAll('nav.langs button').forEach(btn=>{
+  btn.addEventListener('click', ()=> setLang(btn.dataset.lang));
+});
+</script>
+
+<script src="/demos/demo-kit.js" data-name="Austral Parrilla" data-credits="Fotos: <a href=&quot;https://commons.wikimedia.org/wiki/File:Asado_tradicional_argentino,_le%C3%B1a,_brasas.jpg&quot; rel=&quot;noopener&quot;>Maxd2</a> (CC BY-SA 4.0), <a href=&quot;https://commons.wikimedia.org/wiki/File:Asado_de_cerdo_con_costillas_y_chorizos_al_estilo_argentino_(presentaci%C3%B3n).jpg&quot; rel=&quot;noopener&quot;>Horacio Cambeiro</a> (CC BY-SA 3.0), <a href=&quot;https://commons.wikimedia.org/wiki/File:Cut_of_Sirloin_Steak_in_Medium.jpg&quot; rel=&quot;noopener&quot;>Ceeseven</a> (CC BY-SA 4.0), <a href=&quot;https://commons.wikimedia.org/wiki/File:Hamburguesa_argentina_casera_con_papas_fritas.jpg&quot; rel=&quot;noopener&quot;>Horacio Cambeiro</a> (CC BY-SA 4.0), <a href=&quot;https://commons.wikimedia.org/wiki/File:Sirloin_Steak_with_Waffle_Fries.jpg&quot; rel=&quot;noopener&quot;>Ceeseven</a> (CC BY-SA 4.0), vía Wikimedia Commons; recortadas para esta demo. Licencias: <a href=&quot;https://creativecommons.org/licenses/by-sa/4.0/deed.es&quot; rel=&quot;noopener&quot;>CC BY-SA</a>."></script>
+</body>
+</html>

@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Floreta — Floristería en Poblenou, Barcelona</title>
+<meta name="description" content="Floristería en Carrer del Gessamí 21, Poblenou. Ramos hechos a mano, entrega el mismo día en Barcelona y recogida en tienda. 4,9 en Google con 140 reseñas.">
+<meta name="theme-color" content="#1d2b23">
+<link rel="canonical" href="https://yehor-webs.vercel.app/demos/floristeria">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Floreta — Floristería en Poblenou, Barcelona">
+<meta property="og:description" content="Ramos hechos a mano, entrega el mismo día en Barcelona y recogida en tienda.">
+<meta property="og:image" content="assets/img/hero.jpg">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%231d2b23'/><g fill='%23c4756e'><circle cx='16' cy='10.2' r='4.1'/><circle cx='21.8' cy='14.4' r='4.1'/><circle cx='19.6' cy='21.3' r='4.1'/><circle cx='12.4' cy='21.3' r='4.1'/><circle cx='10.2' cy='14.4' r='4.1'/></g><circle cx='16' cy='16' r='2.9' fill='%23faf7f2'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Florist",
+  "name": "Floreta",
+  "image": "assets/img/hero.jpg",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Carrer del Gessamí, 21",
+    "addressLocality": "Barcelona",
+    "postalCode": "08005",
+    "addressCountry": "ES"
+  },
+  "geo": { "@type": "GeoCoordinates", "latitude": 41.4036, "longitude": 2.2006 },
+  "telephone": "+34600000000",
+  "url": "https://yehor-webs.vercel.app/demos/floristeria",
+  "sameAs": ["https://www.instagram.com/"],
+  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "140" },
+  "openingHoursSpecification": [{
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+    "opens": "12:00", "closes": "21:00"
+  }]
+}
+</script>
+</head>
+<body>
+
+<a class="skip" href="#shop">Ir al contenido</a>
+
+<header class="hdr" id="hdr">
+  <div class="wrap hdr-in">
+    <a class="brand" href="#top">Floreta</a>
+
+    <nav class="nav" aria-label="Principal">
+      <a href="#shop" data-i18n="nav.shop">Tienda</a>
+      <a href="#services" data-i18n="nav.services">Servicios</a>
+      <a href="#about" data-i18n="nav.about">Nosotros</a>
+      <a href="#visit" data-i18n="nav.visit">Visítanos</a>
+    </nav>
+
+    <div class="hdr-right">
+      <div class="lang" role="group" aria-label="Idioma / Language">
+        <button type="button" data-lang="es">ES</button>
+        <button type="button" data-lang="ca">CA</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+      <button type="button" class="cart-btn" id="cartBtn" aria-label="Cesta">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 7h12l-1.2 12.2a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8L6 7Z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+        <span class="cart-count" id="cartCount" hidden>0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ── hero ───────────────────────────────────────────────────────── -->
+  <section class="hero">
+    <img class="hero-img" src="assets/img/hero.jpg" alt="" fetchpriority="high" width="1920" height="1256">
+    <div class="hero-veil"></div>
+    <div class="wrap hero-in">
+      <p class="hero-badge">
+        <span class="stars" aria-hidden="true">★★★★★</span>
+        <span data-i18n="hero.rating">4,9 en Google · 140 reseñas</span>
+      </p>
+      <h1 class="hero-title" data-i18n="hero.title">Floreta</h1>
+      <p class="hero-claim" data-i18n="hero.claim">Floristería en Poblenou. Ramos hechos a mano el mismo día.</p>
+      <p class="hero-cta">
+        <a class="btn btn-solid" href="#shop" data-i18n="hero.cta">Ver la tienda</a>
+        <a class="btn btn-ghost" id="heroWa" href="#" target="_blank" rel="noopener" data-i18n="hero.cta2">Pedir por WhatsApp</a>
+      </p>
+      <p class="hero-open"><span class="dot" id="openDot"></span><span id="openTxt"></span></p>
+    </div>
+  </section>
+
+  <!-- ── shop ───────────────────────────────────────────────────────── -->
+  <section class="sec" id="shop">
+    <div class="wrap">
+      <h2 class="sec-t" data-i18n="shop.title">La tienda</h2>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <!-- ── services ───────────────────────────────────────────────────── -->
+  <section class="sec sec-alt" id="services">
+    <div class="wrap">
+      <h2 class="sec-t" data-i18n="svc.title">Cómo lo recibes</h2>
+      <ul class="svcs">
+        <li data-i18n="svc.sameday">Entrega el mismo día</li>
+        <li data-i18n="svc.pickup">Recogida en tienda</li>
+        <li data-i18n="svc.delivery">Reparto en Barcelona</li>
+        <li data-i18n="svc.custom">Encargos y eventos</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ── about ──────────────────────────────────────────────────────── -->
+  <section class="sec" id="about">
+    <div class="wrap about">
+      <div class="about-img">
+        <img src="assets/img/about.jpg" alt="" loading="lazy" width="1200" height="800">
+      </div>
+      <div class="about-txt">
+        <h2 class="sec-t" data-i18n="about.title">Nosotros</h2>
+        <p data-i18n="about.body">Somos una floristería de barrio en Poblenou.</p>
+        <a class="ig" href="https://www.instagram.com/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+          @floreta.bcn
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── reviews ────────────────────────────────────────────────────── -->
+  <section class="sec sec-dark" id="reviews">
+    <div class="wrap">
+      <div class="rev-hd">
+        <h2 class="sec-t" data-i18n="rev.title">Lo que dicen</h2>
+        <p class="rev-score">4,9<span class="rev-stars" aria-hidden="true">★★★★★</span></p>
+        <p class="rev-count" data-i18n="rev.count">140 reseñas en Google</p>
+      </div>
+      <div class="quotes" id="revList"></div>
+      <p class="rev-more">
+        <a class="btn btn-ghost-light" href="https://maps.app.goo.gl/wz6jxTuCPzSyPNSo7" target="_blank" rel="noopener" data-i18n="rev.link">Leerlas todas en Google</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ── visit ──────────────────────────────────────────────────────── -->
+  <section class="sec" id="visit">
+    <div class="wrap">
+      <h2 class="sec-t" data-i18n="visit.title">Visítanos</h2>
+      <div class="visit">
+        <div class="visit-info">
+          <div class="vblock">
+            <p class="vaddr" data-i18n="visit.address">Carrer del Gessamí, 21</p>
+            <p class="vmuted" data-i18n="visit.city">08005 Barcelona · Poblenou</p>
+            <p class="vmuted" data-i18n="visit.metro">Metro Poblenou (L4)</p>
+          </div>
+          <div class="vblock">
+            <h3 data-i18n="visit.hours">Horario</h3>
+            <p data-i18n="visit.hours.week">Lunes a sábado · 12:00 – 21:00</p>
+            <p class="vmuted" data-i18n="visit.hours.sun">Domingo · cerrado</p>
+          </div>
+          <div class="vblock">
+            <h3 data-i18n="visit.contact">Contacto</h3>
+            <p><a id="waLink" href="#" target="_blank" rel="noopener">WhatsApp · 600 000 000</a></p>
+            <p><a href="tel:+34600000000">600 000 000</a></p>
+          </div>
+          <a class="btn btn-solid" href="https://maps.app.goo.gl/wz6jxTuCPzSyPNSo7" target="_blank" rel="noopener" data-i18n="visit.directions">Cómo llegar</a>
+        </div>
+        <div class="visit-map">
+          <iframe
+            title="Floreta en el mapa"
+            src="https://maps.google.com/maps?q=Poblenou%2C%20Barcelona&z=16&output=embed"
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <p class="foot-brand">Floreta</p>
+    <p class="foot-note" data-i18n="foot.rights">Floristería en Poblenou, Barcelona.</p>
+    <nav class="foot-links" aria-label="Enlaces">
+      <a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
+      <a id="waFoot" href="#" target="_blank" rel="noopener">WhatsApp</a>
+      <a href="https://maps.app.goo.gl/wz6jxTuCPzSyPNSo7" target="_blank" rel="noopener">Google Maps</a>
+    </nav>
+  </div>
+</footer>
+
+<!-- ── sticky mobile WhatsApp ───────────────────────────────────────── -->
+<a class="fab" id="fabWa" href="#" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16 3C8.8 3 3 8.8 3 16c0 2.3.6 4.5 1.7 6.4L3 29l6.8-1.8A13 13 0 1 0 16 3Zm0 23.6c-2 0-4-.5-5.7-1.6l-.4-.2-4 1 1.1-3.9-.3-.4A10.6 10.6 0 1 1 16 26.6Zm5.8-7.9c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7 0a8.7 8.7 0 0 1-4.3-3.7c-.3-.6.3-.5.9-1.7.1-.2 0-.4 0-.6l-1-2.3c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-1.2 1.3-1.2 3 0 4.9a13 13 0 0 0 5.1 4.6c1.9.8 2.7.9 3.6.7.6-.1 1.9-.8 2.1-1.5.3-.8.3-1.4.2-1.5s-.2-.2-.5-.3Z"/></svg>
+</a>
+
+<!-- ── cart drawer ──────────────────────────────────────────────────── -->
+<div class="scrim" id="scrim" hidden></div>
+
+<aside class="drawer" id="drawer" aria-hidden="true" aria-label="Cesta">
+  <div class="drawer-hd">
+    <h2 data-i18n="cart.title">Tu cesta</h2>
+    <button type="button" class="x" id="closeCart" aria-label="Cerrar">&times;</button>
+  </div>
+
+  <div class="drawer-body" id="cartBody"></div>
+
+  <div class="drawer-ft" id="cartFoot" hidden>
+    <dl class="tot">
+      <dt data-i18n="cart.subtotal">Subtotal</dt><dd id="tSub">—</dd>
+    </dl>
+    <dl class="tot tot-big">
+      <dt data-i18n="cart.total">Total</dt><dd id="tTot">—</dd>
+    </dl>
+    <button type="button" class="btn btn-solid btn-w" id="toCheckout" data-i18n="cart.checkout">Finalizar pedido</button>
+  </div>
+</aside>
+
+<!-- ── checkout modal ───────────────────────────────────────────────── -->
+<div class="modal" id="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="coTitle">
+  <div class="modal-box">
+    <div class="drawer-hd">
+      <h2 id="coTitle" data-i18n="co.title">Finalizar pedido</h2>
+      <button type="button" class="x" id="closeCo" aria-label="Cerrar">&times;</button>
+    </div>
+
+    <form class="co" id="coForm" novalidate>
+      <fieldset class="fs">
+        <legend data-i18n="co.how">¿Cómo lo quieres?</legend>
+        <div class="segs" id="modeSeg">
+          <label class="seg"><input type="radio" name="mode" value="delivery" checked><span data-i18n="co.delivery">A domicilio</span></label>
+          <label class="seg"><input type="radio" name="mode" value="pickup"><span data-i18n="co.pickup">Recojo en tienda</span></label>
+        </div>
+        <div class="f" id="zoneWrap">
+          <label for="zone" data-i18n="co.zone">Zona</label>
+          <select id="zone" name="zone">
+            <option value="gracia" data-i18n="co.zone.gracia">Poblenou y alrededores</option>
+            <option value="barcelona" data-i18n="co.zone.barcelona">Resto de Barcelona</option>
+          </select>
+        </div>
+      </fieldset>
+
+      <fieldset class="fs">
+        <legend data-i18n="co.who">Tus datos</legend>
+        <div class="row">
+          <div class="f"><label for="cName" data-i18n="co.name">Nombre</label><input id="cName" name="name" required autocomplete="name"></div>
+          <div class="f"><label for="cPhone" data-i18n="co.phone">Teléfono</label><input id="cPhone" name="phone" required inputmode="tel" autocomplete="tel"></div>
+        </div>
+        <div class="f"><label for="cEmail" data-i18n="co.email">Email</label><input id="cEmail" name="email" type="email" required autocomplete="email"></div>
+      </fieldset>
+
+      <fieldset class="fs" id="addrFs">
+        <legend data-i18n="co.where">Dirección de entrega</legend>
+        <div class="f"><label for="cAddr" data-i18n="co.address">Calle, número, piso</label><input id="cAddr" name="address" autocomplete="street-address"></div>
+      </fieldset>
+
+      <fieldset class="fs">
+        <legend data-i18n="co.when">¿Cuándo?</legend>
+        <div class="row">
+          <div class="f"><label for="cDate" data-i18n="co.date">Día</label><input id="cDate" name="date" type="date" required></div>
+          <div class="f">
+            <label for="cTime" data-i18n="co.time">Franja</label>
+            <select id="cTime" name="slot">
+              <option value="morning" data-i18n="co.time.morning">Mañana (10–14)</option>
+              <option value="afternoon" data-i18n="co.time.afternoon">Tarde (14–18)</option>
+              <option value="evening" data-i18n="co.time.evening">Tarde-noche (18–21)</option>
+            </select>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="fs">
+        <div class="f"><label for="cCard" data-i18n="co.card">Mensaje para la tarjeta</label><textarea id="cCard" name="cardmsg" rows="2" data-i18n-ph="co.card.ph"></textarea></div>
+        <div class="f"><label for="cNotes" data-i18n="co.notes">Notas</label><textarea id="cNotes" name="notes" rows="2" data-i18n-ph="co.notes.ph"></textarea></div>
+      </fieldset>
+
+      <dl class="tot"><dt data-i18n="cart.subtotal">Subtotal</dt><dd id="coSub">—</dd></dl>
+      <dl class="tot" id="coDelRow"><dt data-i18n="cart.delivery">Entrega</dt><dd id="coDel">—</dd></dl>
+      <dl class="tot tot-big"><dt data-i18n="cart.total">Total</dt><dd id="coTot">—</dd></dl>
+
+      <p class="err" id="coErr" hidden></p>
+
+      <button type="button" class="btn btn-solid btn-w" id="payCard" hidden data-i18n="co.pay">Pagar con tarjeta</button>
+      <p class="or" id="orRow" hidden><span data-i18n="co.or">o</span></p>
+      <button type="button" class="btn btn-wa btn-w" id="payWa">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16 3C8.8 3 3 8.8 3 16c0 2.3.6 4.5 1.7 6.4L3 29l6.8-1.8A13 13 0 1 0 16 3Zm0 23.6c-2 0-4-.5-5.7-1.6l-.4-.2-4 1 1.1-3.9-.3-.4A10.6 10.6 0 1 1 16 26.6Zm5.8-7.9c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7 0a8.7 8.7 0 0 1-4.3-3.7c-.3-.6.3-.5.9-1.7.1-.2 0-.4 0-.6l-1-2.3c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-1.2 1.3-1.2 3 0 4.9a13 13 0 0 0 5.1 4.6c1.9.8 2.7.9 3.6.7.6-.1 1.9-.8 2.1-1.5.3-.8.3-1.4.2-1.5s-.2-.2-.5-.3Z"/></svg>
+        <span data-i18n="co.wa">Confirmar por WhatsApp</span>
+      </button>
+      <p class="hint" data-i18n="co.wa.hint">Te abrimos WhatsApp con el pedido escrito.</p>
+    </form>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="/demos/demo-kit.js" data-name="Floreta" data-credits="Fotos de producto: Unsplash (licencia Unsplash)."></script>
+<script src="catalog.js"></script>
+<script src="assets/js/i18n.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

@@ -188,6 +188,8 @@ h3 { font-size: 1.3rem; }
 .card__body { padding: 18px 20px 20px; display: grid; gap: 6px; flex: 1; align-content: start; }
 .card__body p { color: var(--muted); font-size: .98rem; }
 .card__body .link-arrow { margin-top: 8px; min-height: 44px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 0; padding: 0; list-style: none; }
+.tags li { font-size: .78rem; font-weight: 600; color: var(--accent); background: var(--accent-soft); padding: 4px 10px; border-radius: 999px; }
 
 /* ── Pasos ────────────────────────────────────────────────── */
 .steps { margin-top: 28px; display: grid; gap: 16px; }

@@ -134,6 +134,7 @@
             h("div", { class: "card__body" },
               h("h3", {}, p.name),
               h("p", {}, pick(p.line, lang)),
+              filled(pick(p.tags, lang)) ? h("ul", { class: "tags", role: "list" }, pick(p.tags, lang).map(function (x) { return h("li", {}, x); })) : null,
               external(p.demo, t, "link-arrow", [d.cta, h("span", { class: "sr-only" }, ": " + p.name), icon("i-arrow")])));
         }))));
   }
