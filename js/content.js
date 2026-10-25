@@ -40,18 +40,32 @@ window.SITE = {
   // Las capturas van en img/work/ (800×500 px, formato .webp).
   projects: [
     {
+      name: "Casa Júlia",
+      demo: "https://ggvs228-cmd.github.io/Casa-Julia-1978/",
+      repo: "https://github.com/ggvs228-cmd/Casa-Julia-1978",
+      image: "img/work/casa-julia.webp",
+      line: { es: "Restaurante de tapas y marisco, con carta digital y precios.", en: "Tapas and seafood restaurant, with a digital menu and prices." },
+    },
+    {
+      name: "Espacio Brisa",
+      demo: "/demos/psicologa",
+      repo: "https://github.com/ggvs228-cmd/yehor-webs/tree/main/demos/psicologa",
+      image: "img/work/psicologa.webp",
+      line: { es: "Psicóloga en Gràcia y online, con reserva de citas online.", en: "Psychologist in Gràcia and online, with online appointment booking." },
+    },
+    {
+      name: "Volta Reformas",
+      demo: "/demos/electricista",
+      repo: "https://github.com/ggvs228-cmd/yehor-webs/tree/main/demos/electricista",
+      image: "img/work/electricista.webp",
+      line: { es: "Electricista y fontanero: llamada, WhatsApp y aviso urgente en un toque.", en: "Electrician and plumber: call, WhatsApp and urgent requests in one tap." },
+    },
+    {
       name: "Monalisa Organic Beauty",
       demo: "https://ggvs228-cmd.github.io/pelumonalisa/",
       repo: "https://github.com/ggvs228-cmd/pelumonalisa",
       image: "img/work/pelumonalisa.webp",
       line: { es: "Peluquería orgánica en Gràcia, con servicios y cita online.", en: "Organic hair salon in Gràcia, with services and online booking." },
-    },
-    {
-      name: "Karma Cafè",
-      demo: "https://ggvs228-cmd.github.io/karmacafe/",
-      repo: "https://github.com/ggvs228-cmd/karmacafe",
-      image: "img/work/karmacafe.webp",
-      line: { es: "Cafetería y librería en el Raval, con carta y cómo llegar.", en: "Espresso bar and bookshop in El Raval, with menu and directions." },
     },
     {
       name: "MDQ",
@@ -61,25 +75,11 @@ window.SITE = {
       line: { es: "Parrilla argentina en Sant Andreu, con carta y menú del día.", en: "Argentinian grill in Sant Andreu, with menu and lunch deal." },
     },
     {
-      name: "Rodríguez Barbershop",
-      demo: "https://ggvs228-cmd.github.io/rodriguezbarbershop/",
-      repo: "https://github.com/ggvs228-cmd/rodriguezbarbershop",
-      image: "img/work/rodriguezbarbershop.webp",
-      line: { es: "Barbería de barrio en el Raval, reservas por WhatsApp.", en: "Neighbourhood barbershop in El Raval, bookings via WhatsApp." },
-    },
-    {
       name: "Meet Flowers",
       demo: "https://ggvs228-cmd.github.io/meetflowers/",
       repo: "https://github.com/ggvs228-cmd/meetflowers",
       image: "img/work/meetflowers.webp",
       line: { es: "Floristería en Gràcia, con pedidos por WhatsApp.", en: "Flower shop in Gràcia, with orders via WhatsApp." },
-    },
-    {
-      name: "Cloud Gelato",
-      demo: "https://ggvs228-cmd.github.io/cloud-gelato/",
-      repo: "https://github.com/ggvs228-cmd/cloud-gelato",
-      image: "img/work/cloud-gelato.webp",
-      line: { es: "Heladería artesana en Gràcia: sabores, horario y cómo llegar.", en: "Artisan gelato shop in Gràcia: flavours, hours and directions." },
     },
   ],
 
@@ -118,7 +118,7 @@ window.SITE = {
       demos: {
         eyebrow: "Proyectos de demostración",
         title: "Otras webs que he diseñado",
-        note: "Son demos que he hecho por mi cuenta para enseñar mi trabajo. No son encargos de esos negocios.",
+        note: "Son demos que he hecho por mi cuenta para enseñar mi trabajo, no encargos. Algunas usan negocios reales como ejemplo y otras son negocios inventados.",
         badge: "Demo",
         cta: "Ver demo",
         altPrefix: "Captura de la demo de",
@@ -205,7 +205,7 @@ window.SITE = {
       demos: {
         eyebrow: "Demo projects",
         title: "Other websites I've designed",
-        note: "These are demos I made on my own to show my work. They were not commissioned by these businesses.",
+        note: "These are demos I made on my own to show my work, not commissions. Some use real businesses as examples and others are made-up businesses.",
         badge: "Demo",
         cta: "View demo",
         altPrefix: "Screenshot of the demo for",

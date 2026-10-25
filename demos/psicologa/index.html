@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Espacio Brisa · Psicología en Gràcia y online (demo)</title>
+  <meta name="description" content="Demo de web para psicóloga: terapia para adultos en Gràcia y online, con reserva de cita online.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='32' fill='%235b7a68'/%3E%3Cpath d='M18 38c8-14 20-14 28 0' fill='none' stroke='%23fff' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <style>
+    @font-face { font-family: "Fraunces"; font-weight: 400 500; font-display: swap; src: url("/fonts/fraunces-latin.woff2") format("woff2"); }
+    @font-face { font-family: "Inter"; font-weight: 400 600; font-display: swap; src: url("/fonts/inter-latin.woff2") format("woff2"); }
+    :root {
+      --bg: #f6f4ef; --surface: #fffefb; --sage: #5b7a68; --sage-dark: #44604f; --sage-soft: #e3ebe4;
+      --text: #263029; --muted: #5d675f; --line: #dfe3dc; --sand: #efe7da;
+      --serif: "Fraunces", Georgia, serif; --sans: "Inter", system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 400 1.0625rem/1.65 var(--sans); -webkit-font-smoothing: antialiased; }
+    h1, h2, h3 { font-family: var(--serif); font-weight: 400; line-height: 1.15; margin: 0; }
+    p { margin: 0; }
+    a { color: var(--sage-dark); }
+    :focus-visible { outline: 2px solid var(--sage); outline-offset: 3px; border-radius: 6px; }
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+    .demo-bar { background: var(--text); color: #f3f1ea; font-size: .85rem; text-align: center; padding: 8px 16px; }
+    .demo-bar a { color: #fff; font-weight: 600; }
+    header { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 90%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+    .head { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 16px; }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); font-family: var(--serif); font-size: 1.25rem; }
+    .logo svg { width: 30px; height: 30px; }
+    nav { display: none; gap: 24px; }
+    nav a { color: var(--muted); text-decoration: none; font-size: .95rem; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 12px 22px; border-radius: 999px; border: 1px solid transparent; font: 600 1rem/1.2 var(--sans); text-decoration: none; cursor: pointer; }
+    .btn--main { background: var(--sage-dark); color: #fff; }
+    .btn--main:hover { background: #38513f; }
+    .btn--ghost { background: transparent; border-color: var(--line); color: var(--text); }
+    .btn--sm { min-height: 40px; padding: 8px 16px; font-size: .92rem; }
+    @media (min-width: 820px) { nav { display: flex; } }
+
+    .hero { padding-top: 56px; padding-bottom: 64px; display: grid; gap: 36px; }
+    .eyebrow { font-size: .8rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--sage-dark); margin-bottom: 12px; }
+    .hero h1 { font-size: clamp(2.3rem, 8vw, 3.8rem); }
+    .hero h1 em { font-style: italic; color: var(--sage-dark); }
+    .hero .lead { margin-top: 16px; font-size: 1.15rem; color: var(--muted); max-width: 46ch; }
+    .hero .cta { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 12px; }
+    .facts { list-style: none; margin: 28px 0 0; padding: 0; display: grid; gap: 10px; }
+    .facts li { display: flex; gap: 10px; align-items: flex-start; }
+    .facts li::before { content: ""; flex: none; width: 8px; height: 8px; margin-top: .6em; border-radius: 50%; background: var(--sage); }
+    .card-calm { border-radius: 28px; background: var(--sage-soft); padding: 28px; display: grid; gap: 14px; align-content: start; }
+    .card-calm .who { display: flex; gap: 14px; align-items: center; }
+    .avatar { width: 64px; height: 64px; border-radius: 50%; background: var(--sage); color: #fff; display: grid; place-items: center; font: 400 1.6rem/1 var(--serif); flex: none; }
+    .card-calm h2 { font-size: 1.4rem; }
+    .card-calm small { color: var(--muted); font-size: .92rem; }
+    .quote { font-family: var(--serif); font-size: 1.25rem; line-height: 1.45; }
+    @media (min-width: 860px) { .hero { grid-template-columns: 1.3fr 1fr; align-items: center; padding-top: 88px; padding-bottom: 88px; } }
+
+    section.block { padding: 64px 0; }
+    section.alt { background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    h2.title { font-size: clamp(1.8rem, 5.5vw, 2.5rem); margin-bottom: 12px; }
+    .sub { color: var(--muted); max-width: 58ch; }
+    .topics { margin-top: 28px; display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 230px), 1fr)); }
+    .topic { background: var(--bg); border: 1px solid var(--line); border-radius: 18px; padding: 20px; }
+    .topic h3 { font-size: 1.2rem; margin-bottom: 6px; }
+    .topic p { color: var(--muted); font-size: .97rem; }
+    .steps { margin-top: 28px; display: grid; gap: 14px; counter-reset: s; }
+    .steps li { list-style: none; background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 20px 20px 20px 70px; position: relative; }
+    .steps li::before { counter-increment: s; content: counter(s); position: absolute; left: 20px; top: 20px; width: 34px; height: 34px; border-radius: 50%; background: var(--sage-soft); color: var(--sage-dark); display: grid; place-items: center; font-family: var(--serif); }
+    .steps h3 { font-size: 1.15rem; margin-bottom: 4px; }
+    .steps p { color: var(--muted); }
+    .steps { padding: 0; }
+    @media (min-width: 820px) { .steps { grid-template-columns: repeat(3, 1fr); } }
+
+    /* Reserva */
+    .booking { margin-top: 28px; background: var(--bg); border: 1px solid var(--line); border-radius: 24px; padding: 22px; display: grid; gap: 26px; }
+    .booking fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+    .booking legend { font: 600 .82rem/1.3 var(--sans); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; padding: 0; }
+    .opts { display: grid; gap: 10px; }
+    .opt { position: relative; }
+    .opt input { position: absolute; inset: 0; opacity: 0; pointer-events: none; }
+    .booking > * { min-width: 0; }
+    .opt label { display: flex; justify-content: space-between; gap: 12px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); cursor: pointer; }
+    .opt label span:last-child { color: var(--muted); white-space: nowrap; }
+    .opt input:checked + label { border-color: var(--sage-dark); box-shadow: 0 0 0 1px var(--sage-dark); background: var(--sage-soft); }
+    .opt input:focus-visible + label { outline: 2px solid var(--sage); outline-offset: 2px; }
+    .opt input:disabled + label { opacity: .4; cursor: not-allowed; text-decoration: line-through; }
+    .days { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; scrollbar-width: thin; }
+    .days .opt label { flex-direction: column; align-items: center; gap: 0; min-width: 72px; padding: 10px 8px; }
+    .days .opt label span:last-child { white-space: normal; }
+    .days b { font: 400 1.4rem/1.2 var(--serif); }
+    .times { display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: 8px; }
+    .times .opt label { justify-content: center; }
+    .fields { display: grid; gap: 12px; }
+    .fields label { display: grid; gap: 6px; font-size: .95rem; font-weight: 500; }
+    .fields input, .fields textarea { font: inherit; padding: 12px 14px; border-radius: 12px; border: 1px solid #c9cfc6; background: var(--surface); color: var(--text); }
+    .fields textarea { min-height: 84px; resize: vertical; }
+    .check { display: flex !important; grid-template-columns: none; gap: 10px !important; align-items: flex-start; font-weight: 400 !important; color: var(--muted); }
+    .check input { margin-top: 4px; width: 18px; height: 18px; accent-color: var(--sage-dark); }
+    .summary { border-top: 1px solid var(--line); padding-top: 18px; display: grid; gap: 14px; }
+    .summary p { color: var(--muted); }
+    .summary strong { color: var(--text); }
+    .error { color: #a3402f; font-weight: 500; }
+    .done { text-align: center; padding: 26px 10px; display: grid; gap: 12px; justify-items: center; }
+    .done .ok { width: 64px; height: 64px; border-radius: 50%; background: var(--sage-soft); color: var(--sage-dark); display: grid; place-items: center; }
+    .done h3 { font-size: 1.6rem; }
+    .done .note { font-size: .9rem; color: var(--muted); max-width: 46ch; background: var(--sand); padding: 10px 14px; border-radius: 12px; }
+    .hint { font-size: .9rem; color: var(--muted); }
+    @media (min-width: 860px) { .booking { grid-template-columns: 1fr 1.3fr; padding: 30px; } .booking .full { grid-column: 1 / -1; } }
+
+    .prices { margin-top: 28px; display: grid; gap: 14px; }
+    .price { background: var(--bg); border: 1px solid var(--line); border-radius: 18px; padding: 22px; display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
+    .price h3 { font-size: 1.15rem; }
+    .price p { color: var(--muted); font-size: .95rem; }
+    .price b { font: 400 1.7rem/1 var(--serif); white-space: nowrap; }
+    @media (min-width: 820px) { .prices { grid-template-columns: repeat(3, 1fr); } .price { flex-direction: column; } }
+    details { border-bottom: 1px solid var(--line); padding: 16px 0; }
+    summary { cursor: pointer; font-weight: 600; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+    summary::after { content: "+"; font-family: var(--serif); font-size: 1.4rem; line-height: 1; color: var(--sage-dark); }
+    details[open] summary::after { content: "–"; }
+    details p { margin-top: 10px; color: var(--muted); max-width: 64ch; }
+    .faq { margin-top: 20px; max-width: 760px; }
+    .contact { display: grid; gap: 20px; margin-top: 24px; }
+    .contact div { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 20px; }
+    .contact h3 { font-size: 1.1rem; margin-bottom: 6px; }
+    @media (min-width: 820px) { .contact { grid-template-columns: repeat(3, 1fr); } }
+    footer { padding: 32px 0 48px; color: var(--muted); font-size: .9rem; }
+    .toast { position: fixed; left: 50%; bottom: 20px; transform: translate(-50%, 20px); opacity: 0; pointer-events: none; background: var(--text); color: #fff; padding: 12px 18px; border-radius: 12px; font-size: .95rem; transition: .25s; max-width: calc(100% - 32px); z-index: 50; }
+    .toast.on { opacity: 1; transform: translate(-50%, 0); }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .toast { transition: none; } }
+  </style>
+</head>
+<body>
+  <div class="demo-bar">Web de demostración creada por <a href="/">Yehor · Webs para negocios</a>. Espacio Brisa es un negocio ficticio.</div>
+
+  <header>
+    <div class="wrap head">
+      <a class="logo" href="#top" aria-label="Espacio Brisa, inicio">
+        <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="32" fill="#5b7a68"/><path d="M18 38c8-14 20-14 28 0" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/></svg>
+        Espacio Brisa
+      </a>
+      <nav aria-label="Secciones">
+        <a href="#ayuda">En qué te ayudo</a>
+        <a href="#como">Cómo funciona</a>
+        <a href="#tarifas">Tarifas</a>
+        <a href="#preguntas">Preguntas</a>
+      </nav>
+      <a class="btn btn--main btn--sm" href="#reservar">Reservar cita</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="wrap hero">
+      <div>
+        <p class="eyebrow">Psicología para adultos · Gràcia y online</p>
+        <h1>Un espacio tranquilo para <em>entender lo que te pasa</em>.</h1>
+        <p class="lead">Terapia individual para la ansiedad, el estrés y los momentos difíciles. En consulta en Gràcia o por videollamada, a tu ritmo.</p>
+        <div class="cta">
+          <a class="btn btn--main" href="#reservar">Reservar primera llamada gratis</a>
+          <a class="btn btn--ghost" href="#como">Cómo funciona</a>
+        </div>
+        <ul class="facts">
+          <li>Primera llamada de 20 minutos gratuita y sin compromiso</li>
+          <li>Sesiones de 50 minutos, presenciales u online</li>
+          <li>Reserva tu cita en línea, en menos de un minuto</li>
+        </ul>
+      </div>
+      <aside class="card-calm" aria-label="Sobre la psicóloga">
+        <div class="who">
+          <div class="avatar" aria-hidden="true">CR</div>
+          <div><h2>Clara Riera</h2><small>Psicóloga general sanitaria (nombre ficticio)</small></div>
+        </div>
+        <p class="quote">“No hace falta estar mal del todo para pedir ayuda. A veces basta con querer entenderte mejor.”</p>
+        <p class="hint">Enfoque cognitivo-conductual y de aceptación. Atiendo en español, catalán e inglés.</p>
+      </aside>
+    </div>
+
+    <section class="block alt" id="ayuda" aria-labelledby="t-ayuda">
+      <div class="wrap">
+        <p class="eyebrow">En qué te puedo ayudar</p>
+        <h2 class="title" id="t-ayuda">Lo que más me consultan</h2>
+        <p class="sub">Si no ves tu caso aquí, escríbeme igualmente. En la primera llamada vemos si puedo ayudarte.</p>
+        <div class="topics">
+          <div class="topic"><h3>Ansiedad</h3><p>Preocupación constante, nervios, dificultad para dormir o desconectar.</p></div>
+          <div class="topic"><h3>Estrés y trabajo</h3><p>Agotamiento, presión, cambios de trabajo o sensación de no llegar a todo.</p></div>
+          <div class="topic"><h3>Autoestima</h3><p>Exigencia, inseguridad y la forma en que te tratas.</p></div>
+          <div class="topic"><h3>Relaciones</h3><p>Pareja, familia, rupturas y límites con los demás.</p></div>
+          <div class="topic"><h3>Duelo y cambios</h3><p>Pérdidas, mudanzas, una nueva etapa que cuesta.</p></div>
+          <div class="topic"><h3>Vivir lejos de casa</h3><p>Adaptarte a una ciudad nueva, soledad, añoranza.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="como" aria-labelledby="t-como">
+      <div class="wrap">
+        <p class="eyebrow">Cómo funciona</p>
+        <h2 class="title" id="t-como">Empezar es sencillo</h2>
+        <ol class="steps">
+          <li><h3>Reservas una llamada</h3><p>Eliges día y hora en el calendario de abajo. Son 20 minutos y no cuesta nada.</p></li>
+          <li><h3>Hablamos</h3><p>Me cuentas qué te trae y te explico cómo trabajaría contigo. Sin compromiso.</p></li>
+          <li><h3>Decides tú</h3><p>Si quieres seguir, reservamos la primera sesión presencial u online.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="block alt" id="reservar" aria-labelledby="t-reservar">
+      <div class="wrap">
+        <p class="eyebrow">Reserva online</p>
+        <h2 class="title" id="t-reservar">Elige tu cita</h2>
+        <p class="sub">Los huecos se actualizan solos. Recibirás la confirmación por email y un recordatorio el día antes.</p>
+
+        <form class="booking" id="booking" novalidate>
+          <fieldset>
+            <legend>1. Tipo de cita</legend>
+            <div class="opts" id="types"></div>
+          </fieldset>
+          <fieldset>
+            <legend>2. Día</legend>
+            <div class="days" id="days"></div>
+            <p class="hint" style="margin-top:14px">3. Hora</p>
+            <div class="times" id="times" role="radiogroup" aria-label="Hora"></div>
+          </fieldset>
+          <fieldset class="full">
+            <legend>4. Tus datos</legend>
+            <div class="fields">
+              <label>Nombre<input name="name" autocomplete="name" required></label>
+              <label>Email o teléfono<input name="contact" autocomplete="email" required></label>
+              <label>¿Quieres contarme algo antes? (opcional)<textarea name="note"></textarea></label>
+              <label class="check"><input type="checkbox" name="ok" required> Acepto que se usen mis datos solo para gestionar esta cita.</label>
+            </div>
+          </fieldset>
+          <div class="summary full" aria-live="polite">
+            <p id="summary">Elige tipo de cita, día y hora.</p>
+            <p class="error" id="error" hidden></p>
+            <button class="btn btn--main" type="submit">Confirmar cita</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="block" id="tarifas" aria-labelledby="t-tarifas">
+      <div class="wrap">
+        <p class="eyebrow">Tarifas</p>
+        <h2 class="title" id="t-tarifas">Precios claros</h2>
+        <div class="prices">
+          <div class="price"><div><h3>Primera llamada</h3><p>20 min · teléfono o vídeo</p></div><b>Gratis</b></div>
+          <div class="price"><div><h3>Sesión individual</h3><p>50 min · en consulta</p></div><b>60 €</b></div>
+          <div class="price"><div><h3>Sesión online</h3><p>50 min · videollamada</p></div><b>55 €</b></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block alt" id="preguntas" aria-labelledby="t-faq">
+      <div class="wrap">
+        <p class="eyebrow">Preguntas frecuentes</p>
+        <h2 class="title" id="t-faq">Antes de empezar</h2>
+        <div class="faq">
+          <details><summary>¿Cuántas sesiones voy a necesitar?</summary><p>Depende de cada persona. Normalmente revisamos cómo vas cada pocas sesiones y decidimos juntos si seguir, espaciar o terminar.</p></details>
+          <details><summary>¿La terapia online funciona igual?</summary><p>Para la mayoría de consultas, sí. Solo necesitas un sitio tranquilo y conexión a internet. Te envío el enlace al reservar.</p></details>
+          <details><summary>¿Puedo cancelar o cambiar la cita?</summary><p>Sí, sin coste hasta 24 horas antes, desde el mismo email de confirmación.</p></details>
+          <details><summary>¿Es confidencial?</summary><p>Totalmente. Todo lo que hablamos queda entre tú y yo, según el código deontológico y la ley de protección de datos.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="contacto" aria-labelledby="t-contacto">
+      <div class="wrap">
+        <p class="eyebrow">Dónde estoy</p>
+        <h2 class="title" id="t-contacto">Consulta en Gràcia</h2>
+        <div class="contact">
+          <div><h3>Dirección</h3><p>Carrer ficticio, 12, 2º<br>08012 Barcelona · Metro Fontana (L3)</p></div>
+          <div><h3>Horario</h3><p>Lunes a jueves, 9:00–20:00<br>Viernes, 9:00–14:00</p></div>
+          <div><h3>Contacto</h3><p><a href="#" data-demo>Escríbeme por WhatsApp</a><br><a href="#" data-demo>hola@espaciobrisa.demo</a></p></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">Espacio Brisa · Psicología en Gràcia (negocio ficticio) · Demo de <a href="/">Yehor · Webs para negocios</a></div>
+  </footer>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <script>
+  (function () {
+    var TYPES = [
+      { id: "intro", name: "Primera llamada gratuita", info: "20 min · gratis", step: 30 },
+      { id: "session", name: "Sesión en consulta", info: "50 min · 60 €", step: 60 },
+      { id: "online", name: "Sesión online", info: "50 min · 55 €", step: 60 }
+    ];
+    var DAYS_ES = ["dom", "lun", "mar", "mié", "jue", "vie", "sáb"];
+    var MONTHS = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
+    var form = document.getElementById("booking");
+    var state = { type: null, day: null, time: null };
+    function f(n) { return form.elements.namedItem(n); }
+
+    function el(html) { var d = document.createElement("div"); d.innerHTML = html.trim(); return d.firstChild; }
+    function opt(group, value, label, extra, disabled) {
+      var id = group + "-" + value;
+      return el('<div class="opt"><input type="radio" name="' + group + '" id="' + id + '" value="' + value + '"' + (disabled ? " disabled" : "") + '><label for="' + id + '"><span>' + label + '</span><span>' + (extra || "") + '</span></label></div>');
+    }
+    // Disponibilidad simulada pero estable para cada día
+    function busy(dateKey, time) {
+      var h = 0, s = dateKey + time;
+      for (var i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) % 997;
+      return h % 3 === 0;
+    }
+
+    TYPES.forEach(function (t) { document.getElementById("types").appendChild(opt("type", t.id, t.name, t.info)); });
+
+    var days = [], d = new Date();
+    d.setHours(0, 0, 0, 0);
+    while (days.length < 10) {
+      d.setDate(d.getDate() + 1);
+      if (d.getDay() !== 0 && d.getDay() !== 6) days.push(new Date(d));
+    }
+    days.forEach(function (day) {
+      var key = day.getFullYear() + "-" + String(day.getMonth() + 1).padStart(2, "0") + "-" + String(day.getDate()).padStart(2, "0");
+      var o = opt("day", key, DAYS_ES[day.getDay()], "", false);
+      o.querySelector("label").innerHTML = "<span>" + DAYS_ES[day.getDay()] + "</span><b>" + day.getDate() + "</b><span>" + MONTHS[day.getMonth()] + "</span>";
+      document.getElementById("days").appendChild(o);
+    });
+
+    function renderTimes() {
+      var box = document.getElementById("times");
+      box.innerHTML = "";
+      state.time = null;
+      if (!state.day || !state.type) {
+        box.appendChild(el('<p class="hint">Elige primero tipo de cita y día.</p>'));
+        return;
+      }
+      var t = TYPES.filter(function (x) { return x.id === state.type; })[0];
+      var dt = new Date(state.day + "T00:00");
+      var end = dt.getDay() === 5 ? 14 : 20;
+      for (var m = 9 * 60; m < end * 60; m += t.step) {
+        var hh = String(Math.floor(m / 60)).padStart(2, "0") + ":" + String(m % 60).padStart(2, "0");
+        box.appendChild(opt("time", hh, hh, "", busy(state.day, hh)));
+      }
+    }
+
+    function label() {
+      var t = TYPES.filter(function (x) { return x.id === state.type; })[0];
+      var dt = state.day && new Date(state.day + "T00:00");
+      if (!t || !dt || !state.time) return null;
+      return t.name + " · " + DAYS_ES[dt.getDay()] + " " + dt.getDate() + " " + MONTHS[dt.getMonth()] + " a las " + state.time + " (" + t.info + ")";
+    }
+
+    form.addEventListener("change", function (e) {
+      var n = e.target.name;
+      if (n === "type" || n === "day") { state[n] = e.target.value; renderTimes(); }
+      if (n === "time") state.time = e.target.value;
+      var l = label();
+      document.getElementById("summary").innerHTML = l ? "Tu cita: <strong>" + l + "</strong>" : "Elige tipo de cita, día y hora.";
+    });
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var err = document.getElementById("error");
+      var l = label();
+      var msg = !l ? "Falta elegir tipo de cita, día y hora." :
+        !f("name").value.trim() ? "Escribe tu nombre." :
+        !f("contact").value.trim() ? "Déjame un email o teléfono para confirmarte." :
+        !f("ok").checked ? "Marca la casilla de datos para continuar." : "";
+      err.hidden = !msg; err.textContent = msg;
+      if (msg) return;
+      var name = f("name").value.trim().split(" ")[0];
+      var done = el('<div class="done full" tabindex="-1"><div class="ok" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div><h3></h3><p></p><p class="note">Esto es una demo: no se ha enviado nada. En una web real, la cita entraría en el calendario de la psicóloga y te llegaría la confirmación por email o WhatsApp.</p><button class="btn btn--ghost" type="button">Hacer otra reserva</button></div>');
+      done.querySelector("h3").textContent = "¡Gracias, " + name + "!";
+      done.querySelector("p").textContent = "Cita reservada: " + l + ".";
+      done.querySelector("button").addEventListener("click", function () { location.reload(); });
+      form.innerHTML = "";
+      form.appendChild(done);
+      done.focus();
+    });
+
+    renderTimes();
+
+    var toast = document.getElementById("toast"), tt;
+    document.querySelectorAll("[data-demo]").forEach(function (a) {
+      a.addEventListener("click", function (e) {
+        e.preventDefault();
+        toast.textContent = "Demo: en una web real, este enlace abriría WhatsApp o el email de la psicóloga.";
+        toast.classList.add("on"); clearTimeout(tt);
+        tt = setTimeout(function () { toast.classList.remove("on"); }, 3200);
+      });
+    });
+  })();
+  </script>
+</body>
+</html>
