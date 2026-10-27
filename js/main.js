@@ -167,7 +167,7 @@
         sectionHead(p.eyebrow, p.title, "prices-title"),
         h("div", { class: "plans" },
           plan(p.mainLabel, p.mainPrice, p.mainNote, p.mainItems, "plan--main", p.mainExtra),
-          plan(p.careLabel, p.carePrice, p.careNote, p.careItems)),
+          plan(p.careLabel, p.carePrice, p.careNote, p.careItems, "", p.careExtra)),
         h("p", { class: "guarantee" }, p.guarantee)));
   }
 
