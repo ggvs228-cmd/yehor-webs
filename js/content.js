@@ -165,7 +165,6 @@ window.SITE = {
         careNote: "Mantenimiento, cambios y Google",
         careItems: ["Cambios de precios, fotos y horarios", "Revisión de tu ficha de Google", "Me escribes y lo cambio yo"],
         careExtra: "El precio depende de lo que necesites: más cambios, más idiomas o más servicios. Lo hablamos y te lo digo antes.",
-        guarantee: "Si en 30 días no te convence, te devuelvo el dinero.",
         askBtn: "Pídeme presupuesto por WhatsApp",
       },
       faq: {
@@ -173,7 +172,7 @@ window.SITE = {
         title: "Antes de *escribirme*",
         items: [
           { q: "¿Cuánto tardas?", a: "En unos días ves la primera versión y, normalmente, en una semana está publicada. Si las fotos o los textos tardan en llegar, tardamos un poco más." },
-          { q: "¿Cómo se paga?", a: "La mitad al empezar y la otra mitad cuando la web está publicada. Si en 30 días no te convence, te devuelvo el dinero." },
+          { q: "¿Cómo se paga?", a: "La mitad al empezar y la otra mitad cuando la web está publicada." },
           { q: "¿Y el dominio y el alojamiento?", a: "El dominio (tunegocio.com) se compra a tu nombre, así que es tuyo: cuesta unos 10–15 € al año y yo me encargo de configurarlo. El alojamiento de la web no tiene coste." },
           { q: "¿De quién es la web?", a: "Tuya, igual que el dominio. Los cambios me los pides por WhatsApp y los hago yo: con el mantenimiento entran en la cuota; si no, te digo el precio antes." },
           { q: "¿Necesito tener fotos y textos?", a: "Con lo que tienes en Instagram ya podemos empezar. Los textos los preparamos juntos a partir de una charla de 15 minutos." },
@@ -274,7 +273,6 @@ window.SITE = {
         careNote: "Maintenance, changes and Google",
         careItems: ["Price, photo and opening-hour changes", "Google profile check-ups", "Message me and I'll change it"],
         careExtra: "The price depends on what you need: more changes, more languages or more services. We talk it through and I tell you first.",
-        guarantee: "If you're not convinced within 30 days, I'll give you your money back.",
         askBtn: "Ask me for a quote on WhatsApp",
       },
       faq: {
@@ -282,7 +280,7 @@ window.SITE = {
         title: "Before you *message me*",
         items: [
           { q: "How long does it take?", a: "You see a first version in a few days, and it's usually live within a week. If photos or texts take a while to arrive, it takes a little longer." },
-          { q: "How do I pay?", a: "Half to start and half when the website is live. If you're not convinced within 30 days, I'll give you your money back." },
+          { q: "How do I pay?", a: "Half to start and half when the website is live." },
           { q: "What about the domain and hosting?", a: "The domain (yourbusiness.com) is bought in your name, so it's yours: it costs about €10–15 a year and I set it up. Hosting the website costs nothing." },
           { q: "Who owns the website?", a: "You do, like the domain. You ask me for changes on WhatsApp and I make them: on the care plan they're included; otherwise I tell you the price first." },
           { q: "Do I need photos and texts?", a: "What you already have on Instagram is enough to start. We write the texts together after a 15-minute chat." },

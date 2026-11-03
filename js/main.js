@@ -207,7 +207,7 @@
         h("div", { class: "plans" },
           plan(p.mainLabel, p.from, p.mainPrice, "", p.mainNote, p.mainItems, p.mainExtra, "plan--main"),
           plan(p.careLabel, p.from, p.carePrice, p.careUnit, p.careNote, p.careItems, p.careExtra)),
-        h("p", { class: "guarantee" }, p.guarantee),
+        filled(p.guarantee) ? h("p", { class: "guarantee" }, p.guarantee) : null,
         filled(p.askBtn) ? h("a", { class: "btn btn--wa guarantee__btn", href: waLink(t) }, icon("i-wa"), p.askBtn) : null));
   }
 

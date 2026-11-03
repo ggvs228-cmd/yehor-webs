@@ -291,7 +291,7 @@ p, ul, ol, dl, dd, figure, blockquote { margin: 0; padding: 0; }
 /* CTA intermedios */
 .ask { margin-top: var(--s9); padding-top: var(--s7); border-top: 1px solid var(--line); display: grid; gap: var(--s5); justify-items: start; }
 .ask__q { font: 400 clamp(2rem, 5vw, 3.5rem)/1.05 var(--serif); max-width: 18ch; }
-.guarantee__btn { margin-top: var(--s6); }
+.guarantee__btn { margin-top: var(--s7); }
 
 /* ── Preguntas ──────────────────────────────────────────────── */
 .faq__list { border-top: 1px solid var(--line); max-width: 860px; }
