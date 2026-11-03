@@ -41,6 +41,12 @@
     return typeof v === "string" ? v.trim() !== "" : !!v;
   }
 
+  // "Texto con *énfasis*" → HTML seguro con <em>
+  function em(text) {
+    var safe = String(text).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    return safe.replace(/\*([^*]+)\*/g, "<em>$1</em>");
+  }
+
   function waLink(t) {
     return "https://wa.me/" + S.contact.whatsapp + "?text=" + encodeURIComponent(t.whatsappMessage);
   }
@@ -50,34 +56,45 @@
       children, h("span", { class: "sr-only" }, " " + t.opensNew));
   }
 
-  function sectionHead(eyebrow, title, id) {
+  // Cabecera de sección: número en mono + etiqueta + título grande
+  function head(num, eyebrow, title, id) {
     return h("div", { class: "head" },
-      h("p", { class: "eyebrow" }, eyebrow),
-      h("h2", { id: id }, title));
+      h("p", { class: "label" }, h("span", { class: "label__num" }, num), eyebrow),
+      h("h2", { id: id, html: em(title) }));
+  }
+
+  function count(i, total) {
+    return String(i).padStart(2, "0") + " / " + String(total).padStart(2, "0");
   }
 
   /* ── Secciones ─────────────────────────────────────────── */
 
   function hero(t) {
-    // Foto opcional: si "photo" está vacío en content.js, el hero va solo con texto.
+    var x = t.hero;
     var photo = null;
     if (filled(S.photo)) {
-      photo = h("div", { class: "hero__photo" });
-      var img = h("img", { src: S.photo, alt: t.hero.photoAlt, width: 480, height: 600, fetchpriority: "high", decoding: "async" });
-      img.addEventListener("error", function () { photo.remove(); });
-      photo.appendChild(img);
+      photo = h("figure", { class: "hero__photo" },
+        h("img", { src: S.photo, alt: x.photoAlt, width: 480, height: 600, fetchpriority: "high", decoding: "async" }));
     }
+    // Detalle de firma: la "Y" se dibuja sola, una vez (ver DESIGN.md §7)
+    var mark = h("div", { class: "sig", "aria-hidden": "true", html:
+      '<svg viewBox="0 0 120 120"><circle class="sig__ring" cx="60" cy="60" r="56" pathLength="1"/>' +
+      '<path class="sig__y" d="M36 30 60 64 84 30M60 64v28" pathLength="1"/></svg>' });
 
-    return h("section", { class: "hero wrap" + (photo ? "" : " hero--text"), id: "top", "aria-labelledby": "hero-title" },
-      photo,
-      h("div", { class: "hero__text" },
-        h("p", { class: "eyebrow" }, t.hero.kicker),
-        h("h1", { id: "hero-title" }, t.hero.title),
-        h("p", { class: "hero__line" }, t.hero.line),
-        h("div", { class: "hero__actions" },
-          h("a", { class: "btn btn--wa", href: waLink(t) }, icon("i-wa"), t.hero.whatsapp),
-          h("p", { class: "hero__email" }, t.hero.emailLabel + " ",
-            h("a", { href: "mailto:" + S.contact.email }, S.contact.email)))));
+    return h("section", { class: "hero band band--ink", id: "top", "aria-labelledby": "hero-title" },
+      h("div", { class: "wrap hero__grid" + (photo ? " has-photo" : "") },
+        h("p", { class: "hero__top mono" }, x.topline),
+        mark,
+        h("div", { class: "hero__text" },
+          h("p", { class: "hero__hello" }, x.hello),
+          h("h1", { id: "hero-title", html: em(x.line) }),
+          h("p", { class: "hero__sub" }, x.sub),
+          h("div", { class: "hero__actions" },
+            h("a", { class: "btn btn--wa", href: waLink(t) }, icon("i-wa"), x.whatsapp),
+            h("p", { class: "hero__email" }, x.emailLabel + " ",
+              h("a", { href: "mailto:" + S.contact.email }, S.contact.email)))),
+        photo,
+        h("div", { class: "hero__meta mono" }, h("span", {}, x.place), h("span", {}, x.langs))));
   }
 
   function work(t, lang) {
@@ -87,110 +104,116 @@
     var rText = pick(c.review && c.review.text, lang);
     if (filled(rText)) {
       review = h("figure", { class: "review" },
-        h("p", { class: "review__label" }, w.reviewTitle),
+        h("p", { class: "label" }, w.reviewTitle),
         h("blockquote", {}, h("p", {}, "“" + rText + "”")),
-        filled(c.review.author) ? h("figcaption", {}, "— " + c.review.author) : null);
+        filled(c.review.author) ? h("figcaption", { class: "mono" }, c.review.author) : null);
     }
 
     var results = null;
     var list = (c.results || []).filter(function (r) { return filled(r.value) && filled(pick(r.label, lang)); });
     if (list.length) {
-      results = h("div", { class: "results" },
-        h("h3", { class: "results__title" }, w.resultsTitle),
-        h("dl", {}, list.map(function (r) {
-          return h("div", {}, h("dt", {}, pick(r.label, lang)), h("dd", {}, r.value));
-        })));
+      results = h("dl", { class: "results" }, list.map(function (r) {
+        return h("div", {}, h("dd", {}, r.value), h("dt", {}, pick(r.label, lang)));
+      }));
     }
 
-    return h("section", { class: "section", id: "trabajo", "aria-labelledby": "work-title" },
+    return h("section", { class: "band band--paper", id: "trabajo", "aria-labelledby": "work-title" },
       h("div", { class: "wrap" },
-        sectionHead(w.eyebrow, w.title, "work-title"),
-        h("p", { class: "lead" }, w.intro),
+        head("01", w.eyebrow, w.title, "work-title"),
         h("div", { class: "case" },
           h("div", { class: "case__shots" },
             h("img", { class: "shot shot--desktop", src: c.imageDesktop, alt: w.altDesktop, width: 1200, height: 750, loading: "lazy", decoding: "async" }),
             h("img", { class: "shot shot--mobile", src: c.imageMobile, alt: w.altMobile, width: 600, height: 1298, loading: "lazy", decoding: "async" })),
           h("div", { class: "case__body" },
+            h("p", { class: "lead" }, w.intro),
             h("dl", { class: "ba" },
-              h("div", { class: "ba__item" }, h("dt", {}, w.beforeLabel), h("dd", {}, w.before)),
-              h("div", { class: "ba__item ba__item--after" }, h("dt", {}, w.afterLabel), h("dd", {}, w.after))),
-            external(c.url, t, "link-arrow", [w.visit + " · " + c.url.replace(/^https?:\/\//, "").replace(/\/$/, ""), icon("i-arrow")]),
+              h("div", {}, h("dt", { class: "mono" }, w.beforeLabel), h("dd", {}, w.before)),
+              h("div", { class: "ba__after" }, h("dt", { class: "mono" }, w.afterLabel), h("dd", {}, w.after))),
+            external(c.url, t, "link", [w.visit + " — " + c.url.replace(/^https?:\/\//, "").replace(/\/$/, ""), icon("i-arrow")]),
             review,
             results))));
   }
 
   function demos(t, lang) {
     if (!filled(S.projects)) return null;
-    var d = t.demos;
-    return h("section", { class: "section section--alt", id: "demos", "aria-labelledby": "demos-title" },
+    var d = t.demos, n = S.projects.length;
+    return h("section", { class: "band band--paper band--tight", id: "demos", "aria-labelledby": "demos-title" },
       h("div", { class: "wrap" },
-        sectionHead(d.eyebrow, d.title, "demos-title"),
-        h("p", { class: "lead" }, d.note),
-        h("ul", { class: "grid", role: "list" }, S.projects.map(function (p) {
-          return h("li", { class: "card" },
-            h("div", { class: "card__img" },
-              h("img", { src: p.image, alt: d.altPrefix + " " + p.name, width: 800, height: 500, loading: "lazy", decoding: "async" }),
-              h("span", { class: "badge" }, d.badge)),
-            h("div", { class: "card__body" },
+        head("01b", d.eyebrow, d.title, "demos-title"),
+        h("p", { class: "lead lead--wide" }, d.note),
+        h("ol", { class: "works", role: "list" }, S.projects.map(function (p, i) {
+          return h("li", { class: "work" },
+            h("a", { class: "work__img", href: p.demo, target: "_blank", rel: "noopener", tabindex: "-1", "aria-hidden": "true" },
+              h("img", { src: p.image, alt: "", width: 800, height: 500, loading: "lazy", decoding: "async" })),
+            h("div", { class: "work__body" },
+              h("p", { class: "work__count mono" }, count(i + 1, n) + " · " + d.badge),
               h("h3", {}, p.name),
-              h("p", {}, pick(p.line, lang)),
+              h("p", { class: "work__line" }, pick(p.line, lang)),
               filled(pick(p.tags, lang)) ? h("ul", { class: "tags", role: "list" }, pick(p.tags, lang).map(function (x) { return h("li", {}, x); })) : null,
-              external(p.demo, t, "link-arrow", [d.cta, h("span", { class: "sr-only" }, ": " + p.name), icon("i-arrow")])));
+              external(p.demo, t, "link", [d.cta, h("span", { class: "sr-only" }, ": " + p.name), icon("i-arrow")])));
         }))));
   }
 
+  function statement(t) {
+    if (!filled(t.statement)) return null;
+    return h("section", { class: "band band--ink statement", "aria-label": t.about.eyebrow },
+      h("div", { class: "wrap" }, h("p", { html: em(t.statement) })));
+  }
+
   function process(t) {
-    var p = t.process;
-    return h("section", { class: "section", id: "como-trabajo", "aria-labelledby": "process-title" },
+    var p = t.process, n = p.steps.length;
+    return h("section", { class: "band band--paper", id: "proceso", "aria-labelledby": "process-title" },
       h("div", { class: "wrap" },
-        sectionHead(p.eyebrow, p.title, "process-title"),
+        head("02", p.eyebrow, p.title, "process-title"),
         h("ol", { class: "steps", role: "list" }, p.steps.map(function (s, i) {
           return h("li", { class: "step" },
-            h("span", { class: "step__n", "aria-hidden": "true" }, String(i + 1)),
-            h("div", {}, h("h3", {}, s.title), h("p", {}, s.text)));
+            h("p", { class: "step__count mono" }, count(i + 1, n) + " · " + s.stage),
+            h("h3", {}, s.title),
+            h("p", {}, s.text));
         })),
-        h("p", { class: "note" }, p.google)));
+        h("p", { class: "note" }, icon("i-pin"), h("span", {}, p.google))));
   }
 
   function prices(t) {
     var p = t.prices;
-    function plan(label, price, note, items, cls, extra) {
-      return h("div", { class: "plan " + (cls || "") },
-        h("h3", { class: "plan__label" }, label),
-        h("p", { class: "plan__price" }, price),
+    function plan(label, from, price, unit, note, items, extra, cls) {
+      return h("article", { class: "plan " + (cls || "") },
+        h("h3", { class: "label" }, label),
+        h("p", { class: "plan__price" }, h("span", { class: "plan__from mono" }, from), price, unit ? h("small", {}, unit) : null),
         h("p", { class: "plan__note" }, note),
         filled(items) ? h("ul", { role: "list" }, items.map(function (i) { return h("li", {}, i); })) : null,
         filled(extra) ? h("p", { class: "plan__extra" }, extra) : null);
     }
-    return h("section", { class: "section section--alt", id: "precios", "aria-labelledby": "prices-title" },
+    return h("section", { class: "band band--paper", id: "precios", "aria-labelledby": "prices-title" },
       h("div", { class: "wrap" },
-        sectionHead(p.eyebrow, p.title, "prices-title"),
+        head("03", p.eyebrow, p.title, "prices-title"),
         h("div", { class: "plans" },
-          plan(p.mainLabel, p.mainPrice, p.mainNote, p.mainItems, "plan--main", p.mainExtra),
-          plan(p.careLabel, p.carePrice, p.careNote, p.careItems, "", p.careExtra)),
+          plan(p.mainLabel, p.from, p.mainPrice, "", p.mainNote, p.mainItems, p.mainExtra, "plan--main"),
+          plan(p.careLabel, p.from, p.carePrice, p.careUnit, p.careNote, p.careItems, p.careExtra)),
         h("p", { class: "guarantee" }, p.guarantee)));
   }
 
   function about(t) {
     var a = t.about;
     if (!filled(a.paragraphs)) return null;
-    return h("section", { class: "section", id: "sobre-mi", "aria-labelledby": "about-title" },
-      h("div", { class: "wrap wrap--narrow" },
-        sectionHead(a.eyebrow, a.title, "about-title"),
-        a.paragraphs.map(function (p) { return h("p", { class: "about__p" }, p); })));
+    return h("section", { class: "band band--paper", id: "estudio", "aria-labelledby": "about-title" },
+      h("div", { class: "wrap about" },
+        head("04", a.eyebrow, a.title, "about-title"),
+        h("div", { class: "about__text" }, a.paragraphs.map(function (p) { return h("p", {}, p); }))));
   }
 
   function contact(t) {
     var c = t.contact;
-    return h("section", { class: "section contact", id: "contacto", "aria-labelledby": "contact-title" },
-      h("div", { class: "wrap wrap--narrow" },
-        sectionHead(c.eyebrow, c.title, "contact-title"),
+    return h("section", { class: "band band--ink contact", id: "contacto", "aria-labelledby": "contact-title" },
+      h("div", { class: "wrap" },
+        h("p", { class: "label" }, h("span", { class: "label__num" }, "05"), c.eyebrow),
+        h("h2", { id: "contact-title", html: em(c.title) }),
         h("p", { class: "lead" }, c.text),
         h("div", { class: "contact__actions" },
           h("a", { class: "btn btn--wa", href: waLink(t) }, icon("i-wa"), c.whatsapp),
-          h("a", { class: "btn btn--ghost", href: "tel:" + S.contact.phone }, icon("i-phone"),
+          h("a", { class: "btn btn--line", href: "tel:" + S.contact.phone }, icon("i-phone"),
             h("span", {}, c.call + " · ", h("span", { class: "nowrap" }, S.contact.phoneDisplay)))),
-        h("p", { class: "contact__email" }, icon("i-mail"),
+        h("p", { class: "contact__email" },
           h("span", { class: "sr-only" }, c.email + ": "),
           h("a", { href: "mailto:" + S.contact.email }, S.contact.email))));
   }
@@ -212,14 +235,12 @@
     document.querySelectorAll("[data-t]").forEach(function (el) { el.textContent = get(t, el.dataset.t); });
     document.querySelectorAll("[data-t-label]").forEach(function (el) { el.setAttribute("aria-label", get(t, el.dataset.tLabel)); });
     document.querySelectorAll("[data-lang]").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.lang === lang)); });
-
-    var sticky = document.getElementById("sticky-wa");
-    sticky.href = waLink(t);
-    sticky.setAttribute("aria-label", t.contact.whatsapp);
+    document.getElementById("pill").href = waLink(t);
+    document.getElementById("nav-wa").href = waLink(t);
 
     // Secciones
     [].slice.call(main.children).forEach(function (n) { if (n.tagName !== "NOSCRIPT") n.remove(); });
-    [hero(t), work(t, lang), demos(t, lang), process(t), prices(t), about(t), contact(t)]
+    [hero(t), work(t, lang), demos(t, lang), statement(t), process(t), prices(t), about(t), contact(t)]
       .forEach(function (s) { if (s) main.appendChild(s); });
   }
 
@@ -239,36 +260,27 @@
       try { localStorage.setItem("lang", lang); } catch (e) {}
       var y = window.scrollY;
       render(lang);
+      document.documentElement.classList.add("drawn");
       window.scrollTo(0, y);
-      observeHero();
     });
   });
 
-  /* ── Botón flotante de WhatsApp (solo cuando el del hero ya no se ve) ── */
+  /* ── Menú en móvil ─────────────────────────────────────── */
 
-  var io = null;
-  function observeHero() {
-    var sticky = document.getElementById("sticky-wa");
-    var heroBtn = main.querySelector(".hero .btn--wa");
-    var contactSec = document.getElementById("contacto");
-    if (!("IntersectionObserver" in window) || !heroBtn) return;
-    if (io) io.disconnect();
-    var state = { hero: true, contact: false };
-    io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.target === heroBtn) state.hero = e.isIntersecting;
-        else state.contact = e.isIntersecting;
-      });
-      var show = !state.hero && !state.contact;
-      sticky.hidden = false;
-      sticky.classList.toggle("is-on", show);
-      sticky.setAttribute("tabindex", show ? "0" : "-1");
-      sticky.setAttribute("aria-hidden", String(!show));
-    });
-    io.observe(heroBtn);
-    if (contactSec) io.observe(contactSec);
+  var btn = document.getElementById("menu-btn");
+  var nav = document.getElementById("nav");
+  function setMenu(open) {
+    document.body.classList.toggle("menu-open", open);
+    btn.setAttribute("aria-expanded", String(open));
+    var t = S.text[document.documentElement.lang] || S.text.es;
+    btn.querySelector(".sr-only").textContent = open ? t.nav.close : t.nav.menu;
+    if (open) { var first = nav.querySelector("a"); if (first) first.focus(); }
   }
+  btn.addEventListener("click", function () { setMenu(!document.body.classList.contains("menu-open")); });
+  nav.addEventListener("click", function (e) { if (e.target.closest("a")) setMenu(false); });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && document.body.classList.contains("menu-open")) { setMenu(false); btn.focus(); }
+  });
 
   render(initialLang());
-  observeHero();
 })();

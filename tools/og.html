@@ -2,19 +2,18 @@
 <html lang="es"><head><meta charset="utf-8">
 <link rel="stylesheet" href="/css/styles.css">
 <style>
-  html,body{margin:0;width:1200px;height:630px;overflow:hidden;background:#f7f3ee;color:#2a2421}
-  .og{display:grid;grid-template-columns:1fr 300px;gap:56px;align-items:center;height:100%;padding:0 80px;box-sizing:border-box}
-  .k{display:flex;align-items:center;gap:12px;font:600 18px/1 Inter,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#8c4e3a}
-  .k svg{width:40px;height:40px}
-  h1{font:500 58px/1.1 Fraunces,serif;letter-spacing:-.01em;margin:22px 0 26px}
-  p{font:500 24px/1.4 Inter,sans-serif;color:#5f5650;margin:0}
-  img{width:300px;border-radius:22px;border:6px solid #fffdfa;box-shadow:0 12px 40px rgb(42 36 33 / .18);margin-top:150px}
+  html,body{margin:0;width:1200px;height:630px;overflow:hidden;background:#0d0c0b;color:#efeae2}
+  .og{position:relative;height:100%;padding:64px 80px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:space-between}
+  .og-top{font:400 18px/1 "Plex Mono",monospace;letter-spacing:.1em;text-transform:uppercase;color:#e3683d;display:flex;justify-content:space-between}
+  h1{font:400 92px/.95 "Instrument Serif",serif;letter-spacing:-.015em;margin:0;max-width:15ch}
+  h1 em{font-style:italic;color:#e3683d}
+  .og-foot{font:400 17px/1 "Plex Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:#a39b91;display:flex;justify-content:space-between;border-top:1px solid #2c2926;padding-top:22px}
+  svg{position:absolute;right:80px;top:150px;width:260px;height:260px}
+  circle,path{fill:none;stroke:#e3683d;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
 </style></head>
 <body><div class="og">
-  <div>
-    <div class="k"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9l6 8.5L22 9M16 17.5V24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Yehor · Webs para negocios</div>
-    <h1>Webs para estudios de belleza y pequeños negocios de Barcelona</h1>
-    <p>Reservas por WhatsApp · Ficha de Google · Desde 600 €</p>
-  </div>
-  <img src="/img/work/nude-beauty-mobile.webp" alt="">
+  <div class="og-top"><span>Yehor · Webs para negocios</span><span>Webs desde 600 €</span></div>
+  <h1>Hago webs para <em>estudios de belleza</em> y pequeños negocios de Barcelona.</h1>
+  <div class="og-foot"><span>Reservas por WhatsApp · Ficha de Google</span><span>Barcelona</span></div>
+  <svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="56"/><path d="M36 30 60 64 84 30M60 64v28" stroke-width="3"/></svg>
 </div></body></html>

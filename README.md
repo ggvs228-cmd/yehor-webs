@@ -1,5 +1,7 @@
 # Yehor · Webs para negocios
 
+Diseño: decisiones, tipografía, colores y cómo seguir construyendo en [`DESIGN.md`](DESIGN.md).
+
 Web personal estática (HTML + CSS + JS, sin frameworks), lista para Vercel.
 
 ## Editar textos y proyectos

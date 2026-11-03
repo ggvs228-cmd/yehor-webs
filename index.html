@@ -6,8 +6,7 @@
   <title>Yehor · Webs para estudios de belleza y negocios en Barcelona</title>
   <meta name="description" content="Hago webs sencillas para estudios de belleza y pequeños negocios de Barcelona. Reservas por WhatsApp y ficha de Google incluidas. Desde 600 €.">
   <meta name="color-scheme" content="light dark">
-  <meta name="theme-color" content="#f7f3ee" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#1b1816" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#0d0c0b">
   <link rel="canonical" href="https://yehor-webs.vercel.app/">
 
   <!-- Open Graph (vista previa en WhatsApp / Instagram) -->
@@ -28,9 +27,9 @@
   <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
-  <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/css/styles.css?v=202610271719">
+  <link rel="preload" href="/fonts/instrument-serif-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/styles.css?v=202611032141">
 
   <script type="application/ld+json">
   {
@@ -74,21 +73,27 @@
 <body>
   <a class="skip" href="#main" data-t="skip">Saltar al contenido</a>
 
-  <header class="top">
-    <div class="wrap top__inner">
+  <header class="top" id="top-bar">
+    <div class="top__inner">
       <a class="brand" href="#top" aria-label="Yehor, inicio">
         <svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true"><use href="#y-mark"/></svg>
         <span>Yehor</span>
       </a>
-      <nav class="nav" aria-label="Secciones">
-        <a href="#trabajo" data-t="nav.work">Trabajo</a>
-        <a href="#como-trabajo" data-t="nav.process">Cómo trabajo</a>
-        <a href="#precios" data-t="nav.prices">Precios</a>
-        <a href="#contacto" data-t="nav.contact">Contacto</a>
+      <nav class="nav" id="nav" aria-label="Secciones">
+        <a href="#trabajo"><i>01</i><span data-t="nav.work">Trabajo</span></a>
+        <a href="#proceso"><i>02</i><span data-t="nav.process">Proceso</span></a>
+        <a href="#precios"><i>03</i><span data-t="nav.prices">Precios</span></a>
+        <a href="#estudio"><i>04</i><span data-t="nav.studio">Estudio</span></a>
+        <a href="#contacto"><i>05</i><span data-t="nav.contact">Contacto</span></a>
+        <p class="nav__contact"><a id="nav-wa" href="https://wa.me/34654269467">WhatsApp · +34 654 269 467</a><a href="mailto:yehorwebs@gmail.com">yehorwebs@gmail.com</a></p>
       </nav>
-      <div class="lang" role="group" aria-label="Idioma" data-t-label="langLabel">
-        <button type="button" data-lang="es" aria-pressed="true">ES</button>
-        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      <div class="top__actions">
+        <div class="lang" role="group" aria-label="Idioma" data-t-label="langLabel">
+          <button type="button" data-lang="es" aria-pressed="true">ES</button>
+          <button type="button" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+        <a class="pill" id="pill" href="https://wa.me/34654269467"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg><span data-t="cta">Escríbeme</span></a>
+        <button class="menu-btn" type="button" id="menu-btn" aria-expanded="false" aria-controls="nav"><span class="sr-only" data-t="nav.menu">Menú</span><i aria-hidden="true"></i></button>
       </div>
     </div>
   </header>
@@ -105,16 +110,11 @@
   </main>
 
   <footer class="foot">
-    <div class="wrap foot__inner">
+    <div class="foot__inner">
       <p data-t="footer">Yehor · Webs para negocios · Barcelona</p>
       <p><a href="mailto:yehorwebs@gmail.com">yehorwebs@gmail.com</a> · <a href="/aviso-legal/" data-t="legal">Aviso legal y privacidad</a></p>
     </div>
   </footer>
-
-  <a class="sticky-wa" id="sticky-wa" href="https://wa.me/34654269467" hidden>
-    <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg>
-    <span data-t="sticky">WhatsApp</span>
-  </a>
 
   <!-- Iconos -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -131,13 +131,16 @@
     <symbol id="i-mail" viewBox="0 0 24 24">
       <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><path d="m3 6 9 7 9-7"/></g>
     </symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></g>
+    </symbol>
     <symbol id="i-arrow" viewBox="0 0 24 24">
       <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M9 7h8v8"/>
     </symbol>
   </svg>
 
-  <script src="/js/content.js?v=202610271719"></script>
-  <script src="/js/main.js?v=202610271719"></script>
+  <script src="/js/content.js?v=202611032141"></script>
+  <script src="/js/main.js?v=202611032141"></script>
   <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
