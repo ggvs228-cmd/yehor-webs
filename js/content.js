@@ -31,6 +31,12 @@ window.SITE = {
         en: "I highly recommend him! He built me a flawless website, taking care of every detail, and throughout the whole process he was attentive and quick to solve things. Since I've had it I've noticed more visits; I'm delighted with the result and the service.",
       },
       author: { es: "Dueña de Nude Beauty Studio", en: "Owner of Nude Beauty Studio (translated from Spanish)" },
+      // Fragmento corto para el inicio (recorte honesto de la reseña, con […])
+      short: {
+        es: "Me creó una página web impecable, cuidando cada detalle […] Desde que la tengo he notado más visitas.",
+        en: "He built me a flawless website, taking care of every detail […] Since I've had it I've noticed more visits.",
+      },
+      thumb: "img/work/nude-beauty-mobile.webp",
     },
 
     // ▼▼▼ RESULTADOS REALES — solo datos que puedas demostrar. Vacío = no se muestra.
@@ -94,7 +100,7 @@ window.SITE = {
         title: "Yehor · Webs para estudios de belleza y negocios en Barcelona",
         description: "Hago webs sencillas para estudios de belleza y pequeños negocios de Barcelona. Reservas por WhatsApp y ficha de Google incluidas. Desde 600 €.",
       },
-      nav: { work: "Trabajo", process: "Proceso", prices: "Precios", studio: "Estudio", contact: "Contacto", menu: "Menú", close: "Cerrar" },
+      nav: { work: "Trabajo", process: "Proceso", prices: "Precios", faq: "Preguntas", studio: "Estudio", contact: "Contacto", menu: "Menú", close: "Cerrar" },
       cta: "Escríbeme",
       skip: "Saltar al contenido",
       whatsappMessage: "Hola Yehor, he visto tu web y me gustaría hablar sobre una web para mi negocio.",
@@ -130,6 +136,8 @@ window.SITE = {
         badge: "Demo",
         cta: "Probar la demo",
         altPrefix: "Captura de la demo de",
+        ask: "¿Quieres una así para tu negocio?",
+        askBtn: "Escríbeme por WhatsApp",
       },
       statement: "Un estudio de una sola persona para negocios que merecen que se les *encuentre*.",
       process: {
@@ -157,7 +165,20 @@ window.SITE = {
         careNote: "Mantenimiento, cambios y Google",
         careItems: ["Cambios de precios, fotos y horarios", "Revisión de tu ficha de Google", "Me escribes y lo cambio yo"],
         careExtra: "El precio depende de lo que necesites: más cambios, más idiomas o más servicios. Lo hablamos y te lo digo antes.",
-        guarantee: "Si en 30 días no te convence, no pagas.",
+        guarantee: "Si en 30 días no te convence, te devuelvo el dinero.",
+        askBtn: "Pídeme presupuesto por WhatsApp",
+      },
+      faq: {
+        eyebrow: "Preguntas",
+        title: "Antes de *escribirme*",
+        items: [
+          { q: "¿Cuánto tardas?", a: "En unos días ves la primera versión y, normalmente, en una semana está publicada. Si las fotos o los textos tardan en llegar, tardamos un poco más." },
+          { q: "¿Cómo se paga?", a: "La mitad al empezar y la otra mitad cuando la web está publicada. Si en 30 días no te convence, te devuelvo el dinero." },
+          { q: "¿Y el dominio y el alojamiento?", a: "El dominio (tunegocio.com) se compra a tu nombre, así que es tuyo: cuesta unos 10–15 € al año y yo me encargo de configurarlo. El alojamiento de la web no tiene coste." },
+          { q: "¿De quién es la web?", a: "Tuya, igual que el dominio. Los cambios me los pides por WhatsApp y los hago yo: con el mantenimiento entran en la cuota; si no, te digo el precio antes." },
+          { q: "¿Necesito tener fotos y textos?", a: "Con lo que tienes en Instagram ya podemos empezar. Los textos los preparamos juntos a partir de una charla de 15 minutos." },
+          { q: "No sé nada de webs. ¿Es un problema?", a: "No hace falta. Me escribes por WhatsApp como a cualquier proveedor y yo me encargo de todo lo técnico, también de tu ficha de Google." },
+        ],
       },
       about: {
         eyebrow: "Estudio",
@@ -188,7 +209,7 @@ window.SITE = {
         title: "Yehor · Websites for beauty studios and small businesses in Barcelona",
         description: "I make simple websites for beauty studios and small businesses in Barcelona. WhatsApp booking and Google profile included. From €600.",
       },
-      nav: { work: "Work", process: "Process", prices: "Prices", studio: "Studio", contact: "Contact", menu: "Menu", close: "Close" },
+      nav: { work: "Work", process: "Process", prices: "Prices", faq: "FAQ", studio: "Studio", contact: "Contact", menu: "Menu", close: "Close" },
       cta: "Message me",
       skip: "Skip to content",
       whatsappMessage: "Hi Yehor, I saw your website and I'd like to talk about a website for my business.",
@@ -224,6 +245,8 @@ window.SITE = {
         badge: "Demo",
         cta: "Try the demo",
         altPrefix: "Screenshot of the demo for",
+        ask: "Want one like this for your business?",
+        askBtn: "Message me on WhatsApp",
       },
       statement: "A one-person studio for businesses that deserve to be *found*.",
       process: {
@@ -251,7 +274,20 @@ window.SITE = {
         careNote: "Maintenance, changes and Google",
         careItems: ["Price, photo and opening-hour changes", "Google profile check-ups", "Message me and I'll change it"],
         careExtra: "The price depends on what you need: more changes, more languages or more services. We talk it through and I tell you first.",
-        guarantee: "If you're not convinced within 30 days, you don't pay.",
+        guarantee: "If you're not convinced within 30 days, I'll give you your money back.",
+        askBtn: "Ask me for a quote on WhatsApp",
+      },
+      faq: {
+        eyebrow: "FAQ",
+        title: "Before you *message me*",
+        items: [
+          { q: "How long does it take?", a: "You see a first version in a few days, and it's usually live within a week. If photos or texts take a while to arrive, it takes a little longer." },
+          { q: "How do I pay?", a: "Half to start and half when the website is live. If you're not convinced within 30 days, I'll give you your money back." },
+          { q: "What about the domain and hosting?", a: "The domain (yourbusiness.com) is bought in your name, so it's yours: it costs about €10–15 a year and I set it up. Hosting the website costs nothing." },
+          { q: "Who owns the website?", a: "You do, like the domain. You ask me for changes on WhatsApp and I make them: on the care plan they're included; otherwise I tell you the price first." },
+          { q: "Do I need photos and texts?", a: "What you already have on Instagram is enough to start. We write the texts together after a 15-minute chat." },
+          { q: "I know nothing about websites. Is that a problem?", a: "Not at all. You message me on WhatsApp like any other supplier and I handle everything technical, including your Google profile." },
+        ],
       },
       about: {
         eyebrow: "Studio",

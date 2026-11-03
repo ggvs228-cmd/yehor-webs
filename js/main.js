@@ -69,7 +69,7 @@
 
   /* ── Secciones ─────────────────────────────────────────── */
 
-  function hero(t) {
+  function hero(t, lang) {
     var x = t.hero;
     var photo = null;
     if (filled(S.photo)) {
@@ -91,11 +91,24 @@
           h("h1", { id: "hero-title", html: em(x.line) }),
           h("p", { class: "hero__sub" }, x.sub),
           h("div", { class: "hero__actions" },
-            h("a", { class: "btn btn--wa", href: waLink(t) }, icon("i-wa"), x.whatsapp),
-            h("p", { class: "hero__email" }, x.emailLabel + " ",
-              h("a", { href: "mailto:" + S.contact.email }, S.contact.email)))),
+            h("a", { class: "btn btn--wa", href: waLink(t) }, icon("i-wa"), x.whatsapp)),
+          proof(t, lang),
+          h("p", { class: "hero__email" }, x.emailLabel + " ",
+            h("a", { href: "mailto:" + S.contact.email }, S.contact.email))),
         photo,
         h("div", { class: "hero__meta mono" }, h("span", {}, x.place), h("span", {}, x.langs))));
+  }
+
+  // Prueba social junto al botón: recorte real de la reseña + miniatura de la web real
+  function proof(t, lang) {
+    var r = S.caseStudy.review || {};
+    var quote = pick(r.short, lang);
+    if (!filled(quote)) return null;
+    return h("a", { class: "proof", href: "#trabajo" },
+      filled(r.thumb) ? h("img", { class: "proof__thumb", src: r.thumb, alt: "", width: 600, height: 1298, decoding: "async" }) : null,
+      h("span", { class: "proof__body" },
+        h("span", { class: "proof__quote" }, "“" + quote + "”"),
+        h("span", { class: "proof__who mono" }, pick(r.author, lang))));
   }
 
   function work(t, lang) {
@@ -152,7 +165,10 @@
               h("p", { class: "work__line" }, pick(p.line, lang)),
               filled(pick(p.tags, lang)) ? h("ul", { class: "tags", role: "list" }, pick(p.tags, lang).map(function (x) { return h("li", {}, x); })) : null,
               external(p.demo, t, "link", [d.cta, h("span", { class: "sr-only" }, ": " + p.name), icon("i-arrow")])));
-        }))));
+        })),
+        filled(d.ask) ? h("div", { class: "ask" },
+          h("p", { class: "ask__q" }, d.ask),
+          h("a", { class: "btn btn--wa", href: waLink(t) }, icon("i-wa"), d.askBtn)) : null));
   }
 
   function statement(t) {
@@ -191,7 +207,21 @@
         h("div", { class: "plans" },
           plan(p.mainLabel, p.from, p.mainPrice, "", p.mainNote, p.mainItems, p.mainExtra, "plan--main"),
           plan(p.careLabel, p.from, p.carePrice, p.careUnit, p.careNote, p.careItems, p.careExtra)),
-        h("p", { class: "guarantee" }, p.guarantee)));
+        h("p", { class: "guarantee" }, p.guarantee),
+        filled(p.askBtn) ? h("a", { class: "btn btn--wa guarantee__btn", href: waLink(t) }, icon("i-wa"), p.askBtn) : null));
+  }
+
+  function faq(t) {
+    var f = t.faq;
+    if (!f || !filled(f.items)) return null;
+    return h("section", { class: "band band--paper", id: "preguntas", "aria-labelledby": "faq-title" },
+      h("div", { class: "wrap faq" },
+        head("04", f.eyebrow, f.title, "faq-title"),
+        h("div", { class: "faq__list" }, f.items.map(function (it, i) {
+          return h("details", { class: "faq__item" },
+            h("summary", {}, h("span", { class: "mono faq__n" }, String(i + 1).padStart(2, "0")), h("span", { class: "faq__q" }, it.q), h("span", { class: "faq__plus", "aria-hidden": "true" })),
+            h("p", {}, it.a));
+        }))));
   }
 
   function about(t) {
@@ -199,7 +229,7 @@
     if (!filled(a.paragraphs)) return null;
     return h("section", { class: "band band--paper", id: "estudio", "aria-labelledby": "about-title" },
       h("div", { class: "wrap about" },
-        head("04", a.eyebrow, a.title, "about-title"),
+        head("05", a.eyebrow, a.title, "about-title"),
         h("div", { class: "about__text" }, a.paragraphs.map(function (p) { return h("p", {}, p); }))));
   }
 
@@ -207,7 +237,7 @@
     var c = t.contact;
     return h("section", { class: "band band--ink contact", id: "contacto", "aria-labelledby": "contact-title" },
       h("div", { class: "wrap" },
-        h("p", { class: "label" }, h("span", { class: "label__num" }, "05"), c.eyebrow),
+        h("p", { class: "label" }, h("span", { class: "label__num" }, "06"), c.eyebrow),
         h("h2", { id: "contact-title", html: em(c.title) }),
         h("p", { class: "lead" }, c.text),
         h("div", { class: "contact__actions" },
@@ -241,7 +271,7 @@
 
     // Secciones
     [].slice.call(main.children).forEach(function (n) { if (n.tagName !== "NOSCRIPT") n.remove(); });
-    [hero(t), work(t, lang), demos(t, lang), statement(t), process(t), prices(t), about(t), contact(t)]
+    [hero(t, lang), work(t, lang), demos(t, lang), statement(t), process(t), prices(t), faq(t), about(t), contact(t)]
       .forEach(function (s) { if (s) main.appendChild(s); });
     attachStage();
   }

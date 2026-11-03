@@ -121,7 +121,30 @@ self-hosted in `js/vendor/`).
 
 Nothing else on the page moves. No custom cursor, no scroll-jacking.
 
-## 8. How to keep building with Claude Code
+## Page order, and why (researched Nov 2026)
+
+1. **Hero:** what you do in one line (understood in ~5 s), price line on top,
+   **one** action (WhatsApp), and **proof right under the button**: a cut of the
+   real review plus a thumbnail of the real site. A widely cited A/B test
+   (Michael Aagaard) moved testimonials next to the button and reported a big lift;
+   treat the exact number as anecdotal.
+2. **Real work first** (Nude Beauty: before/after + full review). Clients look at
+   visuals first and dig deeper only if they like them.
+3. **Demos** grouped by kind of business (owners look for their own sector), then a
+   repeated CTA: "¿Quieres una así para tu negocio?"
+4. **Process → Prices → FAQ.** Visible prices: usability studies see people leave
+   for competitors when prices are hidden. FAQ answers the doubts that stop a
+   message (time, payment, domain, ownership, photos, "I know nothing about webs").
+5. **Studio → Contact.** Who you are, then every way to reach you.
+
+The WhatsApp action appears 4 times (header pill, hero, after demos, after
+prices) plus the contact section. It's always the same action, never a competing one.
+
+**Best image:** eye-tracking studies (Djamasbi et al. 2010) find pages with faces
+more appealing. The single best upgrade is still a real portrait of Yehor; until
+then, the strongest image is the real client site (used in the hero proof card).
+
+
 
 Give decisions, not adjectives. Example prompt:
 
