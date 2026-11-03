@@ -26,8 +26,11 @@ window.SITE = {
 
     // ▼▼▼ RESEÑA DE LA DUEÑA — pega aquí su texto real. Vacío = no se muestra.
     review: {
-      text: { es: "", en: "" },
-      author: "",                     // p. ej. "Nombre, dueña de Nude Beauty Studio"
+      text: {
+        es: "¡Lo recomiendo muchísimo! Me creó una página web impecable, cuidando cada detalle, y durante todo el proceso fue muy atento y resolutivo. Desde que la tengo he notado más visitas; estoy encantada con el resultado y con el servicio.",
+        en: "I highly recommend him! He built me a flawless website, taking care of every detail, and throughout the whole process he was attentive and quick to solve things. Since I've had it I've noticed more visits; I'm delighted with the result and the service.",
+      },
+      author: { es: "Dueña de Nude Beauty Studio", en: "Owner of Nude Beauty Studio (translated from Spanish)" },
     },
 
     // ▼▼▼ RESULTADOS REALES — solo datos que puedas demostrar. Vacío = no se muestra.

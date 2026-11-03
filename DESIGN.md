@@ -43,10 +43,10 @@ Prime reference: **byholm.co** (HOLM, a one-person studio). Ideas taken from it:
 - A single persistent pill button ("Book a call"). Here: "Escríbeme" → WhatsApp.
 - Dark, cinematic hero; italic serif statements.
 
-Not taken from it, on purpose: the WebGL 3D scene. It is ~MBs of code and GPU
-work. The visitors here are on mid-range phones with mobile data, and the
-brief asks for under one second on 4G. The signature detail (see 7) keeps the
-*idea* (a mark that draws itself) at ~1 KB.
+Taken in a light form: the 3D. Byholm's whole site is one scroll-driven WebGL
+world (several MB). Here only the hero has a real 3D object (see 7), loaded
+*after* the page is visible, so the first screen stays instant on a phone.
+Decided with Yehor: "3D hero only", not a full 3D world.
 
 Other directions, from print rather than websites, to look at when extending:
 Barcelona shop signage and hand-painted "rótulos", the *panot* pavement tile,
@@ -105,10 +105,21 @@ the case study.
 
 ## 7. One signature detail
 
-**The Y draws itself.** On load, the "Y" monogram is drawn as a single clay
-line (SVG stroke animation, CSS only, ~1 KB), echoing HOLM's "everything starts
-as a single line". It does not move again. It respects
-`prefers-reduced-motion`. No custom cursor, no scroll-jacking, no parallax.
+**A dark-chrome Y inside a clay ring, in real 3D** (`js/hero3d.js`, Three.js r170
+self-hosted in `js/vendor/`).
+
+- Drag it with a finger or the mouse to turn it (vertical swipes still scroll the
+  page); it tilts a little as you scroll and spins slowly when left alone.
+- Lit like a product photo: a dark room with light strips and a warm fill, so
+  highlights slide over the chrome as it turns. Dark chrome was chosen over
+  see-through glass: glass on a black background reads as flat plastic, and
+  it is the most expensive effect for a phone to draw.
+- Loads after the page (`requestIdleCallback`), skipped with Data Saver or no
+  WebGL, pauses when off-screen or in a background tab. Cost: ~171 KB gzipped.
+- While it loads (or if it can't), the flat SVG "Y" draws itself as before.
+- `prefers-reduced-motion`: no idle spin or scroll motion; dragging still works.
+
+Nothing else on the page moves. No custom cursor, no scroll-jacking.
 
 ## 8. How to keep building with Claude Code
 
@@ -129,8 +140,13 @@ phone-width screenshot and a critique after each.
 
 Answering these makes the site more *his*:
 
-1. A real portrait (see 5): when can a friend take it?
-2. Did the Nude Beauty owner agree to a short review? One sentence is enough.
-3. Any real number from Nude Beauty you can prove (bookings by WhatsApp per month, Google views)?
-4. What street or neighbourhood do you walk most when looking for clients? It could be the "local" detail in the hero.
-5. Do you want "Escríbeme" (WhatsApp) or "Llámame" as the single persistent button? WhatsApp is the current choice.
+Answered: launch without a portrait for now · review received and published ·
+local detail = Barcelona coordinates · persistent button = WhatsApp.
+
+Still open:
+1. The real numbers behind "more visits, new clients, WhatsApp bookings, Google
+   views" for Nude Beauty (e.g. "+40 % visitas en Google en 3 meses"). They go in
+   `caseStudy.results` in `content.js`; never estimate them.
+2. Can the review be signed with the owner's first name? Right now it says
+   "Dueña de Nude Beauty Studio".
+3. A real portrait, when there's a friend and good daylight.

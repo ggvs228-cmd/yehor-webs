@@ -85,6 +85,7 @@
       h("div", { class: "wrap hero__grid" + (photo ? " has-photo" : "") },
         h("p", { class: "hero__top mono" }, x.topline),
         mark,
+        h("div", { class: "stage" }),
         h("div", { class: "hero__text" },
           h("p", { class: "hero__hello" }, x.hello),
           h("h1", { id: "hero-title", html: em(x.line) }),
@@ -106,7 +107,7 @@
       review = h("figure", { class: "review" },
         h("p", { class: "label" }, w.reviewTitle),
         h("blockquote", {}, h("p", {}, "“" + rText + "”")),
-        filled(c.review.author) ? h("figcaption", { class: "mono" }, c.review.author) : null);
+        filled(pick(c.review.author, lang)) ? h("figcaption", { class: "mono" }, "— " + pick(c.review.author, lang)) : null);
     }
 
     var results = null;
@@ -242,7 +243,33 @@
     [].slice.call(main.children).forEach(function (n) { if (n.tagName !== "NOSCRIPT") n.remove(); });
     [hero(t), work(t, lang), demos(t, lang), statement(t), process(t), prices(t), about(t), contact(t)]
       .forEach(function (s) { if (s) main.appendChild(s); });
+    attachStage();
   }
+
+  /* ── 3D (Y de cristal): se carga después, nunca bloquea la primera pantalla ── */
+
+  var three = null;
+  function attachStage() {
+    var stage = main.querySelector(".stage");
+    if (!three || !stage) return;
+    three.attach(stage);
+    main.querySelector(".hero").classList.add("has-3d");
+  }
+  function canWebGL() {
+    try { var c = document.createElement("canvas"); return !!(window.WebGLRenderingContext && (c.getContext("webgl2") || c.getContext("webgl"))); }
+    catch (e) { return false; }
+  }
+  function load3D() {
+    var conn = navigator.connection;
+    if ((conn && conn.saveData) || !canWebGL() || !("IntersectionObserver" in window) || !("ResizeObserver" in window)) return;
+    import("/js/hero3d.js?v=" + (document.documentElement.dataset.v || "1"))
+      .then(function (m) { three = m.mount(); attachStage(); })
+      .catch(function () { /* sin 3D: se queda la Y dibujada */ });
+  }
+  window.addEventListener("load", function () {
+    var later = window.requestIdleCallback || function (fn) { return setTimeout(fn, 200); };
+    later(load3D, { timeout: 2500 });
+  });
 
   function initialLang() {
     var q = new URLSearchParams(location.search).get("lang");
