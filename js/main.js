@@ -69,6 +69,32 @@
 
   /* ── Secciones ─────────────────────────────────────────── */
 
+  // Titular con palabra en bucle (inspirado en chamaac/text-loop). Lectores de pantalla y Google leen "line".
+  function esc(v) { return String(v).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+  function loopTitle(x) {
+    if (!filled(x.loop)) return em(x.line);
+    var items = x.loop.map(function (w, i) { return '<span class="loop__item' + (i ? "" : " is-on") + '">' + esc(w) + "</span>"; }).join("");
+    return '<span aria-hidden="true">' + esc(x.loopStart) + ' <span class="loop">' + items + "</span>" + esc(x.loopEnd) + "</span>" +
+      '<span class="sr-only">' + esc(x.line.replace(/\*/g, "")) + "</span>";
+  }
+  var loopTimer = 0;
+  function startLoop() {
+    clearInterval(loopTimer);
+    var items = [].slice.call(main.querySelectorAll(".loop__item"));
+    if (items.length < 2 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    var i = 0;
+    loopTimer = setInterval(function () {
+      if (document.hidden) return;
+      var cur = items[i], next = items[(i + 1) % items.length];
+      cur.classList.add("is-selecting");
+      setTimeout(function () {
+        cur.classList.remove("is-on", "is-selecting");
+        next.classList.add("is-on");
+      }, 520);
+      i = (i + 1) % items.length;
+    }, 2800);
+  }
+
   function hero(t, lang) {
     var x = t.hero;
     var photo = null;
@@ -87,7 +113,7 @@
         mark,
         h("div", { class: "hero__text" },
           h("p", { class: "hero__hello" }, x.hello),
-          h("h1", { id: "hero-title", html: em(x.line) }),
+          h("h1", { id: "hero-title", html: loopTitle(x) }),
           h("p", { class: "hero__sub" }, x.sub),
           h("div", { class: "hero__actions" },
             h("a", { class: "btn btn--wa", href: waLink(t) }, icon("i-wa"), x.whatsapp)),
@@ -190,24 +216,36 @@
         h("p", { class: "note" }, icon("i-pin"), h("span", {}, p.google))));
   }
 
+  var TIER_ICONS = {
+    file: '<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6M9 9h2"/>',
+    trend: '<path d="m3 17 6-6 4 4 8-8"/><path d="M15 7h6v6"/>',
+    store: '<path d="M4 9h16l-1.5-5h-13zM5 9v11h14V9"/><path d="M10 20v-6h4v6M4 9a2.7 2.7 0 0 0 5.3 0 2.7 2.7 0 0 0 5.4 0 2.7 2.7 0 0 0 5.3 0"/>',
+  };
+  var CHECK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 9.5 17 19 7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
   function prices(t) {
     var p = t.prices;
-    function plan(label, from, price, unit, note, items, extra, cls) {
-      return h("article", { class: "plan " + (cls || "") },
-        h("h3", { class: "label" }, label),
-        h("p", { class: "plan__price" }, h("span", { class: "plan__from mono" }, from), price, unit ? h("small", {}, unit) : null),
-        h("p", { class: "plan__note" }, note),
-        filled(items) ? h("ul", { role: "list" }, items.map(function (i) { return h("li", {}, i); })) : null,
-        filled(extra) ? h("p", { class: "plan__extra" }, extra) : null);
-    }
+    if (!filled(p.plans)) return null;
     return h("section", { class: "band band--paper", id: "precios", "aria-labelledby": "prices-title" },
       h("div", { class: "wrap" },
         head("03", p.eyebrow, p.title, "prices-title"),
-        h("div", { class: "plans" },
-          plan(p.mainLabel, p.from, p.mainPrice, "", p.mainNote, p.mainItems, p.mainExtra, "plan--main"),
-          plan(p.careLabel, p.from, p.carePrice, p.careUnit, p.careNote, p.careItems, p.careExtra)),
-        filled(p.guarantee) ? h("p", { class: "guarantee" }, p.guarantee) : null,
-        filled(p.askBtn) ? h("a", { class: "btn btn--wa guarantee__btn", href: waLink(t) }, icon("i-wa"), p.askBtn) : null));
+        h("div", { class: "tiers" }, p.plans.map(function (pl) {
+          var link = "https://wa.me/" + S.contact.whatsapp + "?text=" + encodeURIComponent(pl.msg || t.whatsappMessage);
+          return h("article", { class: "tier tier--" + pl.tone, "aria-label": pl.name },
+            h("div", { class: "tier__top" },
+              h("span", { class: "tier__icon", "aria-hidden": "true", html: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">' + (TIER_ICONS[pl.icon] || "") + "</svg>" }),
+              filled(pl.badge) ? h("span", { class: "tier__badge" }, pl.badge) : null),
+            h("h3", {}, pl.name),
+            h("p", { class: "tier__desc" }, pl.desc),
+            h("p", { class: "tier__price" },
+              h("span", { class: "tier__amount" }, filled(pl.from) ? h("small", {}, pl.from + " ") : null, pl.amount),
+              h("span", { class: "tier__unit" }, pl.unit)),
+            h("a", { class: "btn " + (pl.tone === "lime" ? "btn--wa" : "btn--line"), href: link }, icon("i-wa"), pl.cta, h("span", { class: "btn__arrow", "aria-hidden": "true" }, "→")),
+            h("p", { class: "tier__label" }, pl.label),
+            h("ul", { role: "list" }, pl.items.map(function (it) { return h("li", {}, h("span", { html: CHECK }), h("span", {}, it)); })),
+            filled(pl.note) ? h("p", { class: "tier__note" }, pl.note) : null);
+        })),
+        filled(p.foot) ? h("p", { class: "tiers__foot" }, p.foot) : null));
   }
 
   function faq(t) {
@@ -260,7 +298,8 @@
     if (!PATHS) {
       PATHS = [];
       [1, -1].forEach(function (pos) {
-        for (var i = 0; i < 36; i++) {
+        var step = window.innerWidth < 700 ? 2 : 1; // en móvil, la mitad de líneas
+        for (var i = 0; i < 36; i += step) {
           var dur = 20 + Math.random() * 10;
           var g = pathPoints(i, pos);
           PATHS.push({ pts: g.pts, len: g.len, w: 0.5 + i * 0.03, a: Math.min(0.1 + i * 0.03, 1), dur: dur, phase: Math.random() });
@@ -310,7 +349,7 @@
     }
     function loop(now) {
       if (!on) return;
-      if (now - last > 33) { last = now; draw(now); } // ~30 fps es suficiente para líneas lentas
+      if (now - last > 50) { last = now; draw(now); } // ~20 fps: las líneas son lentas, no hace falta más
       raf = requestAnimationFrame(loop);
     }
     var ro = "ResizeObserver" in window ? new ResizeObserver(size) : null;
@@ -346,7 +385,6 @@
   function contact(t) {
     var c = t.contact;
     return h("section", { class: "band band--ink contact", id: "contacto", "aria-labelledby": "contact-title" },
-      h("div", { class: "paths", "aria-hidden": "true" }),
       h("div", { class: "wrap" },
         h("p", { class: "label" }, h("span", { class: "label__num" }, "06"), c.eyebrow),
         h("h2", { id: "contact-title", class: "rise", html: riseTitle(c.title) }),
@@ -361,28 +399,39 @@
           h("a", { href: "mailto:" + S.contact.email }, S.contact.email))));
   }
 
-  // Las letras suben una vez al entrar; las líneas solo se animan mientras se ven
-  var contactIO = null, pathsCtl = null;
+  // Las letras de "Hablemos." suben una vez al entrar
+  var contactIO = null;
   function watchContact() {
     var sec = main.querySelector(".contact");
     if (!sec) return;
-    var host = sec.querySelector(".paths");
-    if (pathsCtl) pathsCtl.play(false); // al cambiar de idioma se rehace la sección: para el bucle anterior
-    pathsCtl = host ? mountPaths(host) : null;
-    if (!("IntersectionObserver" in window)) { sec.classList.add("is-in"); if (pathsCtl) pathsCtl.play(true); return; }
+    if (!("IntersectionObserver" in window)) { sec.classList.add("is-in"); return; }
     if (contactIO) contactIO.disconnect();
     contactIO = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (pathsCtl) pathsCtl.play(en.isIntersecting);
-        if (en.intersectionRatio > 0.2) sec.classList.add("is-in");
-      });
-    }, { threshold: [0, 0.2] });
+      entries.forEach(function (en) { if (en.isIntersecting) { sec.classList.add("is-in"); contactIO.disconnect(); } });
+    }, { threshold: 0.05 });
     contactIO.observe(sec);
   }
-  document.addEventListener("visibilitychange", function () {
-    var sec = main.querySelector(".contact.is-in");
-    if (pathsCtl) pathsCtl.play(!document.hidden && !!sec && sec.getBoundingClientRect().top < window.innerHeight);
-  });
+
+  // Fondo de líneas animadas detrás de toda la web: un único <canvas> fijo
+  (function backgroundLines() {
+    if (!window.HTMLCanvasElement) return;
+    var host = document.createElement("div");
+    host.className = "bg-lines";
+    host.setAttribute("aria-hidden", "true");
+    document.body.insertBefore(host, document.body.firstChild);
+    var ctl = mountPaths(host);
+    ctl.play(true);
+    document.addEventListener("visibilitychange", function () { ctl.play(!document.hidden); });
+  })();
+
+  // Cristal líquido: el reflejo sigue al dedo o al ratón
+  document.addEventListener("pointermove", function (e) {
+    var b = e.target.closest && e.target.closest(".btn, .pill, .menu-btn");
+    if (!b) return;
+    var r = b.getBoundingClientRect();
+    b.style.setProperty("--mx", (e.clientX - r.left) + "px");
+    b.style.setProperty("--my", (e.clientY - r.top) + "px");
+  }, { passive: true });
 
   /* ── Render e idioma ───────────────────────────────────── */
 
@@ -409,6 +458,7 @@
     [hero(t, lang), work(t, lang), demos(t, lang), statement(t), process(t), prices(t), faq(t), about(t), contact(t)]
       .forEach(function (s) { if (s) main.appendChild(s); });
     watchContact();
+    startLoop();
   }
 
   function initialLang() {

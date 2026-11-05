@@ -70,20 +70,25 @@ Scale (mobile → desktop, via `clamp`): hero 56 → 132 px, section titles
 40 → 88 px, prices 72 → 160 px, body 17 px, labels 12 px. Keep the contrast
 dramatic: one giant line next to small text, never three medium sizes.
 
-## 4. Palette: from the place
+## 4. Palette (updated Nov 2026, from Yehor's pricing reference)
 
-Barcelona at night and the brick of the Eixample, not a brand-kit:
+Dark only. Near-black with cool greys and three accents, one per pricing tier:
 
-| Token | Hex | From |
+| Token | Hex | Use |
 |---|---|---|
-| `--ink` | `#0D0C0B` | Street at night, the dark hero |
-| `--bone` | `#EFEAE2` | Plaster walls, old paper menus |
-| `--clay` | `#C8512B` | Terracotta roof tiles / Eixample brick. **The one accent.** |
-| `--stone` | `#8C857C` | *Panot* pavement grey, for secondary text |
+| `--ink` / `--paper` | `#0b0b0d` / `#0e0e10` | Background |
+| `--paper-2` | `#141416` | Cards |
+| `--line` | `#26262b` | Borders |
+| `--text` / `--muted` | `#f4f4f5` / `#a1a1aa` | Text |
+| `--lime` | `#c3e15a` | Main accent: italic words, numbers, primary (WhatsApp) glass button |
+| `--blue` | `#8ea2ff` | "Web" tier, text-loop gradient |
+| `--violet` | `#c49be0` | "A medida" tier, text-loop gradient |
 
-One accent, used boldly (prices, the drawn mark, focus rings), not sprinkled.
-WhatsApp green appears only on WhatsApp buttons, where it tells people what the
-button does.
+Tinted glows (`--tint-*`) sit behind the hero, the contact section and the top of
+each pricing card, so the liquid-glass buttons have something to refract.
+
+**Buttons:** every button is liquid glass (translucent, blurred, top highlight, a
+sheen that follows the pointer). Primary = lime-tinted glass, secondary = clear glass.
 
 ## 5. Photos are the design
 
