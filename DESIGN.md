@@ -70,25 +70,29 @@ Scale (mobile → desktop, via `clamp`): hero 56 → 132 px, section titles
 40 → 88 px, prices 72 → 160 px, body 17 px, labels 12 px. Keep the contrast
 dramatic: one giant line next to small text, never three medium sizes.
 
-## 4. Palette (updated Nov 2026, from Yehor's pricing reference)
+## 4. Palette (updated Nov 2026: calmer, beauty-salon friendly)
 
-Dark only. Near-black with cool greys and three accents, one per pricing tier:
+Light only. Warm cream, espresso text and a dusty-rose accent, the colours of a
+nude/skin-care studio. One soft tone per pricing tier. All text colours pass WCAG AA
+on cream.
 
 | Token | Hex | Use |
 |---|---|---|
-| `--ink` / `--paper` | `#0b0b0d` / `#0e0e10` | Background |
-| `--paper-2` | `#141416` | Cards |
-| `--line` | `#26262b` | Borders |
-| `--text` / `--muted` | `#f4f4f5` / `#a1a1aa` | Text |
-| `--lime` | `#c3e15a` | Main accent: italic words, numbers, primary (WhatsApp) glass button |
-| `--blue` | `#8ea2ff` | "Web" tier, text-loop gradient |
-| `--violet` | `#c49be0` | "A medida" tier, text-loop gradient |
+| `--ink` / `--paper` | `#f7f1ea` | Background (cream) |
+| `--paper-2` | `#fbf8f4` | Cards |
+| `--line` | `#e7dbd1` | Borders |
+| `--text` / `--muted` | `#3b2f2b` / `#76675f` | Text (espresso / taupe) |
+| `--rose` (`--clay`) | `#a05a4c` | Main accent: italic words, labels, primary WhatsApp button, "Web + Cuidado" |
+| `--sage` | `#5d7052` | "Web" tier |
+| `--sand` | `#84653a` | "A medida" tier |
+| `--blush` | `#f2dcd4` | Badge and text-loop selection |
 
-Tinted glows (`--tint-*`) sit behind the hero, the contact section and the top of
-each pricing card, so the liquid-glass buttons have something to refract.
+Soft blush and sand glows sit behind the hero and contact; the background lines are
+dusty rose at 10% opacity.
 
-**Buttons:** every button is liquid glass (translucent, blurred, top highlight, a
-sheen that follows the pointer). Primary = lime-tinted glass, secondary = clear glass.
+**Buttons:** soft frosted glass. Primary = solid dusty rose with white text,
+secondary = white frosted glass. The earlier dark/lime version (from a SaaS pricing
+reference) was dropped as too "tech" for salon owners.
 
 ## 5. Photos are the design
 
