@@ -85,7 +85,6 @@
       h("div", { class: "wrap hero__grid" + (photo ? " has-photo" : "") },
         h("p", { class: "hero__top mono" }, x.topline),
         mark,
-        h("div", { class: "stage" }),
         h("div", { class: "hero__text" },
           h("p", { class: "hero__hello" }, x.hello),
           h("h1", { id: "hero-title", html: em(x.line) }),
@@ -233,21 +232,157 @@
         h("div", { class: "about__text" }, a.paragraphs.map(function (p) { return h("p", {}, p); }))));
   }
 
+  /* ── Fondo de líneas (versión sin React de components/ui/background-paths.tsx) ── */
+
+  // Mismas curvas que el componente original (36 por lado, posición 1 y -1), pintadas en un <canvas>:
+  // 72 líneas SVG animadas obligan a repintar toda la sección en cada fotograma; el canvas no.
+  function pathPoints(i, position) {
+    var a = 380 - i * 5 * position, b = 189 + i * 6, c = 312 - i * 5 * position, d = 216 - i * 6,
+        e = 152 - i * 5 * position, f = 343 - i * 6, g = 616 - i * 5 * position, k = 470 - i * 6,
+        m = 684 - i * 5 * position, n = 875 - i * 6;
+    var segs = [[[-a, -b], [-a, -b], [-c, d], [e, f]], [[e, f], [g, k], [m, n], [m, n]]];
+    var pts = [], len = [0];
+    segs.forEach(function (sg, si) {
+      for (var j = si ? 1 : 0; j <= 60; j++) {
+        var t = j / 60, u = 1 - t;
+        var x = u * u * u * sg[0][0] + 3 * u * u * t * sg[1][0] + 3 * u * t * t * sg[2][0] + t * t * t * sg[3][0];
+        var y = u * u * u * sg[0][1] + 3 * u * u * t * sg[1][1] + 3 * u * t * t * sg[2][1] + t * t * t * sg[3][1];
+        if (pts.length) { var p = pts[pts.length - 1]; len.push(len[len.length - 1] + Math.hypot(x - p[0], y - p[1])); }
+        pts.push([x, y]);
+      }
+    });
+    var total = len[len.length - 1];
+    return { pts: pts, len: len.map(function (l) { return l / total; }) };
+  }
+
+  var PATHS = null;
+  function mountPaths(host) {
+    if (!PATHS) {
+      PATHS = [];
+      [1, -1].forEach(function (pos) {
+        for (var i = 0; i < 36; i++) {
+          var dur = 20 + Math.random() * 10;
+          var g = pathPoints(i, pos);
+          PATHS.push({ pts: g.pts, len: g.len, w: 0.5 + i * 0.03, a: Math.min(0.1 + i * 0.03, 1), dur: dur, phase: Math.random() });
+        }
+      });
+    }
+    var canvas = document.createElement("canvas");
+    host.appendChild(canvas);
+    var ctx = canvas.getContext("2d");
+    var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var color = getComputedStyle(host).color;
+    var W = 0, H = 0, scale = 1, ox = 0, oy = 0, raf = 0, last = 0, on = false;
+
+    function size() {
+      var r = host.getBoundingClientRect(), dpr = Math.min(window.devicePixelRatio || 1, 2);
+      W = r.width; H = r.height;
+      canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      scale = Math.max(W / 696, H / 316); ox = (W - 696 * scale) / 2; oy = (H - 316 * scale) / 2; // "cover", como slice
+      draw(performance.now());
+    }
+    function draw(now) {
+      ctx.clearRect(0, 0, W, H);
+      ctx.strokeStyle = color; ctx.lineCap = "round";
+      for (var i = 0; i < PATHS.length; i++) {
+        var P = PATHS[i], from = 0, to = 1, pulse = 1;
+        if (!reduced) {
+          var u = ((now / 1000) / P.dur + P.phase) % 1 * 1.55; // tramo de 0,55 que recorre la línea
+          from = u - 0.55; to = u;
+          pulse = 0.75 + 0.25 * Math.sin((now / 1000) / P.dur * Math.PI * 2 + P.phase * 6.28);
+        }
+        if (to <= 0 || from >= 1) continue;
+        ctx.globalAlpha = P.a * pulse;
+        ctx.lineWidth = P.w * scale;
+        ctx.beginPath();
+        var started = false;
+        for (var j = 0; j < P.pts.length; j++) {
+          var l = P.len[j];
+          if (l < from) continue;
+          if (l > to) break;
+          var x = ox + P.pts[j][0] * scale, y = oy + P.pts[j][1] * scale;
+          if (!started) { ctx.moveTo(x, y); started = true; } else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+      }
+      ctx.globalAlpha = 1;
+    }
+    function loop(now) {
+      if (!on) return;
+      if (now - last > 33) { last = now; draw(now); } // ~30 fps es suficiente para líneas lentas
+      raf = requestAnimationFrame(loop);
+    }
+    var ro = "ResizeObserver" in window ? new ResizeObserver(size) : null;
+    if (ro) ro.observe(host); else size();
+    return {
+      play: function (yes) {
+        if (reduced) return;
+        yes = yes && !document.hidden;
+        if (yes && !on) { on = true; raf = requestAnimationFrame(loop); }
+        if (!yes) { on = false; cancelAnimationFrame(raf); }
+      },
+    };
+  }
+
+  // Título que sube letra a letra (como el componente). El texto real queda para lectores de pantalla.
+  function riseTitle(text) {
+    var html = "", n = 0;
+    String(text).split(/(\*[^*]+\*)/).forEach(function (seg) {
+      if (!seg) return;
+      var italic = /^\*.*\*$/.test(seg);
+      var words = (italic ? seg.slice(1, -1) : seg).split(/(\s+)/).map(function (w) {
+        if (/^\s+$/.test(w)) return " ";
+        return '<span class="rise__w">' + w.split("").map(function (ch) {
+          var safe = ch.replace(/&/g, "&amp;").replace(/</g, "&lt;");
+          return '<span class="rise__l" style="--i:' + (n++) + '">' + safe + "</span>";
+        }).join("") + "</span>";
+      }).join("");
+      html += italic ? "<em>" + words + "</em>" : words;
+    });
+    return '<span aria-hidden="true">' + html + '</span><span class="sr-only">' + String(text).replace(/\*/g, "").replace(/</g, "&lt;") + "</span>";
+  }
+
   function contact(t) {
     var c = t.contact;
     return h("section", { class: "band band--ink contact", id: "contacto", "aria-labelledby": "contact-title" },
+      h("div", { class: "paths", "aria-hidden": "true" }),
       h("div", { class: "wrap" },
         h("p", { class: "label" }, h("span", { class: "label__num" }, "06"), c.eyebrow),
-        h("h2", { id: "contact-title", html: em(c.title) }),
+        h("h2", { id: "contact-title", class: "rise", html: riseTitle(c.title) }),
         h("p", { class: "lead" }, c.text),
         h("div", { class: "contact__actions" },
-          h("a", { class: "btn btn--wa", href: waLink(t) }, icon("i-wa"), c.whatsapp),
+          h("span", { class: "glass" },
+            h("a", { class: "btn btn--wa", href: waLink(t) }, icon("i-wa"), c.whatsapp, h("span", { class: "btn__arrow", "aria-hidden": "true" }, "→"))),
           h("a", { class: "btn btn--line", href: "tel:" + S.contact.phone }, icon("i-phone"),
             h("span", {}, c.call + " · ", h("span", { class: "nowrap" }, S.contact.phoneDisplay)))),
         h("p", { class: "contact__email" },
           h("span", { class: "sr-only" }, c.email + ": "),
           h("a", { href: "mailto:" + S.contact.email }, S.contact.email))));
   }
+
+  // Las letras suben una vez al entrar; las líneas solo se animan mientras se ven
+  var contactIO = null, pathsCtl = null;
+  function watchContact() {
+    var sec = main.querySelector(".contact");
+    if (!sec) return;
+    var host = sec.querySelector(".paths");
+    if (pathsCtl) pathsCtl.play(false); // al cambiar de idioma se rehace la sección: para el bucle anterior
+    pathsCtl = host ? mountPaths(host) : null;
+    if (!("IntersectionObserver" in window)) { sec.classList.add("is-in"); if (pathsCtl) pathsCtl.play(true); return; }
+    if (contactIO) contactIO.disconnect();
+    contactIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (pathsCtl) pathsCtl.play(en.isIntersecting);
+        if (en.intersectionRatio > 0.2) sec.classList.add("is-in");
+      });
+    }, { threshold: [0, 0.2] });
+    contactIO.observe(sec);
+  }
+  document.addEventListener("visibilitychange", function () {
+    var sec = main.querySelector(".contact.is-in");
+    if (pathsCtl) pathsCtl.play(!document.hidden && !!sec && sec.getBoundingClientRect().top < window.innerHeight);
+  });
 
   /* ── Render e idioma ───────────────────────────────────── */
 
@@ -273,33 +408,8 @@
     [].slice.call(main.children).forEach(function (n) { if (n.tagName !== "NOSCRIPT") n.remove(); });
     [hero(t, lang), work(t, lang), demos(t, lang), statement(t), process(t), prices(t), faq(t), about(t), contact(t)]
       .forEach(function (s) { if (s) main.appendChild(s); });
-    attachStage();
+    watchContact();
   }
-
-  /* ── 3D (Y de cristal): se carga después, nunca bloquea la primera pantalla ── */
-
-  var three = null;
-  function attachStage() {
-    var stage = main.querySelector(".stage");
-    if (!three || !stage) return;
-    three.attach(stage);
-    main.querySelector(".hero").classList.add("has-3d");
-  }
-  function canWebGL() {
-    try { var c = document.createElement("canvas"); return !!(window.WebGLRenderingContext && (c.getContext("webgl2") || c.getContext("webgl"))); }
-    catch (e) { return false; }
-  }
-  function load3D() {
-    var conn = navigator.connection;
-    if ((conn && conn.saveData) || !canWebGL() || !("IntersectionObserver" in window) || !("ResizeObserver" in window)) return;
-    import("/js/hero3d.js?v=" + (document.documentElement.dataset.v || "1"))
-      .then(function (m) { three = m.mount(); attachStage(); })
-      .catch(function () { /* sin 3D: se queda la Y dibujada */ });
-  }
-  window.addEventListener("load", function () {
-    var later = window.requestIdleCallback || function (fn) { return setTimeout(fn, 200); };
-    later(load3D, { timeout: 2500 });
-  });
 
   function initialLang() {
     var q = new URLSearchParams(location.search).get("lang");

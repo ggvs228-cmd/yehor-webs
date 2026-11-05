@@ -43,7 +43,7 @@ Prime reference: **byholm.co** (HOLM, a one-person studio). Ideas taken from it:
 - A single persistent pill button ("Book a call"). Here: "Escríbeme" → WhatsApp.
 - Dark, cinematic hero; italic serif statements.
 
-Taken in a light form: the 3D. Byholm's whole site is one scroll-driven WebGL
+Tried and then removed: the 3D. Byholm's whole site is one scroll-driven WebGL
 world (several MB). Here only the hero has a real 3D object (see 7), loaded
 *after* the page is visible, so the first screen stays instant on a phone.
 Decided with Yehor: "3D hero only", not a full 3D world.
@@ -103,23 +103,18 @@ the case study.
 - Prices: oversized numerals, the number *is* the layout.
 - One unexpected section: the studio statement in giant italic on dark.
 
-## 7. One signature detail
+## 7. Signature details (motion budget: two, both cheap)
 
-**A dark-chrome Y inside a clay ring, in real 3D** (`js/hero3d.js`, Three.js r170
-self-hosted in `js/vendor/`).
+1. **The Y draws itself** once in the hero (SVG stroke, CSS only, ~1 KB). The 3D
+   version (Three.js) was tried and removed at Yehor's request.
+2. **Flowing lines behind "Hablemos."** (contact): a vanilla port of
+   `components/ui/background-paths.tsx` (shadcn/framer-motion). Same 72 curves,
+   drawn on one `<canvas>` at ~30 fps only while the section is on screen,
+   clay on ink. The title rises letter by letter once. The original React files
+   are kept in `components/ui/` for a future migration but are not deployed.
 
-- Drag it with a finger or the mouse to turn it (vertical swipes still scroll the
-  page); it tilts a little as you scroll and spins slowly when left alone.
-- Lit like a product photo: a dark room with light strips and a warm fill, so
-  highlights slide over the chrome as it turns. Dark chrome was chosen over
-  see-through glass: glass on a black background reads as flat plastic, and
-  it is the most expensive effect for a phone to draw.
-- Loads after the page (`requestIdleCallback`), skipped with Data Saver or no
-  WebGL, pauses when off-screen or in a background tab. Cost: ~171 KB gzipped.
-- While it loads (or if it can't), the flat SVG "Y" draws itself as before.
-- `prefers-reduced-motion`: no idle spin or scroll motion; dragging still works.
-
-Nothing else on the page moves. No custom cursor, no scroll-jacking.
+`prefers-reduced-motion`: the Y appears drawn, the lines are static, the title
+appears without motion. No custom cursor, no scroll-jacking.
 
 ## Page order, and why (researched Nov 2026)
 
